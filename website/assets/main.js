@@ -28,6 +28,12 @@ $(document).ready(function () {
 
 	map.on('locationerror', onLocationError);
 
+document.getElementById("button").addEventListener("click", button);
+
+function button() {
+  document.getElementById("button").innerHTML = "Stop";
+}
+
 
 });
 
