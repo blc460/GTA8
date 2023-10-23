@@ -1,3 +1,3 @@
 # GTA8
 Side-Eye
-Ist ein Semesterprojekt in GTA von Carlos, Christian, Estelle und Niklas.
+Is a semesterproject in the lecture GTA from Carlos, Christian, Estelle and Niklas.
