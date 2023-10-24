@@ -170,7 +170,7 @@ body {
 	height: 50px;
 	z-index: 1;
 	text-transform: uppercase;
-	background-color: #000; /* Hintergrundfarbe des Buttons */
+	background-color: #444444; /* Hintergrundfarbe des Buttons */
 	color: #fff; /* Textfarbe des Buttons */
 	font-weight: bold;
 	border: none;

@@ -32,10 +32,10 @@ $(document).ready(function () {
 		var buttonElement = document.getElementById("button");
 		if (buttonElement.innerHTML === "Start") {
 		  buttonElement.innerHTML = "Stop";
-		  buttonElement.style.backgroundColor = "#8a8a8a";
+		  buttonElement.style.backgroundColor = "#000";
 		} else {
 		  buttonElement.innerHTML = "Start";
-		  buttonElement.style.backgroundColor = '#000';
+		  buttonElement.style.backgroundColor = '#444444';
 		}
 	  }
 	  
