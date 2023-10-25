@@ -3,7 +3,7 @@ $(document).ready(function () {
 
 	// Map.
 
-	var map = L.map('map').setView([46.79851, 8.23173], 6);
+	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
 	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
 		minZoom: 2,
