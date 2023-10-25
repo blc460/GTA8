@@ -25,6 +25,7 @@ $(document).ready(function () {
 	function onLocationError(e) {
 		alert(e.message);
 	}
+	
 
 	map.on('locationerror', onLocationError);
 
