@@ -1,69 +1,68 @@
 $(document).ready(function () {
-    console.log("ready!");
+	console.log("ready!");
 
-    // Map.
-    var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
+	// Map.
+	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
-    L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
-        minZoom: 2,
-        maxZoom: 20,
-        attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        ext: 'png'
-    }).addTo(map);
+	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
+		minZoom: 2,
+		maxZoom: 20,
+		attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		ext: 'png'
+	}).addTo(map);
 
-    map.locate({ setView: true, maxZoom: 16 });
+	map.locate({ setView: true, maxZoom: 16 });
 
-    var locationCircle; // Variable für den Location Circle.
+	var locationCircle;
 
-    function onLocationFound(e) {
-        var radius = e.accuracy;
+	function onLocationFound(e) {
+		var radius = e.accuracy;
 
-        if (locationCircle) {
-            // Wenn der Location Circle bereits existiert, aktualisieren Sie seine Position und seinen Radius.
-            locationCircle.setLatLng(e.latlng);
-            locationCircle.setRadius(radius);
-        } else {
-            // Andernfalls erstellen Sie den Location Circle.
-            locationCircle = L.circle(e.latlng, radius).addTo(map);
-        }
-    }
+		if (locationCircle) {
+			// Wenn der Location Circle bereits existiert, aktualisieren Sie seine Position und seinen Radius.
+			locationCircle.setLatLng(e.latlng);
+			locationCircle.setRadius(radius);
+		} else {
+			// Andernfalls erstellen Sie den Location Circle.
+			locationCircle = L.circle(e.latlng, radius).addTo(map);
+		}
+	}
 
-    map.on('locationfound', onLocationFound);
+	map.on('locationfound', onLocationFound);
 
-    function onLocationError(e) {
-        alert(e.message);
-    }
+	function onLocationError(e) {
+		alert(e.message);
+	}
 
-    map.on('locationerror', onLocationError);
+	map.on('locationerror', onLocationError);
 
-    function toggleButton() {
-        var buttonElement = document.getElementById("button");
-        if (buttonElement.innerHTML === "Start") {
-            buttonElement.innerHTML = "Stop";
-            buttonElement.style.backgroundColor = "#000";
-        } else {
-            buttonElement.innerHTML = "Start";
-            buttonElement.style.backgroundColor = '#444444';
-        }
-    }
+	function toggleButton() {
+		var buttonElement = document.getElementById("button");
+		if (buttonElement.innerHTML === "Start") {
+			buttonElement.innerHTML = "Stop";
+			buttonElement.style.backgroundColor = "#000";
+		} else {
+			buttonElement.innerHTML = "Start";
+			buttonElement.style.backgroundColor = '#444444';
+		}
+	}
 
-    // Fügen Sie das onclick-Ereignis dem Button hinzu
-    var button = document.getElementById("button");
-    button.onclick = toggleButton;
+	// Fügen Sie das onclick-Ereignis dem Button hinzu
+	var button = document.getElementById("button");
+	button.onclick = toggleButton;
 
-    var locateButton = document.getElementById("locateButton");
+	var locateButton = document.getElementById("locateButton");
 
-    locateButton.addEventListener("click", function () {
-        if ("geolocation" in navigator) {
-            var watchID = navigator.geolocation.watchPosition(function (position) {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                var zoomLevel = 16; // Passen Sie den Zoom-Level nach Bedarf an.
-                map.setView([lat, lng], zoomLevel);
-                onLocationFound({ latlng: [lat, lng], accuracy: 10 }); // Simuliere eine Location-Update-Ereignis
-            });
-        } else {
-            alert("Geolocation is not supported by your browser.");
-        }
-    });
+	locateButton.addEventListener("click", function () {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var lat = position.coords.latitude;
+				var lng = position.coords.longitude;
+				var zoomLevel = 16; // Passen Sie den Zoom-Level nach Bedarf an.
+				map.setView([lat, lng], zoomLevel);
+			});
+		} else {
+			alert("Geolocation is not supported by your browser.");
+		}
+	});
 });
