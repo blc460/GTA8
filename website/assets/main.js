@@ -22,6 +22,7 @@ $(document).ready(function () {
 			// Wenn der Location Circle bereits existiert, aktualisieren Sie seine Position und seinen Radius.
 			locationCircle.setLatLng(e.latlng);
 			locationCircle.setRadius(radius);
+			console.log("position set!")
 		} else {
 			// Andernfalls erstellen Sie den Location Circle.
 			locationCircle = L.circle(e.latlng, radius).addTo(map);
@@ -51,9 +52,9 @@ $(document).ready(function () {
 	var button = document.getElementById("button");
 	button.onclick = toggleButton;
 
-	var locateButton = document.getElementById("locateButton");
+	
 
-	locateButton.addEventListener("click", function () {
+	function locatingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
 				var lat = position.coords.latitude;
@@ -64,5 +65,11 @@ $(document).ready(function () {
 		} else {
 			alert("Geolocation is not supported by your browser.");
 		}
-	});
+	}
+	
+	// Fügen Sie das onclick-Ereignis dem Button hinzu
+	var locateButton = document.getElementById("locateButton");
+	locateButton.onclick = locatingButton
+
+	
 });
