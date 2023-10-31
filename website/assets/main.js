@@ -22,7 +22,7 @@ $(document).ready(function () {
 			// Wenn der Location Circle bereits existiert, aktualisieren Sie seine Position und seinen Radius.
 			locationCircle.setLatLng(e.latlng);
 			locationCircle.setRadius(radius);
-			console.log("position set!")
+			console.log("Position aktualisiert!");
 		} else {
 			// Andernfalls erstellen Sie den Location Circle.
 			locationCircle = L.circle(e.latlng, radius).addTo(map);
@@ -36,6 +36,28 @@ $(document).ready(function () {
 	}
 
 	map.on('locationerror', onLocationError);
+
+	// Aktivieren Sie die Geolokalisierung und überwachen Sie die Position laufend.
+	var watchID = navigator.geolocation.watchPosition(function (position) {
+		// Rufen Sie die aktualisierte Position ab und aktualisieren Sie den Location Circle.
+		var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+		var accuracy = position.coords.accuracy;
+
+		if (locationCircle) {
+			locationCircle.setLatLng(latlng);
+			locationCircle.setRadius(accuracy);
+			console.log("Position aktualisiert!");
+		} else {
+			locationCircle = L.circle(latlng, accuracy).addTo(map);
+		}
+	}, function (error) {
+		// Behandeln Sie Fehler bei der Geolokalisierung.
+		console.error("Fehler bei der Geolokalisierung:", error);
+	});
+
+	// Um die Überwachung der Position zu stoppen, können Sie watchID verwenden:
+	// navigator.geolocation.clearWatch(watchID);
+
 
 	function toggleButton() {
 		var buttonElement = document.getElementById("button");
@@ -52,7 +74,7 @@ $(document).ready(function () {
 	var button = document.getElementById("button");
 	button.onclick = toggleButton;
 
-	
+
 
 	function locatingButton() {
 		if ("geolocation" in navigator) {
@@ -66,10 +88,10 @@ $(document).ready(function () {
 			alert("Geolocation is not supported by your browser.");
 		}
 	}
-	
+
 	// Fügen Sie das onclick-Ereignis dem Button hinzu
 	var locateButton = document.getElementById("locateButton");
 	locateButton.onclick = locatingButton
 
-	
+
 });
