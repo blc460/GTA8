@@ -46,7 +46,6 @@ $(document).ready(function () {
 		if (locationCircle) {
 			locationCircle.setLatLng(latlng);
 			locationCircle.setRadius(accuracy);
-			console.log("Position aktualisiert!");
 		} else {
 			locationCircle = L.circle(latlng, accuracy).addTo(map);
 		}
@@ -59,7 +58,7 @@ $(document).ready(function () {
 	// navigator.geolocation.clearWatch(watchID);
 
 
-	function toggleButton() {
+	function startStopButton() {
 		var buttonElement = document.getElementById("button");
 		if (buttonElement.innerHTML === "Start") {
 			buttonElement.innerHTML = "Stop";
@@ -72,7 +71,7 @@ $(document).ready(function () {
 
 	// Fügen Sie das onclick-Ereignis dem Button hinzu
 	var button = document.getElementById("button");
-	button.onclick = toggleButton;
+	button.onclick = startStopButton;
 
 
 
@@ -92,6 +91,11 @@ $(document).ready(function () {
 	// Fügen Sie das onclick-Ereignis dem Button hinzu
 	var locateButton = document.getElementById("locateButton");
 	locateButton.onclick = locatingButton
+
+	//IP-Adresse
+	$.getJSON("https://api.ipify.org/?format=json", function (e) {
+		console.log(e.ip);
+	});
 
 
 });
