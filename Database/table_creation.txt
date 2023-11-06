@@ -41,3 +41,11 @@ create table gta_p8.trip (
 	trip_ip_address TEXT,
 	marked_point_id INTEGER REFERENCES gta_p8.marked_point(marked_point_id)
 );
+
+--add geometry:
+
+SELECT AddGeometryColumn('gta_p8', 'restaurant', 'geometry', 4326, 'POINT', 2);
+
+SELECT AddGeometryColumn('gta_p8', 'church', 'geometry', 4326, 'POINT', 2);
+
+SELECT AddGeometryColumn('gta_p8', 'marked_point', 'geometry', 4326, 'POINT', 2)
