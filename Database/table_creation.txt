@@ -49,3 +49,5 @@ SELECT AddGeometryColumn('gta_p8', 'restaurant', 'geometry', 4326, 'POINT', 2);
 SELECT AddGeometryColumn('gta_p8', 'church', 'geometry', 4326, 'POINT', 2);
 
 SELECT AddGeometryColumn('gta_p8', 'marked_point', 'geometry', 4326, 'POINT', 2)
+
+SELECT AddGeometryColumn('gta_p8', 'trip', 'geometry', 4326, 'LINESTRING', 2);
