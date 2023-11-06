@@ -7,6 +7,14 @@
 	box-sizing: border-box;
 }
 
+.main {
+	margin: 10px;
+}
+
+#footer {
+	margin: 10px;
+}
+
 #map {
 	position: absolute;
 	top: 61px;
@@ -200,10 +208,13 @@ body {
 }
 
 #locateButton img {
-	width: 50%; /* Die Breite des Bildes auf 80% festlegen */
-	height: auto; /* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
-  }
+	width: 50%;
+	/* Die Breite des Bildes auf 80% festlegen */
+	height: auto;
+	/* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
+}
 
 #locateButton:active {
-	background-color: #000; /* Hintergrundfarbe während des Klickens ändern */
-  }
+	background-color: #000;
+	/* Hintergrundfarbe während des Klickens ändern */
+}
