@@ -1,7 +1,3 @@
-import psycopg2
-from psycopg2.extensions import AsIs
-import pandas as pd
-
 def read_sql(sql, dbname, port, user, password, host ):
     """execute sql query on database and return results"""
     """aufrufen mit data = read_sql(sql_string, **db_credentials)"""
