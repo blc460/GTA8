@@ -2,14 +2,14 @@
 
 create table gta_p8.city (
 	city_id SERIAL PRIMARY KEY,
-	city_postcode INTEGER UNIQUE,
+	city_postcode TEXT UNIQUE,
 	city_name TEXT
 );
 
 create table gta_p8.address (
 	address_id SERIAL PRIMARY KEY,
 	address_street TEXT,
-	address_number INTEGER,
+	address_number TEXT,
 	city_id INTEGER REFERENCES gta_p8.city(city_id)
 );
 
