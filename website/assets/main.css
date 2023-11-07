@@ -183,6 +183,7 @@ body {
 	color: #fff;
 	/* Textfarbe des Buttons */
 	font-weight: bold;
+	font-size: large;
 	border: none;
 	cursor: pointer;
 	border-radius: 25px;
@@ -215,6 +216,35 @@ body {
 }
 
 #locateButton:active {
+	background-color: #000;
+	/* Hintergrundfarbe während des Klickens ändern */
+}
+
+#drawButton {
+	position: absolute;
+	bottom: 50px;
+	left: calc(50% - 150px);
+	/* Änderung hier: 50% + 150px, um 150px rechts neben #button zu platzieren */
+	width: 50px;
+	height: 50px;
+	z-index: 1;
+	text-transform: uppercase;
+	background-color: #444444;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+	border-radius: 25px;
+}
+
+#drawButton img {
+	width: 60%;
+	/* Die Breite des Bildes auf 80% festlegen */
+	height: auto;
+	/* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
+}
+
+#drawButton:active {
 	background-color: #000;
 	/* Hintergrundfarbe während des Klickens ändern */
 }
