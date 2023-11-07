@@ -1,6 +1,5 @@
 def read_sql(sql, dbname, port, user, password, host ):
     """execute sql query on database and return results"""
-    """aufrufen mit data = read_sql(sql_string, **db_credentials)"""
 
     conn = psycopg2.connect(dbname=dbname, port=port, user=user, password=password, host=host)
     cur = conn.cursor()
