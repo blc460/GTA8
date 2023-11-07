@@ -12,9 +12,13 @@ def read_sql(sql, dbname, port, user, password, host ):
     conn.close()
     return results
 
-def write_sql(sql, dbname, port, user, password, host ):
-    ###
-    return 0
+def write_sql(sql, dbname, port, user, password, host):
+    """execute sql query on database"""
+    conn = psycopg2.connect(dbname=dbname, port=port, user=user, password=password, host=host)
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
 
 db_credentials = {"dbname": 'gta',
                   "port": 5432,
