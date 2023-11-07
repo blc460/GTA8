@@ -29,18 +29,19 @@ create table gta_p8.restaurant (
 
 --collected data:
 
-create table gta_p8.marked_point (
-	marked_point_id SERIAL PRIMARY KEY,
-	marked_point_time TIMESTAMP
-	trip_id INTEGER REFERENCES gta_p8.trip(trip_id)
-);
-
 create table gta_p8.trip (
 	trip_id SERIAL PRIMARY KEY,
 	trip_date_of_collection TIMESTAMP,
+	trip_name TEXT,
 	trip_transport_mode TEXT,
-	trip_ip_address TEXT,
+	trip_ip_address TEXT
 
+);
+
+create table gta_p8.marked_point (
+	marked_point_id SERIAL PRIMARY KEY,
+	marked_point_time TIMESTAMP,
+	trip_id INTEGER REFERENCES gta_p8.trip(trip_id)
 );
 
 --add geometry:
