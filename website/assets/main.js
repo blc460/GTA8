@@ -1,3 +1,19 @@
+var trip = {};
+
+function saveInput() {
+	var name = document.getElementById("name").value;
+	var transportMode = document.getElementById("transportMode").value;
+
+	// You can perform any desired actions with the collected data here
+	console.log("Name: " + name + ", Transport Mode: " + transportMode);
+	trip["name"] = name;
+	trip["transportMode"] = transportMode;
+
+	// Close the popup after saving the input
+	document.getElementById("popup").style.display = "none";
+}
+
+
 $(document).ready(function () {
 	console.log("ready!");
 
@@ -41,8 +57,11 @@ $(document).ready(function () {
 
 	var trackpoints = [];
 
+
+
 	// Aktivieren Sie die Geolokalisierung und überwachen Sie die Position laufend.
-	var watchID = navigator.geolocation.watchPosition(function (position) {
+
+	function geoSuccess(position) {
 		// Rufen Sie die aktualisierte Position ab und aktualisieren Sie den Location Circle.
 		var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
 		var accuracy = position.coords.accuracy;
@@ -58,24 +77,35 @@ $(document).ready(function () {
 			trackpoints.push(latlng)
 			console.log("position logged");
 		}
-	}, function (error) {
+	}
+
+	function geoError(error) {
 		// Behandeln Sie Fehler bei der Geolokalisierung.
 		console.error("Fehler bei der Geolokalisierung:", error);
-	}, geo_options = {
+	}
+
+	geoOptions = {
 		//options
 		enableHighAccuracy: true,
 		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
 		//timeout: 30000   // A maximum of 12 seconds before timeout.
-	});
+	}
+
+	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
 	// Um die Überwachung der Position zu stoppen, können Sie watchID verwenden:
 	// navigator.geolocation.clearWatch(watchID);
 
+
+	document.getElementById("closePopupBtn").addEventListener("click", function () {
+		document.getElementById("popup").style.display = "none";
+	});
+
+
+	
 	var tracking = false;
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
-		var trip_id;
-		var date_of_collection;
 		if (buttonElement.innerHTML === "Start") {
 			buttonElement.innerHTML = "Stop";
 			buttonElement.style.backgroundColor = "#000";
@@ -83,24 +113,27 @@ $(document).ready(function () {
 			//Start tracking
 			tracking = true;
 			console.log("now tracking");
-			trip_id = 0; //herausfinden welche ids in datenbank schon besetzt?
+			trip["trip_id"] = 0; //herausfinden welche ids in datenbank schon besetzt?
 
 		} else {
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
-			
-			//Stop tracking
+
 			// pop-up fenster: transport_mode etc abfragen
-			date_of_collection = Date.now();
+			document.getElementById("popup").style.display = "flex";
+
+
+			trip["date_of_collection"] = Date.now();
 			console.log(trackpoints);
-			console.log(date_of_collection);
+			console.log(trip["date_of_collection"]);
 
 			//upload_trip(trip_id, date_of_collection, ip_adress, trackpoints, etc.)
 
-			//reset
+			//stop tracking and reset
 			tracking = false;
 			console.log("stopped tracking");
 			trackpoints = [];
+			trip = {};
 		}
 	}
 
@@ -129,10 +162,9 @@ $(document).ready(function () {
 	locateButton.onclick = locatingButton
 
 	//IP-Adresse
-	var ip_adress;
 	$.getJSON("https://api.ipify.org/?format=json", function (e) {
-	ip_adress = e.ip;	
-	console.log(e.ip);
+		trip["ip_adress"] = e.ip;
+		console.log(e.ip);
 	});
 
 	function insertData_trip(trackpoints, ip_adress, trip_id,date_of_collection,trip_name,trip_transport_mode) {

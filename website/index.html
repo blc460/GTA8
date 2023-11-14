@@ -42,20 +42,35 @@
 	<!-- Main -->
 	<div id="map"></div>
 
-	<!-- Activate / Deactivate Tracking Mode -->	
+	<!-- Activate / Deactivate Tracking Mode -->
 	<button id="button">Start</button>
 
-	<!-- Center Map -->	
+	<!-- Center Map -->
 	<button id="locateButton">
 		<img src="assets/SVG/pfeil.svg" alt="locate">
 	</button>
 
-	<!-- Mark Interesting Point -->	
+	<!-- Mark Interesting Point -->
 	<button id="drawButton">
 		<img src="assets/SVG/draw.svg" alt="draw">
 	</button>
 
-	
+	<!-- Pop-up to finish tracking and save the trip-->
+	<div id="popup" class="popup">
+		<div class="popup-content">
+			<span class="close" id="closePopupBtn">&times;</span>
+			<h2>Save the trip</h2>
+			<form id="inputForm">
+				<label for="name">Name of the trip:</label>
+				<input type="text" id="name" required>
+
+				<label for="transportMode">Transport Mode:</label>
+				<input type="text" id="transportMode" required>
+
+				<button type="button" onclick="saveInput()">Evaluate</button>
+			</form>
+		</div>
+	</div>
 
 	<!-- Footer -->
 	<!--<footer id="footer">
