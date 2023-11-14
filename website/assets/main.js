@@ -116,7 +116,6 @@ $(document).ready(function () {
 			//Start tracking
 			tracking = true;
 			console.log("now tracking");
-			trip["trip_id"] = 0; //herausfinden welche ids in datenbank schon besetzt?
 
 		} else {
 			buttonElement.innerHTML = "Start";
@@ -129,7 +128,7 @@ $(document).ready(function () {
 			trip["date_of_collection"] = Date.now();
 			console.log(trackpoints);
 
-			insertData_trip(trackpoints, trip["ip_adress"], trip["trip_id"], trip["date_of_collection"], trip["name"], trip["transportMode"])
+			insertData_trip(trackpoints, trip["ip_adress"], trip["date_of_collection"], trip["name"], trip["transportMode"])
 
 			//stop tracking and reset
 			tracking = false;
@@ -169,7 +168,7 @@ $(document).ready(function () {
 		console.log(e.ip);
 	});
 
-	function insertData_trip(trackpoints, ip_adress, trip_id, date_of_collection, trip_name, trip_transport_mode) {
+	function insertData_trip(trackpoints, ip_adress, date_of_collection, trip_name, trip_transport_mode) {
 
 		let lineStringCoords = trackpoints.map(point => point.join(' ')).join(',');
 	
@@ -187,7 +186,6 @@ $(document).ready(function () {
 			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
 			+ '  <wfs:Insert>\n'
 			+ '    <GTA23_project:trip>\n'
-			+ '      <trip_id>' + trip_id + '</trip_id>\n'
 			+ '      <trip_date_of_collection>' + date_of_collection + '</trip_date_of_collection>\n'
 			+ '      <trip_name>' + trip_name + '</trip_name>\n'
 			+ '      <trip_transport_mode>' + trip_transport_mode + '</trip_transport_mode>\n'
