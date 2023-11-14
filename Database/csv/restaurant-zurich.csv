@@ -42,9 +42,9 @@
 47.3675511	8.5457188	Kronenhalle	Rämistrasse	4	8001	Zürich	french;regional	
 47.3678872	8.5443882	Terrasse Restaurant	Limmatquai	3	8001	Zürich		https://www.bindella.ch/de/terrasse-restaurant.html
 47.3677915	8.5451575	Café/Bar Odeon	Limmatquai	2				http://www.odeon.ch/
-47.3673843	8.5458541	Rosaly's	Freieckgasse	7	8001	Zürich	french;regional	https://www.rosalys.ch/
+47.3673843	8.5458541	Rosalys	Freieckgasse	7	8001	Zürich	french;regional	https://www.rosalys.ch/
 47.3670484	8.5462454	Union Diner	St. Urbangasse	4	8001	Zürich	burger	https://uniondiner.ch/en/bellevue
-47.3671867	8.5464840	Yooji's	St. Urbangasse	8	8001	Zürich	sushi	https://www.yoojis.com/standorte/zuerich-i-bellevue/
+47.3671867	8.5464840	Yoojis	St. Urbangasse	8	8001	Zürich	sushi	https://www.yoojis.com/standorte/zuerich-i-bellevue/
 47.3659313	8.5490837	Commercio	Mühlebachstrasse	2	8008	Zürich	italian	https://www.commercio.ch/commercio/
 47.3641688	8.5472235	Quaglinos	Dufourstrasse	4	8008	Zürich	french	https://quaglinos.ch/
 47.3639960	8.5473846	Du Théatre						http://www.du-theatre.ch/
@@ -54,7 +54,7 @@
 47.3637531	8.5462955	Restaurant Pumpstation	Utoquai	10	8008	Zürich		http://www.pumpstation.ch/
 47.3647890	8.5548938	Bohemia	Klosbachstrasse	2	8032	Zürich	american	http://www.bohemia.ch/
 47.3651655	8.5545256	Nooba	Kreuzplatz	5	8032	Zürich	asian	https://www.nooba.ch/
-47.3582879	8.5541672	Yooji's	Seefeldstrasse	115	8008	Zürich	sushi	https://www.yoojis.com/standorte/sushi-im-seefeld-zuerich/
+47.3582879	8.5541672	Yoojis	Seefeldstrasse	115	8008	Zürich	sushi	https://www.yoojis.com/standorte/sushi-im-seefeld-zuerich/
 47.3575819	8.5575836	Gesundheitszentrum für das Alter Wildbach						
 47.3627304	8.5545618	Ländli	Feldeggstrasse	87	8008	Zürich		https://www.laendlizueri.ch/gastronomie/
 47.3663196	8.5467367	Santa Lucia	Theaterstrasse	10	8001	Zürich	pizza;italian	https://www.bindella.ch/de/santa-lucia-corso.html
@@ -75,7 +75,7 @@
 47.3697919	8.5529812	Afghan Anar	Hottingerstrasse	27	8032	Zürich	afghan;oriental	https://www.afghananar.ch/
 47.3681833	8.5451811	Blockhus	Kruggasse	2	8001	Zürich	regional	https://restaurant-blockhus.ch/
 47.3688249	8.5455086	Weisser Wind						https://weisserwind.ch/
-47.3687595	8.5445743	Papa Joe's Zürich					american	https://www.papajoes.ch/de/Restaurants/
+47.3687595	8.5445743	Papa Joes Zürich					american	https://www.papajoes.ch/de/Restaurants/
 47.3690472	8.5439586	Molino	Limmatquai	16	8001	Zürich	pizza	https://molino.ch/de/pizzeria-ristorante-molino-select
 47.3700612	8.5416945	Zunfthaus zur Meisen	Münsterhof	20	8001	Zürich		http://www.zunfthaus-zur-meisen.ch/
 47.3707349	8.5479863	Kunsthaus						
@@ -102,12 +102,12 @@
 47.3751744	8.5397124	Lotti	Werdmühleplatz	3	8001	Zürich		https://www.lotti-lokal.ch/
 47.3643407	8.5470929	Silk						
 47.3676208	8.5373768	Trinity						https://www.trinity-swiss.ch/
-47.3650488	8.5486637	Cheti's Curry					indian	
+47.3650488	8.5486637	Chetis Curry					indian	
 47.3761856	8.5413414	Dupont Brasserie & Bar	Beatenplatz	4	8001	Zürich	international	https://dupont.ch/
 47.3761821	8.5402129	Sala of Tokyo					japanese	https://sala-of-tokyo.ch/
 47.3722057	8.5437442	Santa Lucia	Marktgasse	21	8001	Zürich	pizza;italian	https://www.bindella.ch/de/santa-lucia-niederdorf.html
 47.3766974	8.5388369	Walliser Kanne	Lintheschergasse	21	8001	Zürich	regional	https://www.walliserkanne-zuerich.ch/
-47.3760414	8.5384703	SAM'S Pizza Land	Schweizergasse	6	8001	Zürich	american	https://www.samspizza.ch/
+47.3760414	8.5384703	SAMS Pizza Land	Schweizergasse	6	8001	Zürich	american	https://www.samspizza.ch/
 47.3771005	8.5375221	Schützengasse	Schützengasse	32	8001	Zürich		https://www.schuetzengasse.com/
 47.3743934	8.5355490	Astra					greek	https://astra-kitchenbar.ch/
 47.4097743	8.5373570	Pathila Snacks	Regensbergstrasse	188	8050	Zürich		
@@ -116,7 +116,7 @@
 47.3732035	8.5379816	Aurora						
 47.3735998	8.5447955	Café Zähringer	Zähringerplatz	11	8001	Zürich	regional	https://www.zaehringer.ch/
 47.3601980	8.5333948	Il Tartufo						
-47.3600645	8.5340786	L'Altro	Sternenstrasse	11	8002	Zürich	italian	https://www.l-altro.ch/
+47.3600645	8.5340786	LAltro	Sternenstrasse	11	8002	Zürich	italian	https://www.l-altro.ch/
 47.3597047	8.5318434	Sternen Da Guido	Seestrasse	82	8002	Zürich	italian;pizza	http://www.daguido.ch/
 47.3635082	8.5323081	San Marco						
 47.3635147	8.5339001	La Mimosa	General-Wille-Strasse	8	8002	Zürich	pizza	http://la-mimosa.ch/
@@ -139,7 +139,7 @@
 47.4194842	8.5469086	Family Grill	Bahnhaldenstrasse	2a	8052	Zürich	bosnian	
 47.4107063	8.5448251	Mamma Mia	Nansenstrasse	9	8050	Zürich	italian	http://mammamia.ch/
 47.4100617	8.5464781	Metzgerhalle	Schaffhauserstrasse	354	8050	Zürich	regional	https://metzgerhalle-oerlikon.ch/
-47.4098258	8.5464212	Rolli's Steakhouse	Schaffhauserstrasse	352	8050	Zürich	steak_house	http://rollis-steakhouse.ch
+47.4098258	8.5464212	Rollis Steakhouse	Schaffhauserstrasse	352	8050	Zürich	steak_house	http://rollis-steakhouse.ch
 47.4109387	8.5469906	Bellucci	Dörflistrasse	117	8050	Zürich	italian	https://bellucci.ch/
 47.3756685	8.5243755	Kobal	Kanzleistrasse	78	8004	Zürich	indian	
 47.3788109	8.4955083	Cube	Albisriederstrasse	245				http://www.cube-restaurant.ch/
@@ -153,7 +153,7 @@
 47.3761736	8.5223010	La Baracca	Kanzleistrasse	103			italian	www.osteria-santobevitore.ch/#la-baracca-ristorante
 47.3739825	8.5222246	Chichería Cantina	Köchlistrasse	35	8004	Zürich	peruvian	https://www.cantinazurich.ch/
 47.3750390	8.5281814	Fribourger Stübli	Rotwandstrasse	38			regional;swiss	https://www.fribourger-fondue-stuebli.ch/
-47.3825398	8.5296036	LILY'S	Langstrasse	197	8005	Zürich	asian	https://lilys.ch/
+47.3825398	8.5296036	LILYS	Langstrasse	197	8005	Zürich	asian	https://lilys.ch/
 47.3758295	8.5164278	FiveSpice	Sihlfeldstrasse	81	8004	Zürich	thai	https://www.fivespices.biz/
 47.3648644	8.5323649	Nooch Asian Kitchen	Gotthardstrasse	62	8002	Zürich	asian;sushi	https://www.nooch.ch/nooch-zuerich-enge
 47.3748589	8.5244037	Suan Long	Langstrasse	11	8004	Zürich	chinese;thai	https://suan-long.ch/suanlong/
@@ -164,7 +164,7 @@
 47.3761196	8.5163348	Derby	Sihlfeldstrasse	85	8004	Zürich	pizza	https://restaurantderby.ch/
 47.3764320	8.5162699	Rosi	Sihlfeldstrasse	89	8004	Zürich		https://www.rosi.restaurant/
 47.3778609	8.5211491	EquiTable	Stauffacherstrasse	163	8004	Zürich		https://www.equi-table.ch
-47.3750930	8.5178314	L'Artista						https://lartista.ch/
+47.3750930	8.5178314	LArtista						https://lartista.ch/
 47.3745008	8.5168115	Santo Ristorante	Sihlfeldstrasse	45	8003	Zürich	italian	http://www.santo-zurigo.ch/
 47.3752506	8.5165887	Miki Ramen	Sihlfeldstrasse	63	8003	Zürich	japanese;ramen	http://www.miki-ramen.ch/
 47.3730187	8.5289781	Masala	Stauffacherstrasse	27	8004	Zürich	indian	http://www.masala.ch
@@ -186,7 +186,7 @@
 47.3962653	8.5402882	Gonzalez	Schaffhauserstrasse	121	8057	Zürich	spanish	http://www.restaurant-gonzalez.ch/
 47.3757513	8.5441431	Johanniter	Niederdorfstrasse	70	8001	Zürich		https://www.johanniter.com/
 47.3758264	8.5438660	Bierhalle Wolf	Limmatquai	132	8001	Zürich		https://www.bierhalle-wolf.ch/
-47.3714506	8.5401480	Tao's						
+47.3714506	8.5401480	Taos						
 47.3706516	8.5402164	Kropf						
 47.3706846	8.5406432	Bindella	In Gassen	6	8001	Zürich	italian	https://www.bindella.ch/de/bindella-zuerich.html
 47.3773665	8.5261690	Aargauerhof	Hohlstrasse	43			regional;swiss	http://restaurant-aargauerhof.ch/
@@ -290,7 +290,7 @@ swiss"	http://utoburg.ch/
 47.3740086	8.5444869	Wien Zeile	Mühlegasse	22			austrian	https://kaiser-wienzeile.ch
 47.3735273	8.5430124	Bianchi	Limmatquai	82	8001	Zürich	fish	https://www.bindella.ch/de/bianchi.html
 47.3734009	8.5434614	Weinschenke	Hirschengasse	6				https://www.hirschen-zuerich.ch/weinschenke.html
-47.3733831	8.5436343	Simon's Steakhouse					steak_house	
+47.3733831	8.5436343	Simons Steakhouse					steak_house	
 47.3725790	8.5433042	Blue Monkey	Stüssihofstatt	3	8001	Zürich	thai	https://www.bluemonkey.ch/
 47.3731853	8.5446831	Madrid					regional	http://www.restaurant-madrid.ch
 47.3724834	8.5433829	The Butcher	Stüssihofstatt	15	8001	Zürich	burger	https://www.butcher.ch/zuerich-niederdorf
@@ -307,7 +307,7 @@ swiss"	http://utoburg.ch/
 47.3755766	8.5271252	Volkshaus	Stauffacherstrasse	60	8004	Zürich		https://www.restaurantvolkshaus.ch/
 47.3770799	8.5274993	Tavtai	Hohlstrasse	18	8004	Zürich	mongolian	
 47.3763280	8.5278780	Brasserie Café de Paris	Ankerstrasse	113	8004	Zürich	french	https://www.brasserie-cafedeparis.ch/
-47.3770439	8.5287783	Ach'i	Brauerstrasse	4	8004	Zürich	asian	https://www.achi.restaurant/
+47.3770439	8.5287783	Achi	Brauerstrasse	4	8004	Zürich	asian	https://www.achi.restaurant/
 47.3769262	8.5284802	Thai-Food-Corner	Brauerstrasse	3			thai	
 47.3779077	8.5270821	Stubä	Brauerstrasse	42	8004	Zürich		https://www.stube.me/
 47.3765636	8.5290029	Trübli Bar	Zeughausstrasse	67				
@@ -353,7 +353,7 @@ swiss"	http://utoburg.ch/
 47.3757244	8.5292515	Convivio	Rotwandstrasse	62			italian	
 47.3753340	8.5286575	Accademia del Gusto	Rotwandstrasse	48			italian	http://www.accademiadelgusto.ch/
 47.3749705	8.5289242	Teoh	Bäckerstrasse	37	8004	Zürich	asian	http://teoh-food.ch/
-47.3751694	8.5284160	D'Aurora	Rotwandstrasse	42	8004	Zürich	italian	http://www.daurora.ch/
+47.3751694	8.5284160	DAurora	Rotwandstrasse	42	8004	Zürich	italian	http://www.daurora.ch/
 47.3754803	8.5284806	Osteria Santo Bevitore	Rotwandstrasse	49	8004	Zürich	italian	http://www.osteria-santobevitore.ch/
 47.3742016	8.5307896	Meat Me					steak_house	http://meatme4.ch/
 47.3743454	8.5295536	Sweet Basil	Bäckerstrasse	19			asian	http://www.sweet-basil.ch/
@@ -368,7 +368,7 @@ swiss"	http://utoburg.ch/
 47.3762153	8.5400686	Palette	Schützengasse	7		Zürich		https://palette-zürich.ch/
 47.3720914	8.5339870	Long Huang	Talstrasse	83	8001	Zürich	asian	http://suan-long.ch/longhuang/
 47.3807368	8.5345758	Yoshino	Hafnerstrasse			Zürich	japanese	https://www.yoshino.ch/
-47.4034424	8.5471665	Smeiley's	Berninastrasse	43	8057	Zürich		https://www.smeileys.ch/
+47.4034424	8.5471665	Smeileys	Berninastrasse	43	8057	Zürich		https://www.smeileys.ch/
 47.3764802	8.5252621	Pho 50	Stauffacherstrasse	101	8004	Zürich	vietnamese	https://www.pho50.ch/
 47.4090175	8.5457746	House of Mezze				Zürich	lebanese	
 47.3760618	8.5288696	The Sacred	Müllerstrasse	64	8004	Zürich	cake;tea;coffee_shop	https://vegelateria.ch/
@@ -442,7 +442,7 @@ swiss"	http://utoburg.ch/
 47.3903732	8.5228750	Spaghetti Pomodoro				Zürich	italian;pizza	https://spaghettipomodoro.ch/
 47.3611874	8.5266838	Don Leone	Waffenplatzstrasse	15	8002	Zürich	italian;pizza	https://donleone.ch/waffenplatz/
 47.3618799	8.5261485	Weisses Rössli	Bederstrasse	96	8002	Zürich	french;fine_dining	https://www.weisses-roessli.ch/
-47.3439800	8.5314693	Winit's	Albisstrasse	29	8038		thai	https://www.winits.ch/
+47.3439800	8.5314693	Winits	Albisstrasse	29	8038		thai	https://www.winits.ch/
 47.3468443	8.5287676	Allegro	Mutschellenstrasse	137			italian	
 47.3474258	8.5334884	Peking Garden	Seestrasse	331	8038	Zürich	asian	https://www.peking-garden.ch/pg_restaurant/zuerich-wollishofen/
 47.4077372	8.5825950	bianco nero						
@@ -465,7 +465,7 @@ swiss"	http://utoburg.ch/
 47.3686567	8.5339963	Korner	Gartenstrasse	10	8002	Zürich	burger	http://www.gourmetburger.ch/
 47.3635603	8.5495722	Sazio Osteria	Seefeldstrasse	27	8008	Zürich	italian	https://www.sazio.ch/
 47.3654045	8.5471561	Brasserie Schiller	Sechseläutenplatz	10	8001	Zürich		https://www.brasserie-schiller.ch/
-47.3773415	8.5332076	Kennedy's Irish Pub	Freischützgasse	14	8004			https://www.kennedys.ch/
+47.3773415	8.5332076	Kennedys Irish Pub	Freischützgasse	14	8004			https://www.kennedys.ch/
 47.3618069	8.5265712	Lotus Garden	Waffenplatzstrasse	1	8002	Zürich	chinese	https://lotus.garden/
 47.3715341	8.5245733	Silex	Freyastrasse	3	8004	Zürich		https://www.silexrestaurant.ch/
 47.3719093	8.5256450	Gartenhof	Gartenhofstrasse	1	8004	Zürich	regional	https://www.gartenhof.net/
@@ -487,7 +487,7 @@ swiss"	http://utoburg.ch/
 47.3699912	8.5183510	Bierstube Scheidegg	Kehlhofstrasse	2	8003	Zürich		
 47.3708827	8.5157585	Victoria Restaurant	Birmensdorferstrasse	200	8003	Zürich		
 47.3878313	8.5189366	Brisket	Pfingstweidstrasse	6	8005	Zürich	Southern_BBQ;american	https://www.brisket.ch/
-47.3863155	8.5167264	LY'S Asia	Zahnradstrasse	21	8005	Zürich	asian	https://lys-asia.ch/restaurant/
+47.3863155	8.5167264	LYS Asia	Zahnradstrasse	21	8005	Zürich	asian	https://lys-asia.ch/restaurant/
 47.4165977	8.5558212	Thai Erawan					thai	
 47.3736181	8.5456942	New Bombay	Predigerplatz	34	8001	Zürich	indian	https://newbombay-zurich.ch/
 47.4180995	8.5565889	Tasty Haus	Leutschenbachstrasse	71	8050	Zürich	chinese	https://tastyhaus.ch/
@@ -495,7 +495,7 @@ swiss"	http://utoburg.ch/
 47.4262082	8.5054134	Wirtschaft Unterdorf	Katzenseestrasse	15	8046	Zürich	regional	https://wirtschaft-unterdorf.ch/
 47.3841620	8.5304006	Cucina	Luisenstrasse	40	8005	Zürich	italian;pizza	https://www.cucinarestaurant.ch/
 47.3832940	8.5301807	Cinque	Langstrasse	215	8005	Zürich	italian	http://www.restaurant-cinque.ch
-47.3909932	8.5455952	Moudi's Lecker Garten						http://moudislecker.ch/
+47.3909932	8.5455952	Moudis Lecker Garten						http://moudislecker.ch/
 47.3760181	8.5277705	Centro	Ankerstrasse	108			italian	
 47.3522874	8.5083976	Schützenhaus Albisgüetli	Uetlibergstrasse	341	8045	Zürich	regional	https://www.albisguetli.ch/
 47.3868901	8.4898386	Restaurant Casino	Badenerstrasse	647	8048	Zürich	regional	http://casinoaltstetten.ch
@@ -552,7 +552,7 @@ swiss"	http://utoburg.ch/
 47.3886259	8.5253686	Pizzeria Margheri	Limmatstrasse	273	8005	Zürich	italian	https://margheri.ch/
 47.3822360	8.5145177	Etna	Hardplatz	7	8004	Zürich	italian;pizza	
 47.3719325	8.5402773	Churrasco Steakhouse & Bar	Glockengasse	9	8001	Zürich	steak_house	http://churrasco.ch/
-47.3885695	8.5392870	Mama's Beck	Schaffhauserstrasse	8	8006	Zürich	coffee_shop	
+47.3885695	8.5392870	Mamas Beck	Schaffhauserstrasse	8	8006	Zürich	coffee_shop	
 47.4016808	8.4989566	Pizzeria Rapido					pizza	
 47.3749363	8.5823881	Adlisberg	Adlisbergstrasse	75	8044	Zürich	regional	http://www.adlisberg.ch
 47.3918896	8.5004329	Restaurant Markthalle	Aargauerstrasse	1	8048	Zürich	regional	http://www.restaurant-markthalle.com
@@ -573,7 +573,7 @@ swiss"	http://utoburg.ch/
 47.3749537	8.5244837	PHO Vietnam	Langstrasse	13	8004	Zürich	vietnamese	http://www.pho-vietnam.ch/
 47.3724638	8.5408190	Lindenhofkeller	Pfalzgasse	4				http://www.lindenhofkeller.ch/
 47.3722486	8.5393486	Stamped Burgers & Fries	Augustinergasse	28	8001	Zürich		https://stamped.ch/
-47.3832801	8.5283610	Chimy's	Neugasse	76	8005	Zürich	asian	
+47.3832801	8.5283610	Chimys	Neugasse	76	8005	Zürich	asian	
 47.3792517	8.5241155	Chianalea Ristorante Pizzeria	Brauerstrasse	87	8004	Zürich	italian	https://www.chianalea.ch/
 47.3883170	8.5769420	Thailodge					thai	
 47.3902940	8.5392273	Thali Indian Restaurant	Schaffhauserstrasse	32	8006	Zürich	indian	http://www.thali1.ch
@@ -586,7 +586,7 @@ swiss"	http://utoburg.ch/
 47.3744654	8.5207529	Bebek	Badenerstrasse	171	8003	Zürich		http://www.bebek.ch/
 47.3709487	8.5195333	Schmiedhof						https://restaurant.schmiedhof.ch/
 47.3653311	8.5475291	NZZ am Bellevue	Theaterstrasse	3	8001	Zürich		https://www.nzz-am-bellevue.ch/
-47.4029458	8.4980459	Marcello's Bistro						
+47.4029458	8.4980459	Marcellos Bistro						
 47.3766703	8.5332799	Yume-Ramen	Reitergasse	6	8004	Zürich	japanese	https://www.yume-ramen.ch
 47.3748680	8.5364144	Löweneck	Löwenstrasse	34	8001	Zürich	spanish	https://loeweneck.com/
 47.3746080	8.5357330	Takano City	Löwenstrasse	29	8001	Zürich	japanese	https://takano.ch/
@@ -615,7 +615,7 @@ swiss"	http://utoburg.ch/
 47.4101573	8.5457543	Concerto	Ohmstrasse	11	8050	Zürich	italian;pizza	http://www.ristorante-concerto.ch/
 47.4024233	8.5445394	Nihao	Oerlikonerstrasse	43	8057	Zürich	asian	http://www.restaurant-nihao.ch/
 47.3623277	8.5475678	Studio Bellerive	Utoquai	47				https://www.restaurant-studiobellerive.ch/
-47.3871353	8.4884291	Sir Andrew's	Badenerstrasse	659	8048	Zürich		https://sirandrews.ch/
+47.3871353	8.4884291	Sir Andrews	Badenerstrasse	659	8048	Zürich		https://sirandrews.ch/
 47.3748859	8.5287981	Ikoo	Bäckerstrasse	39	8004	Zürich	japanese	http://www.ikoo.ch
 47.3776411	8.5334110	Beetnut	Lagerstrasse	16b	8004	Zürich		https://beetnut.com/
 47.4075523	8.5478557	SimSim						http://www.sim-sim.ch
@@ -644,12 +644,12 @@ swiss"	http://utoburg.ch/
 47.3900195	8.5222008	Brooklyn Burgermeister	Hardstrasse	316	8005	Zürich	burger	https://www.brooklyn-burgermeister.ch/escherwyss/
 47.3738667	8.5137204	Piccola Trattoria	Aemtlerstrasse	86	8003	Zürich	italian;pizza	https://www.lapiccolatrattoria.ch/
 47.3841944	8.5284377	Maneez	Josefstrasse	137	8005	Zürich	indian	https://www.maneez-zuerich.ch/
-47.3792128	8.5435914	Didi's Frieden	Stampfenbachstrasse	32	8006	Zürich	international	https://www.didisfrieden.ch/
+47.3792128	8.5435914	Didis Frieden	Stampfenbachstrasse	32	8006	Zürich	international	https://www.didisfrieden.ch/
 47.3666913	8.5394310	Pavillon					international	http://www.aupavillon.ch/
 47.4124689	8.5501786	Sushi Palace	Thurgauerstrasse	23	8050	Zürich	sushi	https://www.sushi-palace.ch/
 47.4194232	8.5060520	Pizzeria Piazza	Wehntalerstrasse	546	8046	Zürich	italian	http://www.pizza-piazza.ch/
 47.4184517	8.5058744	Ristorante Pizzeria da Enzo	Schauenbergstrasse	8	8046	Zürich	italian	http://www.ristorante-pizzeria-daenzo.ch
-47.3359056	8.5421859	Fischer's Fritz	Seestrasse	557	8038	Zürich		http://www.fischers-fritz.ch/
+47.3359056	8.5421859	Fischers Fritz	Seestrasse	557	8038	Zürich		http://www.fischers-fritz.ch/
 47.4157652	8.5131189	Frieden	Wehntalerstrasse	444	8046	Zürich	regional	
 47.3550642	8.6019347	Viva						
 47.4115218	8.5258459	Nostos Greek Bistro	Wehntalerstrasse	286	8046	Zürich	greek	
@@ -667,7 +667,7 @@ swiss"	http://utoburg.ch/
 47.3887608	8.4870226	Santa Lucia	Altstetterstrasse	145	8048	Zürich	pizza	https://www.bindella.ch/de/santa-lucia-altstetten.html
 47.3912178	8.4895499	Scent of Bamboo	Altstetterplatz	12	8048	Zürich	chinese;thai	http://suan-long.ch/scentofbamboo/
 47.4251084	8.5484629	Vesuvio	Glatttalstrasse	40			pizza	
-47.3707573	8.5207585	Jacky's Wok	Zentralstrasse	10	8003	Zürich	asian	http://www.jackyswok.ch/
+47.3707573	8.5207585	Jackys Wok	Zentralstrasse	10	8003	Zürich	asian	http://www.jackyswok.ch/
 47.3834555	8.5303841	Co Chin Chin	Josefstrasse	102	8005	Zürich		
 47.3757826	8.5169598	Grand Café Lochergut	Badenerstrasse	230	8004	Zürich		https://www.lochergut.net/
 47.3796260	8.5434495	Hotel Bristol						
@@ -696,10 +696,10 @@ swiss"	http://utoburg.ch/
 47.3822961	8.5881357	Wirtschaft Alter Tobelhof	Tobelhofstrasse	236	8044	Zürich	regional	http://www.tobelhof.ch/
 47.3820685	8.5879257	Chäsalp	Tobelhofstrasse	236	8044	Zürich	traditional	http://www.chaesalp.ch/
 47.4117713	8.5464601	Dapur Indonesia						https://www.dapur-indonesia.ch/
-47.4146478	8.5613897	Ayverdi's					kebab;pizza	https://ayverdis.ch/
+47.4146478	8.5613897	Ayverdis					kebab;pizza	https://ayverdis.ch/
 47.3774130	8.5439582	QQ Sushi	Stampfenbachstrasse	6			sushi	http://qq-sushi.ch/
 47.3786830	8.5437382	Kian	Stampfenbachstrasse	24			persian	http://www.kian-restaurant.ch/
-47.3675745	8.5391385	Baur's						
+47.3675745	8.5391385	Baurs						
 47.3687998	8.5384032	Famo					japanese	https://tandoori-bbq.ch/
 47.3406225	8.5307103	Green Papaya					thai;vietnamese	https://www.greenpapaya.ch/
 47.3381517	8.5298842	Café Wollishofen					regional	
@@ -729,7 +729,7 @@ swiss"	http://utoburg.ch/
 47.3859082	8.5181661	Zum Gaul	Geroldstrasse	35	8005	Zürich	burger	http://www.zumgaul.ch
 47.4104455	8.5095892	Bellavista	Hönggerbergring	47	8093	Zürich	mediterranean;local	https://bellavista-ethz.ch/
 47.3784937	8.5205359	blau	Herman-Greulich-Strasse	56				https://dasblau.ch
-47.3818280	8.5326917	Wesley's Kitchen						https://www.wesleys-kitchen.ch/
+47.3818280	8.5326917	Wesleys Kitchen						https://www.wesleys-kitchen.ch/
 47.4138630	8.5520167	Steakhouse Argentina	Thurgauerstrasse	36/38	8050	Zürich	steak_house	https://www.steakhouse-argentina.ch/oerlikon/
 47.3888334	8.5224703	The Butcher	Heinrichstrasse	239	8005	Zürich	burger	https://www.butcher.ch/zuerich-heinrichstrasse
 47.3739923	8.5254278	Miss Miu	Badenerstrasse	97	8004	Zürich	korean	https://www.butcherdaughter.ch/
@@ -755,7 +755,7 @@ swiss"	http://utoburg.ch/
 47.3807187	8.5265220	Kokoro					japanese	https://www.kokoro-restaurant.ch/
 47.3870425	8.4890636	Samurai VII					japanese	https://www.siebensamurai.com/
 47.3994522	8.4958000	Hoenggerhof					italian	
-47.3754023	8.5169163	LILY'S Factory	Sihlfeldstrasse	58	8003	Zürich	asian	https://lilys.ch/
+47.3754023	8.5169163	LILYS Factory	Sihlfeldstrasse	58	8003	Zürich	asian	https://lilys.ch/
 47.3538079	8.5690296	Restaurant Buchhölzli						
 47.3706365	8.5432314	Zunfthaus zur Zimmerleuten	Limmatquai	40	8001	Zürich	regional	https://zunfthaus-zimmerleuten.ch/
 47.3692887	8.5444905	Il Gattopardo	Rössligasse	7			italian	http://www.ilgattopardo.ch/
@@ -763,7 +763,7 @@ swiss"	http://utoburg.ch/
 47.4104948	8.5428981	Migros Restaurant	Hofwiesenstrasse	350-354	8050	Zürich	international	https://filialen.migros.ch/de/migros-restaurant-zuerich-oerlikon-neumarkt
 47.4038584	8.5732243	Migros Restaurant	Winterthurerstrasse	524	8051	Zürich		https://filialen.migros.ch/de/migros-restaurant-zuerich-schwamendingen
 47.3882191	8.4871306	Migros Restaurant					international	https://filialen.migros.ch/de/migros-restaurant-zuerich-altstetten-neumarkt
-47.4077073	8.5479839	Lin's			8050	Zürich	chinese	http://lins-restaurant.ch/
+47.4077073	8.5479839	Lins			8050	Zürich	chinese	http://lins-restaurant.ch/
 47.3809227	8.5180772	Fulin					asian	
 47.3783532	8.5396557	Scent of Bamboo			8001	Zürich	chinese;thai	http://suan-long.ch/scentofbamboo/
 47.3580896	8.5538491	Totò	Seefeldstrasse	124	8008	Zürich	italian	https://www.ristorante-toto.ch/
@@ -774,7 +774,7 @@ swiss"	http://utoburg.ch/
 47.3722279	8.5388421	Cantinetta Antinori	Augustinergasse	25	8001	Zürich	italian	https://www.bindella.ch/de/cantinetta-antinori.html
 47.3645073	8.5474123	Conti	Dufourstrasse	1	8008	Zürich	italian	http://conti-zuerich.ch/
 47.3777845	8.5393225	Time... Lounge			8001	Zürich		https://www.time-lounge.ch/
-47.3966207	8.5405108	Hang's Gourmet Cuisine	Schaffhauserstrasse	127	8057	Zürich		http://www.hangsgourmetcuisine.ch/
+47.3966207	8.5405108	Hangs Gourmet Cuisine	Schaffhauserstrasse	127	8057	Zürich		http://www.hangsgourmetcuisine.ch/
 47.4150854	8.5634773	ERZ Personalrestaurant Hagenholz						
 47.4105297	8.5432986	Spiga	Hofwiesenstrasse	350	8050	Zürich	italian;pizza	https://www.spiga-ristorante.ch/i-ristoranti/detail/spiga-neumarkt
 47.3629240	8.5131571	Binz & Kunz	Räffelstrasse	17	8045	Zürich	international	https://www.binzundkunz.ch
@@ -811,7 +811,7 @@ swiss"	http://utoburg.ch/
 47.3804387	8.5285106	Neni	Langstrasse	150			mediterranean	https://www.neni.ch
 47.3897096	8.5210658	escherwyss	Hardstrasse	305				
 47.3709657	8.5358464	La Piazzetta					italian	
-47.3737064	8.5459212	d'Bar						
+47.3737064	8.5459212	dBar						
 47.3592867	8.5231352	Der Wilde Kaiser	Kalandergasse	1	8045	Zürich		https://www.derwildekaiser.ch/
 47.3580937	8.5234939	Public Burger	Kalanderplatz	1	8045	Zürich	american;burger	https://www.public-burger.ch/
 47.3782562	8.5095237	Suan Long	Badenerstrasse	355	8003	Zürich	chinese;thai	https://suan-long.ch/suanlong/
@@ -833,7 +833,7 @@ swiss"	http://utoburg.ch/
 47.3756521	8.5398019	Hiltl Dachterrasse	Bahnhofstrasse	88	8001	Zürich		https://www.hiltl.ch/de/standorte/dachterrasse
 47.4094890	8.5423228	Loewen Siam Thai Restaurant	Baumackerstrasse	47	8050	Zürich	thai	http://www.loewen-siam.ch/
 47.3695668	8.5058334	Il Basilico					pizza	http://www.ilbasilico.ch/
-47.3581057	8.5177956	Ciccio's Ristorante Bar Pizzeria	Giesshübelstrasse	65	8045	Zürich	breakfast;coffee_shop;italian;pizza	
+47.3581057	8.5177956	Ciccios Ristorante Bar Pizzeria	Giesshübelstrasse	65	8045	Zürich	breakfast;coffee_shop;italian;pizza	
 47.3685002	8.4951684	Ey-Hof	Triemlistrasse	183	8047	Zürich	international	http://www.ey-site.ch/
 47.3604176	8.5501478	Pizzeria Capri						http://www.ristorante-capri.ch/
 47.3957946	8.5399353	Pizzeria da Amici					italian	http://www.da-amici.ch/
@@ -841,8 +841,8 @@ swiss"	http://utoburg.ch/
 47.3582960	8.5271891	Rietberg						http://www.restaurant-rietberg.ch
 47.3647473	8.5475997	Tibits Bistro Zürich	Falkenstrasse	12	8008	Zürich		https://www.tibits.ch/de/restaurants#tibits-zuerich
 47.3643150	8.5477947	Seehof	Seehofstrasse	11	8008	Zürich		
-47.3711775	8.5286465	Yen's					asian	
-47.3637686	8.5545452	Giusi's Ristorante Pizzeria	Zollikerstrasse	10	8008	Zürich	italian;pizza	https://giusis-ristorante-pizzeria-2.jimdosite.com/
+47.3711775	8.5286465	Yens					asian	
+47.3637686	8.5545452	Giusis Ristorante Pizzeria	Zollikerstrasse	10	8008	Zürich	italian;pizza	https://giusis-ristorante-pizzeria-2.jimdosite.com/
 47.3801773	8.5067222	Relais des Arts						https://www.cpzurich.ch/de/restaurants/relais-des-arts/
 47.3801026	8.5066494	LetziLeu						https://www.cpzurich.ch/de/restaurants/letzileu/
 47.3790326	8.5154904	An Chay	Zypressenstrasse	94	8004	Zürich	vietnamese	
@@ -895,11 +895,11 @@ swiss"	http://utoburg.ch/
 47.3915889	8.4883066	Negishi Sushi Bar	Altstetterplatz	11	8048	Zürich	sushi	https://www.negishi.ch/de/zuerich-altstetten
 47.3933799	8.5116542	Peking Garden	Hardturmstrasse	161	8005	Zürich	chinese	https://www.peking-garden.ch/zh-hardturm/
 47.3888471	8.4950699	LETO	Hohlstrasse	485	8048	Zürich	sandwich	https://letocafe.ch
-47.3650602	8.5328569	Vee's Bistro	Alfred-Escher-Strasse	11	8002	Zürich	thai	http://www.veesbistro.com
+47.3650602	8.5328569	Vees Bistro	Alfred-Escher-Strasse	11	8002	Zürich	thai	http://www.veesbistro.com
 47.3716047	8.5211695	Uto						
 47.3752023	8.5169253	Hoikoi	Sihlfeldstrasse	56	8003	Zürich	sushi	https://hoikoi.ch/
 47.3678146	8.5359333	Ona Poké	Bleicherweg	19	8002	Zürich		https://onapoke.com/
-47.3798658	8.5061904	Ayverdi's					kebab	https://ayverdis.ch/
+47.3798658	8.5061904	Ayverdis					kebab	https://ayverdis.ch/
 47.3769342	8.5393403	La Soupière					french	http://www.hotelschweizerhof.com/restaurant-la-soupiere
 47.3487199	8.5682582	EPI Park Restaurant						
 47.3861960	8.5221215	Restaurant Viadukt	Viaduktstrasse	69	8005	Zürich		http://www.restaurant-viadukt.ch/
@@ -907,7 +907,7 @@ swiss"	http://utoburg.ch/
 47.3909520	8.5098779	Tlako					mexican	http://www.tlako.com/
 47.4143458	8.5493910	Mensa UZH Binzmühle					regional	https://www.mensa.uzh.ch/de/standorte/mensa-uzh-binzmuehle.html
 47.4154095	8.5433938	Jungholz						https://zfv.ch/de/microsites/restaurant-jungholz/
-47.3877848	8.4969898	Napi's					thai	https://www.napis.ch/
+47.3877848	8.4969898	Napis					thai	https://www.napis.ch/
 47.3712595	8.5376179	La Bottega di Mario	Nüschelerstrasse	6	8001	Zürich	regional	http://www.labottegadimario.ch/
 47.4165328	8.5555179	RLB Restaurant Leutschenbach					italian	
 47.3850743	8.4924041	Lunchmarket	Buckhauserstrasse	22	8048	Zürich		
@@ -936,7 +936,7 @@ swiss"	http://utoburg.ch/
 47.4178276	8.5460313	Taste-It					burger;shakes	https://www.facebook.com/pg/tasteitburgerzurich/
 47.3771884	8.5132497	Be Heroes	Badenerstrasse	298	8004	Zürich		https://beheroes.ch/zurich-badenerstrasse
 47.3761860	8.5153905	Delicias latinas Zurich					colombian	https://delicias-latinas-zurich.negocio.site/
-47.3705792	8.5406702	Le Relais de l'Entrecôte	In Gassen	5	8001	Zürich	steak_house	https://www.relaisentrecote.fr/
+47.3705792	8.5406702	Le Relais de lEntrecôte	In Gassen	5	8001	Zürich	steak_house	https://www.relaisentrecote.fr/
 47.3892343	8.5250511	Tschingg	Limmatstrasse	268-270	8005	Zürich	pasta	https://www.tschingg.eu
 47.3881831	8.4865271	Burgermeister	Altstetterstrasse	146	8048	Zürich	burger	https://www.burger-meister.ch/
 47.3886514	8.4838939	Piratino	Jakob-Fügli-Strasse	6			italian	http://www.piratino.ch/
@@ -950,11 +950,11 @@ swiss"	http://utoburg.ch/
 47.3682436	8.5450622	Williams ButchersTable					steak_house	https://www.williamsbutcherstable.ch/
 47.3831028	8.5301347	Thali House	Langstrasse	213	8005	Zürich	indian	https://www.th1.ch/
 47.3810005	8.5353465	il bistrò					italian	https://ilbistro.business.site/
-47.3746758	8.5435796	MyVi's	Schmidgasse	6		Zürich	vietnamese	
+47.3746758	8.5435796	MyVis	Schmidgasse	6		Zürich	vietnamese	
 47.4020655	8.4973963	Höngger Oriental Restarant						
 47.3763367	8.5475026	Dozentenfoyer						
 47.3848545	8.5485426	Zawan					thai	
-47.4092721	8.5472980	Börni's Beizli	Tramstrasse	17	8050	Zürich	german	https://boernisbaizli.ch/
+47.4092721	8.5472980	Börnis Beizli	Tramstrasse	17	8050	Zürich	german	https://boernisbaizli.ch/
 47.3818826	8.5334773	NA081	Konradstrasse	71	8005	Zürich	italian	https://na081.ch/zurich/
 47.3729171	8.5277003	Gaijin Izakaya	Birmensdorferstrasse	5	8004	Zürich	japanese	https://gaijin-izakaya.ch/
 47.3737738	8.5138059	Tapas & Friends	Aemtlerstrasse	86				http://tapasandfriends.ch/
@@ -962,7 +962,7 @@ swiss"	http://utoburg.ch/
 47.3933418	8.5121558	Westhive Kitchen	Hardturmstrasse	161	8005	Zürich	regional;sandwich;pasta;salad;donut	https://www.westhive.com/en/eat-drink/westhive-kitchen-zurich-hardturm/
 47.4159991	8.5605055	SRF Live Restaurant & Bar	Fernsehstrasse	1-4	8052			
 47.3767548	8.4882098	Ioannis						
-47.3687210	8.5243812	Lola's Restaurant	Manessestrasse	32	8003	Zürich	peruvian	https://www.lolas-restaurant.ch/
+47.3687210	8.5243812	Lolas Restaurant	Manessestrasse	32	8003	Zürich	peruvian	https://www.lolas-restaurant.ch/
 47.3888990	8.5203297	Kai Sushi	Hardstrasse	261	8005	Zürich	sushi	https://kaisushi.ch/de/standorte/schiffbau/
 47.3860799	8.5171898	Clouds	Maagplatz	5	8005	Zürich		https://clouds.ch/#restaurant
 47.3405645	8.5299409	Tibet Stubä	Albisstrasse	84	8038	Zürich	tibetan	http://www.tibet-stubae.ch/
@@ -1015,10 +1015,10 @@ swiss"	http://utoburg.ch/
 47.3921674	8.5127304	Himalaya Burger & Co.					burger;tibetan	
 47.3631452	8.4956889	The Penthouse Zurich						https://zurich.fivehotelsandresorts.com/best-restaurants-and-nightclubs-in-zurich/the-penthouse-zurich
 47.3770956	8.5232489	Habesha	Schreinerstrasse	64			ethiopian	
-47.3731276	8.5436660	Adler's swiss chuchi						
+47.3731276	8.5436660	Adlers swiss chuchi						
 47.4178923	8.5465880	Shahba Rose					syrian;turkish	
 47.3937169	8.4751509	Micas Garden						
-47.3872533	8.4876631	Rashim's Kitchen	Badenerstrasse	663	8048	Zürich	indian	https://rashimskitchen.ch/
+47.3872533	8.4876631	Rashims Kitchen	Badenerstrasse	663	8048	Zürich	indian	https://rashimskitchen.ch/
 47.4067164	8.5677179	Wanwan					thai	
 47.3800966	8.4844491	Farfalla						
 47.4080772	8.5656533	3 Spitz	Saatlenstrasse	110	8050	Zürich	pizza	https://www.pizzeriadreispitz.ch
@@ -1027,8 +1027,8 @@ swiss"	http://utoburg.ch/
 47.4044486	8.5734516	Nima	Winterthurerstrasse	537				https://www.nimazuerich.ch/
 47.4051819	8.5705089	Yakamoz	Saatlenstrasse	23	8051	Zürich	kebab;pizza	
 47.3945841	8.4798999	Zett						https://www.swisslifearena.ch/restaurant-sportsbar/
-47.3439841	8.5313955	Winit's TakeAway	Albisstrasse	29	8038	Zürich	thai	https://www.winits.ch/winitstakeaway/
-47.3943706	8.4867095	Jack's Cevap House						https://cevap.ch/
+47.3439841	8.5313955	Winits TakeAway	Albisstrasse	29	8038	Zürich	thai	https://www.winits.ch/winitstakeaway/
+47.3943706	8.4867095	Jacks Cevap House						https://cevap.ch/
 47.3715571	8.5255140	Fattoush					syrian	https://www.fattoush.ch/
 47.3684091	8.5478024	Soi Thai	Rämistrasse	24	8001	Zürich	thai	http://www.soithai.ch/
 47.3827433	8.5357837	Museumscafé	Ausstellungsstrasse	60	8005	Zürich		https://museum-gestaltung.ch/de/news/mittagsmenu/
@@ -1044,7 +1044,7 @@ swiss"	http://utoburg.ch/
 47.3806824	8.5271354	Disco Volante						
 47.3772897	8.5459039	Restaurant Leonhard						
 47.3782031	8.5086711	Iberia					spanish	https://iberiatapas.com/
-47.3929208	8.5120131	Bill's Burger	Hardturmstrasse	161	8005	Zürich	burger	https://www.billsburger.ch/
+47.3929208	8.5120131	Bills Burger	Hardturmstrasse	161	8005	Zürich	burger	https://www.billsburger.ch/
 47.3758207	8.5382808	Leo	Schweizergasse	11	8001	Zürich	italian	https://ristorante-leo.ch/
 47.3759329	8.5378026	Roof Garden	Schweizergasse	11	8001	Zürich	french	https://www.roofgarden.ch/
 47.3830089	8.5303012	Riviera					pizza	
