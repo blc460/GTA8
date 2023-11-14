@@ -260,20 +260,20 @@ body {
 	background-color: rgba(0, 0, 0, 0.5);
 	align-items: center;
 	justify-content: center;
-  }
-  
-  .popup-content {
+}
+
+.popup-content {
 	background-color: #fefefe;
 	padding: 20px;
 	border-radius: 8px;
 	max-width: 400px;
 	text-align: left;
-  }
-  
-  .close {
+}
+
+.close {
 	position: absolute;
 	top: 10px;
 	right: 10px;
 	font-size: 20px;
 	cursor: pointer;
-  }
+}
