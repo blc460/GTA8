@@ -1,7 +1,9 @@
 $(document).ready(function () {
 	console.log("ready!");
 
-	// Map.
+	//import { button1, button2 } from "./buttons.js";
+
+	// Map
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
 	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
@@ -37,6 +39,8 @@ $(document).ready(function () {
 
 	map.on('locationerror', onLocationError);
 
+	var trackpoints = [];
+
 	// Aktivieren Sie die Geolokalisierung und überwachen Sie die Position laufend.
 	var watchID = navigator.geolocation.watchPosition(function (position) {
 		// Rufen Sie die aktualisierte Position ab und aktualisieren Sie den Location Circle.
@@ -49,23 +53,54 @@ $(document).ready(function () {
 		} else {
 			locationCircle = L.circle(latlng, accuracy).addTo(map);
 		}
+		//save position when in tracking mode
+		if (tracking) {
+			trackpoints.push(latlng)
+			console.log("position logged");
+		}
 	}, function (error) {
 		// Behandeln Sie Fehler bei der Geolokalisierung.
 		console.error("Fehler bei der Geolokalisierung:", error);
+	}, geo_options = {
+		//options
+		enableHighAccuracy: true,
+		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
+		//timeout: 30000   // A maximum of 12 seconds before timeout.
 	});
 
 	// Um die Überwachung der Position zu stoppen, können Sie watchID verwenden:
 	// navigator.geolocation.clearWatch(watchID);
 
-
+	var tracking = false;
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
+		var trip_id;
+		var date_of_collection;
 		if (buttonElement.innerHTML === "Start") {
 			buttonElement.innerHTML = "Stop";
 			buttonElement.style.backgroundColor = "#000";
+
+			//Start tracking
+			tracking = true;
+			console.log("now tracking");
+			trip_id = 0; //herausfinden welche ids in datenbank schon besetzt?
+
 		} else {
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
+			
+			//Stop tracking
+			// pop-up fenster: transport_mode etc abfragen
+			date_of_collection = Date.now();
+			console.log(trackpoints);
+			console.log(date_of_collection);
+
+			//upload_trip(trip_id, date_of_collection, ip_adress, trackpoints, etc.)
+
+			//reset
+			tracking = false;
+			console.log("stopped tracking");
+			trackpoints = [];
 		}
 	}
 
@@ -82,6 +117,7 @@ $(document).ready(function () {
 				var lng = position.coords.longitude;
 				var zoomLevel = 16; // Passen Sie den Zoom-Level nach Bedarf an.
 				map.setView([lat, lng], zoomLevel);
+				console.log("zentriert");
 			});
 		} else {
 			alert("Geolocation is not supported by your browser.");
@@ -93,8 +129,10 @@ $(document).ready(function () {
 	locateButton.onclick = locatingButton
 
 	//IP-Adresse
+	var ip_adress;
 	$.getJSON("https://api.ipify.org/?format=json", function (e) {
-		console.log(e.ip);
+	ip_adress = e.ip;	
+	console.log(e.ip);
 	});
 
 
