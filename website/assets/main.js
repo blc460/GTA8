@@ -55,6 +55,7 @@ $(document).ready(function () {
 
 	map.on('locationerror', onLocationError);
 
+
 	var trackpoints = [];
 
 
@@ -93,14 +94,13 @@ $(document).ready(function () {
 
 	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
-	// Um die Überwachung der Position zu stoppen, können Sie watchID verwenden:
+	// Überwachung der Position stoppen:
 	// navigator.geolocation.clearWatch(watchID);
 
 
 	document.getElementById("closePopupBtn").addEventListener("click", function () {
 		document.getElementById("popup").style.display = "none";
 	});
-
 
 	
 	var tracking = false;
@@ -127,7 +127,7 @@ $(document).ready(function () {
 			console.log(trackpoints);
 			console.log(trip["date_of_collection"]);
 
-			//upload_trip(trip_id, date_of_collection, ip_adress, trackpoints, etc.)
+			insertData_trip(trackpoints, trip["ip_adress"], trip["trip_id"], trip["date_of_collection"], trip["name"], trip["transportMode"])
 
 			//stop tracking and reset
 			tracking = false;
@@ -167,7 +167,7 @@ $(document).ready(function () {
 		console.log(e.ip);
 	});
 
-	function insertData_trip(trackpoints, ip_adress, trip_id,date_of_collection,trip_name,trip_transport_mode) {
+	function insertData_trip(trackpoints, ip_adress, trip_id, date_of_collection, trip_name, trip_transport_mode) {
 
 		let lineStringCoords = trackpoints.map(point => point.join(' ')).join(',');
 	
