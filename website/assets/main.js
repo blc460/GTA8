@@ -2,12 +2,13 @@ var trip = {};
 var tracking = false;
 var trackpoints = [];
 
+// save ip adress
 $.getJSON("https://api.ipify.org/?format=json", function (e) {
-	// save ip adress
 	trip["ip_adress"] = e.ip;
 	console.log(e.ip);
 });
 
+// save input from pop-up window
 function saveInput() {
 	// save user input
 	trip["name"] = document.getElementById("name").value;
@@ -25,9 +26,10 @@ function saveInput() {
 $(document).ready(function () {
 	console.log("ready!");
 
-	// import { button1, button2 } from "./buttons.js";
 
-	// create map
+	// create and display map --------------------------------------------------------------------
+
+
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
 	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
@@ -41,6 +43,7 @@ $(document).ready(function () {
 
 	var locationCircle;
 
+	// brauchen wir das???
 	function onLocationFound(e) {
 		var radius = e.accuracy;
 
@@ -54,13 +57,14 @@ $(document).ready(function () {
 			locationCircle = L.circle(e.latlng, radius).addTo(map);
 		}
 	}
-
-	// brauchen wir das???
 	map.on('locationfound', onLocationFound);
 	function onLocationError(e) {
 		alert(e.message);
 	}
 	map.on('locationerror', onLocationError);
+
+
+	// location tracking: ---------------------------------------------------------------
 
 
 	function geoSuccess(position) {
@@ -80,12 +84,10 @@ $(document).ready(function () {
 			console.log("position logged");
 		}
 	}
-
 	function geoError(error) {
 		// handle errors
 		console.error("Fehler bei der Geolokalisierung:", error);
 	}
-
 	geoOptions = {
 		// options
 		enableHighAccuracy: true,
@@ -97,17 +99,16 @@ $(document).ready(function () {
 	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
 	// end location tracking
-	// navigator.geolocation.clearWatch(watchID);
+	// // navigator.geolocation.clearWatch(watchID);
 
-	// close pop-up
-	document.getElementById("closePopupBtn").addEventListener("click", function () {
-		document.getElementById("popup").style.display = "none";
-	});
+	
 
-	// (de)activate tracking
+	// buttons -----------------------------------------------------------------------------
+
+
+	// startstop button: (de)activate tracking
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
-
 		// start tracking
 		if (buttonElement.innerHTML === "Start") {
 			// change button
@@ -117,7 +118,6 @@ $(document).ready(function () {
 			tracking = true;
 			console.log("now tracking");
 		} 
-
 		// stop tracking
 		else {
 			// change button
@@ -128,7 +128,7 @@ $(document).ready(function () {
 			// get timestamp
 			trip["date_of_collection"] = Date.now();
 			// upload trip
-			insertData_trip(trackpoints, trip["ip_adress"], trip["date_of_collection"], trip["name"], trip["transportMode"])
+			insertData_trip(trackpoints, trip);
 			// stop tracking
 			tracking = false;
 			console.log("stopped tracking");
@@ -137,34 +137,45 @@ $(document).ready(function () {
 			trip = {};
 		}
 	}
-
-	// Onclick-Ereignis dem Button hinzufügen
+	// add onclick-event to the button
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
 
+	// close pop-up
+	document.getElementById("closePopupBtn").addEventListener("click", function () {
+		document.getElementById("popup").style.display = "none";
+	});
 
-
+	// locating button: center map at current location
 	function locatingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
 				var lat = position.coords.latitude;
 				var lng = position.coords.longitude;
-				var zoomLevel = 16; // Passen Sie den Zoom-Level nach Bedarf an.
+				var zoomLevel = 16; 
 				map.setView([lat, lng], zoomLevel);
-				console.log("zentriert");
+				console.log("center");
 			});
 		} else {
 			alert("Geolocation is not supported by your browser.");
 		}
 	}
-
-	// Onclick-Ereignis dem Button hinzufügen
+	// add onclick-event to the button
 	var locateButton = document.getElementById("locateButton");
 	locateButton.onclick = locatingButton
 
-	
+	// draw button: mark interesting point
 
-	function insertData_trip(trackpoints, ip_adress, date_of_collection, trip_name, trip_transport_mode) {
+	//....
+
+	// upload to database: -----------------------------------------------------------------------
+
+
+	function insertData_trip(trackpoints, trip) {
+		ip_adress= trip["ip_adress"]
+		date_of_collection = trip["date_of_collection"]
+		trip_name = trip["name"]
+		trip_transport_mode = trip["transportMode"]
 
 		let lineStringCoords = trackpoints.map(point => point.join(' ')).join(',');
 
@@ -202,14 +213,14 @@ $(document).ready(function () {
 			contentType: "text/xml",
 			data: postData,
 			success: function (xml) {
-				//Success feedback
+				// success feedback
 				console.log("Success from AJAX");
 
-				// Do something to notisfy user
+				// do something to notify user
 				alert("Data uploaded");
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
-				//Error handling
+				// error handling
 				console.log("Error from AJAX");
 				console.log(xhr.status);
 				console.log(thrownError);
