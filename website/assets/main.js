@@ -173,7 +173,7 @@ $(document).ready(function () {
 				var lng = position.coords.longitude;
 				var time = Date.now();
 				markedpoints.push((time, lat, lng));
-				console.log("point marked successfully")
+				console.log("point marked successfully");
 			});
 		} else {
 			alert("Geolocation is not supported by your browser.");
