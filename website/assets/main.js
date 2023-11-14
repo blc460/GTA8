@@ -1,6 +1,7 @@
 var trip = {};
 var tracking = false;
 var trackpoints = [];
+var markedpoints = [];
 
 // save ip adress
 $.getJSON("https://api.ipify.org/?format=json", function (e) {
@@ -106,7 +107,7 @@ $(document).ready(function () {
 	// buttons -----------------------------------------------------------------------------
 
 
-	// startstop button: (de)activate tracking
+	// startstop button: (de)activate tracking---------------------------------------------
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
 		// start tracking
@@ -146,7 +147,7 @@ $(document).ready(function () {
 		document.getElementById("popup").style.display = "none";
 	});
 
-	// locating button: center map at current location
+	// locating button: center map at current location---------------------------------------
 	function locatingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
@@ -162,12 +163,29 @@ $(document).ready(function () {
 	}
 	// add onclick-event to the button
 	var locateButton = document.getElementById("locateButton");
-	locateButton.onclick = locatingButton
+	locateButton.onclick = locatingButton;
 
-	// draw button: mark interesting point
+	// draw button: mark interesting point-------------------------------------------------------
+	function markingButton() {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				var lat = position.coords.latitude;
+				var lng = position.coords.longitude;
+				var time = Date.now();
+				markedpoints.push((time, lat, lng));
+				console.log("point marked successfully");
+			});
+		} else {
+			alert("Geolocation is not supported by your browser.");
+		}
+	}
+	// add onclick-event to the button
+	var markPointButton = document.getElementById("drawButton");
+	markPointButton.onclick = markingButton;
 
-	//....
 
+
+		
 	// upload to database: -----------------------------------------------------------------------
 
 
