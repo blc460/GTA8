@@ -1,18 +1,23 @@
 var trip = {};
+var tracking = false;
+var trackpoints = [];
+
+$.getJSON("https://api.ipify.org/?format=json", function (e) {
+	// save ip adress
+	trip["ip_adress"] = e.ip;
+	console.log(e.ip);
+});
 
 function saveInput() {
-	var name = document.getElementById("name").value;
-	var transportMode = document.getElementById("transportMode").value;
+	// save user input
+	trip["name"] = document.getElementById("name").value;
+	trip["transportMode"] = document.getElementById("transportMode").value;
 
-	// You can perform any desired actions with the collected data here
-	console.log("Name: " + name + ", Transport Mode: " + transportMode);
-	trip["name"] = name;
-	trip["transportMode"] = transportMode;
-
+	// reset form
 	document.getElementById("name").value = "";
-	document.getElementById("transportMode").value= "";
+	document.getElementById("transportMode").value = "";
 
-	// Close the popup after saving the input
+	// close the popup
 	document.getElementById("popup").style.display = "none";
 }
 
@@ -20,9 +25,9 @@ function saveInput() {
 $(document).ready(function () {
 	console.log("ready!");
 
-	//import { button1, button2 } from "./buttons.js";
+	// import { button1, button2 } from "./buttons.js";
 
-	// Map
+	// create map
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
 	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
@@ -40,43 +45,36 @@ $(document).ready(function () {
 		var radius = e.accuracy;
 
 		if (locationCircle) {
-			// Wenn der Location Circle bereits existiert, aktualisieren Sie seine Position und seinen Radius.
+			// update position and radius if location circle exists
 			locationCircle.setLatLng(e.latlng);
 			locationCircle.setRadius(radius);
 			console.log("Position aktualisiert!");
 		} else {
-			// Andernfalls erstellen Sie den Location Circle.
+			// create new location circle if not
 			locationCircle = L.circle(e.latlng, radius).addTo(map);
 		}
 	}
 
+	// brauchen wir das???
 	map.on('locationfound', onLocationFound);
-
 	function onLocationError(e) {
 		alert(e.message);
 	}
-
 	map.on('locationerror', onLocationError);
 
 
-	var trackpoints = [];
-
-
-
-	// Aktivieren Sie die Geolokalisierung und überwachen Sie die Position laufend.
-
 	function geoSuccess(position) {
-		// Rufen Sie die aktualisierte Position ab und aktualisieren Sie den Location Circle.
+		// call the current position
 		var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
 		var accuracy = position.coords.accuracy;
-
+		// update location circle
 		if (locationCircle) {
 			locationCircle.setLatLng(latlng);
 			locationCircle.setRadius(accuracy);
 		} else {
 			locationCircle = L.circle(latlng, accuracy).addTo(map);
 		}
-		//save position when in tracking mode
+		// save position when in tracking mode
 		if (tracking) {
 			trackpoints.push(latlng)
 			console.log("position logged");
@@ -84,61 +82,63 @@ $(document).ready(function () {
 	}
 
 	function geoError(error) {
-		// Behandeln Sie Fehler bei der Geolokalisierung.
+		// handle errors
 		console.error("Fehler bei der Geolokalisierung:", error);
 	}
 
 	geoOptions = {
-		//options
+		// options
 		enableHighAccuracy: true,
 		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
-		//timeout: 30000   // A maximum of 12 seconds before timeout.
+		// timeout: 30000   // A maximum of 30 seconds before timeout.
 	}
 
+	// activate geolocation tracking
 	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
-	// Überwachung der Position stoppen:
+	// end location tracking
 	// navigator.geolocation.clearWatch(watchID);
 
-
+	// close pop-up
 	document.getElementById("closePopupBtn").addEventListener("click", function () {
 		document.getElementById("popup").style.display = "none";
 	});
 
-	
-	var tracking = false;
+	// (de)activate tracking
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
+
+		// start tracking
 		if (buttonElement.innerHTML === "Start") {
+			// change button
 			buttonElement.innerHTML = "Stop";
 			buttonElement.style.backgroundColor = "#000";
-
-			//Start tracking
+			// enable tracking
 			tracking = true;
 			console.log("now tracking");
+		} 
 
-		} else {
+		// stop tracking
+		else {
+			// change button
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
-
-			// pop-up fenster: name und transport_mode abfragen
+			// pop-up window
 			document.getElementById("popup").style.display = "flex";
-
-
+			// get timestamp
 			trip["date_of_collection"] = Date.now();
-			console.log(trackpoints);
-
+			// upload trip
 			insertData_trip(trackpoints, trip["ip_adress"], trip["date_of_collection"], trip["name"], trip["transportMode"])
-
-			//stop tracking and reset
+			// stop tracking
 			tracking = false;
 			console.log("stopped tracking");
+			// reset tracking
 			trackpoints = [];
 			trip = {};
 		}
 	}
 
-	// Fügen Sie das onclick-Ereignis dem Button hinzu
+	// Onclick-Ereignis dem Button hinzufügen
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
 
@@ -158,20 +158,16 @@ $(document).ready(function () {
 		}
 	}
 
-	// Fügen Sie das onclick-Ereignis dem Button hinzu
+	// Onclick-Ereignis dem Button hinzufügen
 	var locateButton = document.getElementById("locateButton");
 	locateButton.onclick = locatingButton
 
-	//IP-Adresse
-	$.getJSON("https://api.ipify.org/?format=json", function (e) {
-		trip["ip_adress"] = e.ip;
-		console.log(e.ip);
-	});
+	
 
 	function insertData_trip(trackpoints, ip_adress, date_of_collection, trip_name, trip_transport_mode) {
 
 		let lineStringCoords = trackpoints.map(point => point.join(' ')).join(',');
-	
+
 		let postData =
 			'<wfs:Transaction\n'
 			+ '  service="WFS"\n'
@@ -198,17 +194,17 @@ $(document).ready(function () {
 			+ '    </GTA23_project:trip>\n'
 			+ '  </wfs:Insert>\n'
 			+ '</wfs:Transaction>';
-		
+
 		$.ajax({
 			type: "POST",
 			url: gs.wfs,
 			dataType: "xml",
 			contentType: "text/xml",
 			data: postData,
-			success: function(xml) {	
+			success: function (xml) {
 				//Success feedback
 				console.log("Success from AJAX");
-				
+
 				// Do something to notisfy user
 				alert("Data uploaded");
 			},
@@ -217,7 +213,7 @@ $(document).ready(function () {
 				console.log("Error from AJAX");
 				console.log(xhr.status);
 				console.log(thrownError);
-			  }
+			}
 		});
 	}
 
