@@ -3,9 +3,9 @@ var tracking = false;
 var trackpoints = [];
 var markedpoints = [];
 
-// save ip adress
+// save ip address
 $.getJSON("https://api.ipify.org/?format=json", function (e) {
-	trip["ip_adress"] = e.ip;
+	trip["ip_address"] = e.ip;
 	console.log(e.ip);
 });
 
@@ -102,7 +102,7 @@ $(document).ready(function () {
 	// end location tracking
 	// // navigator.geolocation.clearWatch(watchID);
 
-	
+
 
 	// buttons -----------------------------------------------------------------------------
 
@@ -118,7 +118,7 @@ $(document).ready(function () {
 			// enable tracking
 			tracking = true;
 			console.log("now tracking");
-		} 
+		}
 		// stop tracking
 		else {
 			// change button
@@ -128,13 +128,15 @@ $(document).ready(function () {
 			document.getElementById("popup").style.display = "flex";
 			// get timestamp
 			trip["date_of_collection"] = Date.now();
-			// upload trip
+			// upload trip data and marked points
 			insertData_trip(trackpoints, trip);
+			//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
 			// stop tracking
 			tracking = false;
 			console.log("stopped tracking");
-			// reset tracking
+			// reset
 			trackpoints = [];
+			markedpoints = [];
 			trip = {};
 		}
 	}
@@ -153,7 +155,7 @@ $(document).ready(function () {
 			navigator.geolocation.getCurrentPosition(function (position) {
 				var lat = position.coords.latitude;
 				var lng = position.coords.longitude;
-				var zoomLevel = 16; 
+				var zoomLevel = 16;
 				map.setView([lat, lng], zoomLevel);
 				console.log("center");
 			});
@@ -174,6 +176,7 @@ $(document).ready(function () {
 				var time = Date.now();
 				markedpoints.push((time, lat, lng));
 				console.log("point marked successfully");
+				console.log(markedpoints);
 			});
 		} else {
 			alert("Geolocation is not supported by your browser.");
@@ -184,13 +187,11 @@ $(document).ready(function () {
 	markPointButton.onclick = markingButton;
 
 
-
-		
 	// upload to database: -----------------------------------------------------------------------
 
 
 	function insertData_trip(trackpoints, trip) {
-		ip_adress= trip["ip_adress"]
+		ip_address = trip["ip_address"]
 		date_of_collection = trip["date_of_collection"]
 		trip_name = trip["name"]
 		trip_transport_mode = trip["transportMode"]
@@ -214,7 +215,7 @@ $(document).ready(function () {
 			+ '      <trip_date_of_collection>' + date_of_collection + '</trip_date_of_collection>\n'
 			+ '      <trip_name>' + trip_name + '</trip_name>\n'
 			+ '      <trip_transport_mode>' + trip_transport_mode + '</trip_transport_mode>\n'
-			+ '      <trip_ip_adress>' + ip_adress + '</trip_ip_adress>\n'
+			+ '      <trip_ip_adress>' + ip_address + '</trip_ip_adress>\n'
 			+ '      <geometry>\n'
 			+ '        <gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
 			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
@@ -245,6 +246,65 @@ $(document).ready(function () {
 			}
 		});
 	}
+
+	/*function insertPoint(lat, lng, timestamp, trip_id) {
+
+		let postData =
+			'<wfs:Transaction\n'
+			+ '  service="WFS"\n'
+			+ '  version="1.0.0"\n'
+			+ '  xmlns="http://www.opengis.net/wfs"\n'
+			+ '  xmlns:wfs="http://www.opengis.net/wfs"\n'
+			+ '  xmlns:gml="http://www.opengis.net/gml"\n'
+			+ '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
+			+ '  xmlns:GTA23_lab07="http://www.gis.ethz.ch/GTA23_lab07" \n'
+			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_lab07 \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_lab07/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_lab07%3Agta_u30_lab07 \n'
+			+ '                      http://www.opengis.net/wfs\n'
+			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
+			+ '  <wfs:Insert>\n'
+			+ '    <GTA23_lab07:gta_u30_lab07>\n'
+			+ '      <lon>' + lng + '</lon>\n'
+			+ '      <lat>' + lat + '</lat>\n'
+			+ '      <name>' + name + '</name>\n'
+			+ '      <geometry>\n'
+			+ '        <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
+			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lng + ',' + lat + '</gml:coordinates>\n'
+			+ '        </gml:Point>\n'
+			+ '      </geometry>\n'
+			+ '    </GTA23_lab07:gta_u30_lab07>\n'
+			+ '  </wfs:Insert>\n'
+			+ '</wfs:Transaction>';
+
+		$.ajax({
+			type: "POST",
+			url: gs.wfs,
+			dataType: "xml",
+			contentType: "text/xml",
+			data: postData,
+			success: function (xml) {
+				//Success feedback
+				console.log("Success from AJAX");
+
+				// Do something to notisfy user
+				alert("Data uploaded");
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				//Error handling
+				console.log("Error from AJAX");
+				console.log(xhr.status);
+				console.log(thrownError);
+			}
+		});
+	}
+
+	function insertData_points(markedpoints, trip) {
+		var trip_id = trip["trip_id"];
+		for (let pt in markedpoints) {
+			var pt_lat = pt[0];
+			var pt_lon
+			insertPoint(lat, lng, trip_id)
+		}
+	}*/
 
 
 });
