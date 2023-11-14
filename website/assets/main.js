@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 	map.on('locationerror', onLocationError);
 
-	var timestamps = {};
+	var trackpoints = [];
 
 	// Aktivieren Sie die Geolokalisierung und überwachen Sie die Position laufend.
 	var watchID = navigator.geolocation.watchPosition(function (position) {
@@ -53,13 +53,19 @@ $(document).ready(function () {
 		} else {
 			locationCircle = L.circle(latlng, accuracy).addTo(map);
 		}
-
+		//save position when in tracking mode
 		if (tracking) {
-			//record position
+			trackpoints.push(latlng)
+			console.log("position logged");
 		}
 	}, function (error) {
 		// Behandeln Sie Fehler bei der Geolokalisierung.
 		console.error("Fehler bei der Geolokalisierung:", error);
+	}, geo_options = {
+		//options
+		enableHighAccuracy: true,
+		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
+		//timeout: 30000   // A maximum of 12 seconds before timeout.
 	});
 
 	// Um die Überwachung der Position zu stoppen, können Sie watchID verwenden:
@@ -70,7 +76,6 @@ $(document).ready(function () {
 		var buttonElement = document.getElementById("button");
 		var trip_id;
 		var date_of_collection;
-		var ip_adress;
 		if (buttonElement.innerHTML === "Start") {
 			buttonElement.innerHTML = "Stop";
 			buttonElement.style.backgroundColor = "#000";
@@ -85,11 +90,17 @@ $(document).ready(function () {
 			buttonElement.style.backgroundColor = '#444444';
 			
 			//Stop tracking
-			tracking = false;
-			console.log("stopped tracking");
 			// pop-up fenster: transport_mode etc abfragen
 			date_of_collection = Date.now();
-			ip_adress = 0; //Funktion aufrufen
+			console.log(trackpoints);
+			console.log(date_of_collection);
+
+			//upload_trip(trip_id, date_of_collection, ip_adress, trackpoints, etc.)
+
+			//reset
+			tracking = false;
+			console.log("stopped tracking");
+			trackpoints = [];
 		}
 	}
 
@@ -106,6 +117,7 @@ $(document).ready(function () {
 				var lng = position.coords.longitude;
 				var zoomLevel = 16; // Passen Sie den Zoom-Level nach Bedarf an.
 				map.setView([lat, lng], zoomLevel);
+				console.log("zentriert");
 			});
 		} else {
 			alert("Geolocation is not supported by your browser.");
@@ -117,8 +129,10 @@ $(document).ready(function () {
 	locateButton.onclick = locatingButton
 
 	//IP-Adresse
+	var ip_adress;
 	$.getJSON("https://api.ipify.org/?format=json", function (e) {
-		console.log(e.ip);
+	ip_adress = e.ip;	
+	console.log(e.ip);
 	});
 
 
