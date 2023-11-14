@@ -9,6 +9,9 @@ function saveInput() {
 	trip["name"] = name;
 	trip["transportMode"] = transportMode;
 
+	document.getElementById("name").value = "";
+	document.getElementById("transportMode").value= "";
+
 	// Close the popup after saving the input
 	document.getElementById("popup").style.display = "none";
 }
@@ -119,13 +122,12 @@ $(document).ready(function () {
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
 
-			// pop-up fenster: transport_mode etc abfragen
+			// pop-up fenster: name und transport_mode abfragen
 			document.getElementById("popup").style.display = "flex";
 
 
 			trip["date_of_collection"] = Date.now();
 			console.log(trackpoints);
-			console.log(trip["date_of_collection"]);
 
 			insertData_trip(trackpoints, trip["ip_adress"], trip["trip_id"], trip["date_of_collection"], trip["name"], trip["transportMode"])
 
