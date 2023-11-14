@@ -1,7 +1,9 @@
 $(document).ready(function () {
 	console.log("ready!");
 
-	// Map.
+	//import { button1, button2 } from "./buttons.js";
+
+	// Map
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
 	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
@@ -37,6 +39,8 @@ $(document).ready(function () {
 
 	map.on('locationerror', onLocationError);
 
+	var timestamps = {};
+
 	// Aktivieren Sie die Geolokalisierung und überwachen Sie die Position laufend.
 	var watchID = navigator.geolocation.watchPosition(function (position) {
 		// Rufen Sie die aktualisierte Position ab und aktualisieren Sie den Location Circle.
@@ -49,6 +53,10 @@ $(document).ready(function () {
 		} else {
 			locationCircle = L.circle(latlng, accuracy).addTo(map);
 		}
+
+		if (tracking) {
+			//record position
+		}
 	}, function (error) {
 		// Behandeln Sie Fehler bei der Geolokalisierung.
 		console.error("Fehler bei der Geolokalisierung:", error);
@@ -57,15 +65,31 @@ $(document).ready(function () {
 	// Um die Überwachung der Position zu stoppen, können Sie watchID verwenden:
 	// navigator.geolocation.clearWatch(watchID);
 
-
+	var tracking = false;
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
+		var trip_id;
+		var date_of_collection;
+		var ip_adress;
 		if (buttonElement.innerHTML === "Start") {
 			buttonElement.innerHTML = "Stop";
 			buttonElement.style.backgroundColor = "#000";
+
+			//Start tracking
+			tracking = true;
+			console.log("now tracking");
+			trip_id = 0; //herausfinden welche ids in datenbank schon besetzt?
+
 		} else {
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
+			
+			//Stop tracking
+			tracking = false;
+			console.log("stopped tracking");
+			// pop-up fenster: transport_mode etc abfragen
+			date_of_collection = Date.now();
+			ip_adress = 0; //Funktion aufrufen
 		}
 	}
 
