@@ -191,6 +191,11 @@ $(document).ready(function () {
 
 	// upload to database: -----------------------------------------------------------------------
 
+	var gs = {
+		wfs: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs',
+		ows: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/ows'
+	};
+
 
 	function insertData_trip(trackpoints, trip) {
 		ip_address = trip["ip_address"]
