@@ -231,7 +231,7 @@ $(document).ready(function () {
 			+ '      <trip_date_of_collection>' + date_of_collection + '</trip_date_of_collection>\n'
 			+ '      <trip_name>' + trip_name + '</trip_name>\n'
 			+ '      <trip_transport_mode>' + trip_transport_mode + '</trip_transport_mode>\n'
-			+ '      <trip_ip_adress>' + ip_address + '</trip_ip_adress>\n'
+			+ '      <trip_ip_address>' + ip_address + '</trip_ip_address>\n'
 			+ '      <geometry>\n'
 			+ '        <gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
 			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
