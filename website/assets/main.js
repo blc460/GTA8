@@ -211,7 +211,7 @@ $(document).ready(function () {
 			lineStringCoords = lineStringCoords.concat(',');
 		  }
 		
-		lineStringCoords = stralt.substr(0, stralt.length - 1);
+		lineStringCoords = lineStringCoords.substr(0, stralt.length - 1);
 		
 
 		let postData =
