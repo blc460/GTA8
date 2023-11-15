@@ -126,6 +126,10 @@ $(document).ready(function () {
 			buttonElement.style.backgroundColor = '#444444';
 			// pop-up window
 			document.getElementById("popup").style.display = "flex";
+			// close pop-up
+			document.getElementById("closePopupBtn").addEventListener("click", function () {
+				document.getElementById("popup").style.display = "none";
+			});
 			// get timestamp
 			trip["date_of_collection"] = Date.now();
 			// upload trip data and marked points
@@ -146,10 +150,7 @@ $(document).ready(function () {
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
 
-	// close pop-up
-	document.getElementById("closePopupBtn").addEventListener("click", function () {
-		document.getElementById("popup").style.display = "none";
-	});
+	
 
 	// locating button: center map at current location---------------------------------------
 	function locatingButton() {
@@ -173,10 +174,7 @@ $(document).ready(function () {
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
-				var lat = position.coords.latitude;
-				var lng = position.coords.longitude;
-				var time = Date.now();
-				markedpoints.push((time, lat, lng));
+				markedpoints.push([position.coords.latitude, position.coords.longitude, Date.now()]);
 				console.log("point marked successfully");
 				console.log(markedpoints);
 			});
