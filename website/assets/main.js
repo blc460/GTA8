@@ -200,8 +200,13 @@ $(document).ready(function () {
 		var lineStringCoords = new String();
 
 		for (const tubel in lineStringCoords) {
-			lineStringCoords = lineStringCoords.concat(tubel);
+			lineStringCoords = lineStringCoords.concat(tubel['lat']);
+			lineStringCoords = lineStringCoords.concat(' ');
+			lineStringCoords = lineStringCoords.concat(tubel['lng']);
+			lineStringCoords = lineStringCoords.concat(',');
 		  }
+		
+		lineStringCoords = stralt.substr(0, stralt.length - 1);
 		
 
 		let postData =
