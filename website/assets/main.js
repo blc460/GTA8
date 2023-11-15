@@ -173,10 +173,8 @@ $(document).ready(function () {
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
-				var lat = position.coords.latitude;
-				var lng = position.coords.longitude;
-				var time = Date.now();
-				markedpoints.push((time, lat, lng));
+				var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+				markedpoints.push((Date.now(), latlng));
 				console.log("point marked successfully");
 				console.log(markedpoints);
 			});
