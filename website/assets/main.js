@@ -132,7 +132,7 @@ $(document).ready(function () {
 			console.log(trackpoints);
 			console.log(trackpoints[0]['lat']);
 			insertData_trip(trackpoints, trip);
-			insertData_points(markedpoints, trip);
+			//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
 			// stop tracking
 			tracking = false;
 			console.log("stopped tracking");
@@ -173,7 +173,10 @@ $(document).ready(function () {
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
-				markedpoints.push([position.coords.latitude, position.coords.longitude, Date.now()]);
+				var lat = position.coords.latitude;
+				var lng = position.coords.longitude;
+				var time = Date.now();
+				markedpoints.push((time, lat, lng));
 				console.log("point marked successfully");
 				console.log(markedpoints);
 			});
@@ -260,7 +263,9 @@ $(document).ready(function () {
 		});
 	}
 
-	function insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id){
+	function insertPoint_markedPoint(lat,lng,time) {
+
+
 
 		let postData =
 			'<wfs:Transaction\n'
@@ -276,7 +281,7 @@ $(document).ready(function () {
 			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
 			+ '  <wfs:Insert>\n'
 			+ '    <GTA23_project:marked_point>\n'
-			+ '      <marked_point_time>' + trip_time + '</marked_point_time>\n'
+			+ '      <marked_point_time>' + time + '</marked_point_time>\n'
 			+ '      <geometry>\n'
 			+ '        <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
 			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lng + ',' + lat + '</gml:coordinates>\n'
@@ -309,12 +314,11 @@ $(document).ready(function () {
 	}
 
 	function insertData_points(markedpoints, trip) {
-		//var trip_id = trip["trip_id"]; gaht nonig
+		var trip_id = trip["trip_id"];
 		for (let pt in markedpoints) {
 			var pt_lat = pt[0];
-			var pt_lon = pt[1];
-			var pt_time = pt[2];
-			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
+			var pt_lon
+			insertPoint(lat, lng, trip_id)
 		}
 	}
 
