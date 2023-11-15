@@ -132,7 +132,7 @@ $(document).ready(function () {
 			console.log(trackpoints);
 			console.log(trackpoints[0]['lat']);
 			insertData_trip(trackpoints, trip);
-			//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
+			insertData_points(markedpoints, trip);
 			// stop tracking
 			tracking = false;
 			console.log("stopped tracking");
@@ -173,8 +173,7 @@ $(document).ready(function () {
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
-				var latlng = L.latLng(position.coords.latitude, position.coords.longitude);
-				markedpoints.push((Date.now(), latlng));
+				markedpoints.push([position.coords.latitude, position.coords.longitude, Date.now()]);
 				console.log("point marked successfully");
 				console.log(markedpoints);
 			});
@@ -261,11 +260,7 @@ $(document).ready(function () {
 		});
 	}
 
-	function insertPoint_markedPoint(trip, name) {
-		lat = trip["lat"]
-		lng = trip["lng"]
-		trip_time= trip["time"]
-
+	function insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id){
 
 		let postData =
 			'<wfs:Transaction\n'
@@ -314,11 +309,12 @@ $(document).ready(function () {
 	}
 
 	function insertData_points(markedpoints, trip) {
-		var trip_id = trip["trip_id"];
+		//var trip_id = trip["trip_id"]; gaht nonig
 		for (let pt in markedpoints) {
 			var pt_lat = pt[0];
-			var pt_lon
-			insertPoint(lat, lng, trip_id)
+			var pt_lon = pt[1];
+			var pt_time = pt[2];
+			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
 		}
 	}
 
