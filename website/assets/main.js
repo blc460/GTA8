@@ -195,8 +195,12 @@ $(document).ready(function () {
 		date_of_collection = trip["date_of_collection"]
 		trip_name = trip["name"]
 		trip_transport_mode = trip["transportMode"]
+		var lineStringCoords = new String();
 
-		let lineStringCoords = trackpoints.map(point => point.join(' ')).join(',');
+		for (const tubel in lineStringCoords) {
+			lineStringCoords = lineStringCoords.concat(tubel);
+		  }
+		
 
 		let postData =
 			'<wfs:Transaction\n'
