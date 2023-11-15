@@ -129,6 +129,8 @@ $(document).ready(function () {
 			// get timestamp
 			trip["date_of_collection"] = Date.now();
 			// upload trip data and marked points
+			console.log(trackpoints);
+			console.log(trackpoints[0]['lat']);
 			insertData_trip(trackpoints, trip);
 			//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
 			// stop tracking
