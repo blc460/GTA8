@@ -204,14 +204,14 @@ $(document).ready(function () {
 		trip_transport_mode = trip["transportMode"]
 		var lineStringCoords = new String();
 
-		for (const tubel in lineStringCoords) {
-			lineStringCoords = lineStringCoords.concat(tubel['lat']);
+		for (const tupel in lineStringCoords) {
+			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
-			lineStringCoords = lineStringCoords.concat(tubel['lng']);
+			lineStringCoords = lineStringCoords.concat(tupel['lng']);
 			lineStringCoords = lineStringCoords.concat(',');
 		  }
 		
-		lineStringCoords = lineStringCoords.substr(0, stralt.length - 1);
+		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
 		
 
 		let postData =
