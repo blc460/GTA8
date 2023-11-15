@@ -263,7 +263,11 @@ $(document).ready(function () {
 		});
 	}
 
-	/*function insertPoint(lat, lng, timestamp, trip_id) {
+	function insertPoint_markedPoint(trip, name) {
+		lat = trip["lat"]
+		lng = trip["lng"]
+		trip_time= trip["time"]
+
 
 		let postData =
 			'<wfs:Transaction\n'
@@ -273,21 +277,19 @@ $(document).ready(function () {
 			+ '  xmlns:wfs="http://www.opengis.net/wfs"\n'
 			+ '  xmlns:gml="http://www.opengis.net/gml"\n'
 			+ '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
-			+ '  xmlns:GTA23_lab07="http://www.gis.ethz.ch/GTA23_lab07" \n'
-			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_lab07 \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_lab07/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_lab07%3Agta_u30_lab07 \n'
+			+ '  xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n'
+			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Amarked_point \n'
 			+ '                      http://www.opengis.net/wfs\n'
 			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
 			+ '  <wfs:Insert>\n'
-			+ '    <GTA23_lab07:gta_u30_lab07>\n'
-			+ '      <lon>' + lng + '</lon>\n'
-			+ '      <lat>' + lat + '</lat>\n'
-			+ '      <name>' + name + '</name>\n'
+			+ '    <GTA23_project:marked_point>\n'
+			+ '      <marked_point_time>' + trip_time + '</marked_point_time>\n'
 			+ '      <geometry>\n'
 			+ '        <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
 			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lng + ',' + lat + '</gml:coordinates>\n'
 			+ '        </gml:Point>\n'
 			+ '      </geometry>\n'
-			+ '    </GTA23_lab07:gta_u30_lab07>\n'
+			+ '    </GTA23_project:marked_point>\n'
 			+ '  </wfs:Insert>\n'
 			+ '</wfs:Transaction>';
 
@@ -320,7 +322,7 @@ $(document).ready(function () {
 			var pt_lon
 			insertPoint(lat, lng, trip_id)
 		}
-	}*/
+	}
 
 
 });
