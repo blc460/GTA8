@@ -263,7 +263,7 @@ $(document).ready(function () {
 		});
 	}
 
-	function insertPoint_markedPoint(lat,lng,time) {
+	function insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id) {
 
 
 
@@ -314,11 +314,12 @@ $(document).ready(function () {
 	}
 
 	function insertData_points(markedpoints, trip) {
-		var trip_id = trip["trip_id"];
+		//var trip_id = trip["trip_id"];
 		for (let pt in markedpoints) {
 			var pt_lat = pt[0];
-			var pt_lon
-			insertPoint(lat, lng, trip_id)
+			var pt_lon = pt[1];
+			var pt_time = pt[2];
+			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
 		}
 	}
 
