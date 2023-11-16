@@ -127,23 +127,24 @@ $(document).ready(function () {
 			// pop-up window
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
-			document.getElementById("closePopupBtn").addEventListener("click", function () {
+			document.getElementById("evaluateTrip").addEventListener("click", function () {
+				// get timestamp
+				trip["date_of_collection"] = Date.now();
+				// upload trip data and marked points
+				console.log(trackpoints);
+				console.log(trackpoints[0]['lat']);
+				insertData_trip(trackpoints, trip);
+				//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
+				// stop tracking
+				tracking = false;
+				console.log("stopped tracking");
+				// reset
+				trackpoints = [];
+				markedpoints = [];
+				trip = {};
 				document.getElementById("popup").style.display = "none";
 			});
-			// get timestamp
-			trip["date_of_collection"] = Date.now();
-			// upload trip data and marked points
-			console.log(trackpoints);
-			console.log(trackpoints[0]['lat']);
-			insertData_trip(trackpoints, trip);
-			//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
-			// stop tracking
-			tracking = false;
-			console.log("stopped tracking");
-			// reset
-			trackpoints = [];
-			markedpoints = [];
-			trip = {};
+			
 		}
 	}
 	// add onclick-event to the button
@@ -173,6 +174,9 @@ $(document).ready(function () {
 	// draw button: mark interesting point-------------------------------------------------------
 	function markingButton() {
 		if ("geolocation" in navigator) {
+			if (tracking) {
+				
+			}
 			navigator.geolocation.getCurrentPosition(function (position) {
 				markedpoints.push([position.coords.latitude, position.coords.longitude, Date.now()]);
 				console.log("point marked successfully");
@@ -196,13 +200,13 @@ $(document).ready(function () {
 
 
 	function insertData_trip(trackpoints, trip) {
-		ip_address = trip["ip_address"]
-		date_of_collection = trip["date_of_collection"]
-		trip_name = trip["name"]
-		trip_transport_mode = trip["transportMode"]
+		ip_address = trip["ip_address"];
+		date_of_collection = trip["date_of_collection"];
+		trip_name = trip["name"];
+		trip_transport_mode = trip["transportMode"];
 		var lineStringCoords = new String();
 
-		for (const tupel in lineStringCoords) {
+		for (const tupel in trackpoints) {
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
 			lineStringCoords = lineStringCoords.concat(tupel['lng']);
@@ -214,29 +218,29 @@ $(document).ready(function () {
 
 		let postData =
 			'<wfs:Transaction\n'
-			+ '  service="WFS"\n'
-			+ '  version="1.0.0"\n'
-			+ '  xmlns="http://www.opengis.net/wfs"\n'
-			+ '  xmlns:wfs="http://www.opengis.net/wfs"\n'
-			+ '  xmlns:gml="http://www.opengis.net/gml"\n'
-			+ '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
-			+ '  xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n'
-			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_lab07 \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip \n'
-			+ '                      http://www.opengis.net/wfs\n'
-			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
-			+ '  <wfs:Insert>\n'
-			+ '    <GTA23_project:trip>\n'
-			+ '      <trip_date_of_collection>' + date_of_collection + '</trip_date_of_collection>\n'
-			+ '      <trip_name>' + trip_name + '</trip_name>\n'
-			+ '      <trip_transport_mode>' + trip_transport_mode + '</trip_transport_mode>\n'
-			+ '      <trip_ip_address>' + ip_address + '</trip_ip_address>\n'
-			+ '      <geometry>\n'
-			+ '        <gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
-			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
-			+ '        </gml:LineString>\n'
-			+ '      </geometry>\n'
-			+ '    </GTA23_project:trip>\n'
-			+ '  </wfs:Insert>\n'
+			+ 'service="WFS"\n'
+			+ 'version="1.0.0"\n'
+			+ 'xmlns="http://www.opengis.net/wfs"\n'
+			+ 'xmlns:wfs="http://www.opengis.net/wfs"\n'
+			+ 'xmlns:gml="http://www.opengis.net/gml"\n'
+			+ 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
+			+ 'xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n'
+			+ 'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_lab07 \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n'
+			+ 'http://www.opengis.net/wfs\n'
+			+ 'http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
+			+ '<wfs:Insert>\n'
+			+ '<GTA23_project:trip>\n'
+			+ '<trip_date_of_collection>' + date_of_collection + '</trip_date_of_collection>\n'
+			+ '<trip_name>' + trip_name + '</trip_name>\n'
+			+ '<trip_transport_mode>' + trip_transport_mode + '</trip_transport_mode>\n'
+			+ '<trip_ip_address>' + ip_address + '</trip_ip_address>\n'
+			+ '<geometry>\n'
+			+ '<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
+			+ '<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
+			+ '</gml:LineString>\n'
+			+ '</geometry>\n'
+			+ '</GTA23_project:trip>\n'
+			+ '</wfs:Insert>\n'
 			+ '</wfs:Transaction>';
 
 		$.ajax({
@@ -274,15 +278,15 @@ $(document).ready(function () {
 			+ '  xmlns:gml="http://www.opengis.net/gml"\n'
 			+ '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
 			+ '  xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n'
-			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Amarked_point \n'
+			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Amarked_point\n'
 			+ '                      http://www.opengis.net/wfs\n'
 			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
 			+ '  <wfs:Insert>\n'
 			+ '    <GTA23_project:marked_point>\n'
-			+ '      <marked_point_time>' + time + '</marked_point_time>\n'
+			+ '      <marked_point_time>' + pt_time + '</marked_point_time>\n'
 			+ '      <geometry>\n'
 			+ '        <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
-			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lng + ',' + lat + '</gml:coordinates>\n'
+			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + pt_lng + ',' + pt_lat + '</gml:coordinates>\n'
 			+ '        </gml:Point>\n'
 			+ '      </geometry>\n'
 			+ '    </GTA23_project:marked_point>\n'
