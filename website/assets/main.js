@@ -206,7 +206,7 @@ $(document).ready(function () {
 		trip_transport_mode = trip["transportMode"];
 		var lineStringCoords = new String();
 
-		for (const tupel in trackpoints) {
+		for (const tupel of trackpoints) {
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
 			lineStringCoords = lineStringCoords.concat(tupel['lng']);
