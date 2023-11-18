@@ -204,7 +204,7 @@ $(document).ready(function () {
 		date_of_collection = trip["date_of_collection"];
 		trip_name = trip["name"];
 		trip_transport_mode = trip["transportMode"];
-		var lineStringCoords = new String();
+		var lineStringCoords = '(';
 
 		for (const tupel of trackpoints) {
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
@@ -214,7 +214,7 @@ $(document).ready(function () {
 		  }
 		
 		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
-		
+		lineStringCoords = lineStringCoords.concat(')');
 
 		let postData =
 			'<wfs:Transaction\n'
