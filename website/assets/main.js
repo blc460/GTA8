@@ -215,6 +215,7 @@ $(document).ready(function () {
 		
 		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
 		lineStringCoords = lineStringCoords.concat(')');
+		console.log(lineStringCoords)
 
 		let postData =
 			'<wfs:Transaction\n'
