@@ -23,6 +23,21 @@ function saveInput() {
 	document.getElementById("popup").style.display = "none";
 }
 
+function getTimestamp() {
+	// Timestamp in seconds
+	var ts = new Date();
+	// Convert to PostgreSQL-Timestamp
+	var date = ts.toLocaleDateString();
+	var time = date.slice(6); // yyyy
+	time = time.concat('-');
+	time = time.concat(date.slice(3,5)); // mm
+	time = time.concat('-');
+	time = time.concat(date.slice(0,2)); // dd
+	time = time.concat(' ')
+	time = time.concat(ts.toLocaleTimeString()); // hh:mm:ss
+	return time;
+}
+
 
 $(document).ready(function () {
 	console.log("ready!");
@@ -91,9 +106,9 @@ $(document).ready(function () {
 	}
 	geoOptions = {
 		// options
-		enableHighAccuracy: true,
+		enableHighAccuracy: false,
 		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
-		// timeout: 30000   // A maximum of 30 seconds before timeout.
+		timeout: 30000   // A maximum of 30 seconds before timeout.
 	}
 
 	// activate geolocation tracking
@@ -129,7 +144,7 @@ $(document).ready(function () {
 			// close pop-up
 			document.getElementById("evaluateTrip").addEventListener("click", function () {
 				// get timestamp
-				trip["date_of_collection"] = Date.now();
+				trip["date_of_collection"] = getTimestamp();
 				// upload trip data and marked points
 				console.log(trackpoints);
 				console.log(trackpoints[0]['lat']);
@@ -144,14 +159,14 @@ $(document).ready(function () {
 				trip = {};
 				document.getElementById("popup").style.display = "none";
 			});
-			
+
 		}
 	}
 	// add onclick-event to the button
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
 
-	
+
 
 	// locating button: center map at current location---------------------------------------
 	function locatingButton() {
@@ -175,10 +190,10 @@ $(document).ready(function () {
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			if (tracking) {
-				
+
 			}
 			navigator.geolocation.getCurrentPosition(function (position) {
-				markedpoints.push([position.coords.latitude, position.coords.longitude, Date.now()]);
+				markedpoints.push([position.coords.latitude, position.coords.longitude, getTimestamp()]);
 				console.log("point marked successfully");
 				console.log(markedpoints);
 			});
@@ -211,10 +226,17 @@ $(document).ready(function () {
 			lineStringCoords = lineStringCoords.concat(' ');
 			lineStringCoords = lineStringCoords.concat(tupel['lng']);
 			lineStringCoords = lineStringCoords.concat(',');
-		  }
-		
+		}
+
 		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
 		lineStringCoords = lineStringCoords.concat(')');
+
+		// test
+		console.log(date_of_collection);
+		console.log(lineStringCoords);
+		console.log(trip_name);
+		console.log(trip_transport_mode);
+		console.log(ip_address);
 		console.log(lineStringCoords);
 
 		let postData =
@@ -266,9 +288,8 @@ $(document).ready(function () {
 		});
 	}
 
+	/*
 	function insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id) {
-
-
 
 		let postData =
 			'<wfs:Transaction\n'
@@ -303,8 +324,7 @@ $(document).ready(function () {
 			success: function (xml) {
 				//Success feedback
 				console.log("Success from AJAX");
-
-				// Do something to notisfy user
+				// Do something to notify user
 				alert("Data uploaded");
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
@@ -317,14 +337,14 @@ $(document).ready(function () {
 	}
 
 	function insertData_points(markedpoints, trip) {
-		//var trip_id = trip["trip_id"];
+		var trip_id = trip["trip_id"];
 		for (let pt in markedpoints) {
 			var pt_lat = pt[0];
-			var pt_lon = pt[1];
+			var pt_lng = pt[1];
 			var pt_time = pt[2];
 			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
 		}
 	}
-
+	*/
 
 });
