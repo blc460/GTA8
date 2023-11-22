@@ -35,6 +35,9 @@ function getTimestamp() {
 	time = time.concat(date.slice(0,2)); // dd
 	time = time.concat(' ')
 	time = time.concat(ts.toLocaleTimeString()); // hh:mm:ss
+
+	// data["time"] = data["time"].dt.strftime("%Y-%m-%d %H:%M:%S") use sth like this???
+
 	return time;
 }
 
@@ -219,17 +222,19 @@ $(document).ready(function () {
 		date_of_collection = trip["date_of_collection"];
 		trip_name = trip["name"];
 		trip_transport_mode = trip["transportMode"];
-		var lineStringCoords = '(';
+		var lineStringCoords = ' ';
+
+		// ! LineString must have at least 2 points ! -> implement assertion or error message if only one point
 
 		for (const tupel of trackpoints) {
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
 			lineStringCoords = lineStringCoords.concat(tupel['lng']);
-			lineStringCoords = lineStringCoords.concat(',');
+			lineStringCoords = lineStringCoords.concat(' ');
 		}
 
-		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
-		lineStringCoords = lineStringCoords.concat(')');
+		//lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
+		//lineStringCoords = lineStringCoords.concat(')');
 
 		// test
 		console.log(date_of_collection);
@@ -259,7 +264,7 @@ $(document).ready(function () {
 			+ '<trip_ip_address>' + ip_address + '</trip_ip_address>\n'
 			+ '<geometry>\n'
 			+ '<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
-			+ '<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
+			+ '<gml:posList xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:posList>\n'
 			+ '</gml:LineString>\n'
 			+ '</geometry>\n'
 			+ '</GTA23_project:trip>\n'
@@ -274,6 +279,7 @@ $(document).ready(function () {
 			data: postData,
 			success: function (xml) {
 				// success feedback
+				console.log(xml);
 				console.log("Success from AJAX");
 
 				// do something to notify user
