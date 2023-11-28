@@ -222,7 +222,7 @@ $(document).ready(function () {
 		date_of_collection = trip["date_of_collection"];
 		trip_name = trip["name"];
 		trip_transport_mode = trip["transportMode"];
-		var lineStringCoords = ' ';
+		var lineStringCoords = ' LINESTRING(';
 
 		// ! LineString must have at least 2 points ! -> implement assertion or error message if only one point
 
@@ -230,11 +230,11 @@ $(document).ready(function () {
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
 			lineStringCoords = lineStringCoords.concat(tupel['lng']);
-			lineStringCoords = lineStringCoords.concat(' ');
+			lineStringCoords = lineStringCoords.concat(', ');
 		}
 
-		//lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
-		//lineStringCoords = lineStringCoords.concat(')');
+		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 2);
+		lineStringCoords = lineStringCoords.concat(') ');
 
 		// test
 		console.log(date_of_collection);
@@ -262,11 +262,7 @@ $(document).ready(function () {
 			+ '<trip_name>' + trip_name + '</trip_name>\n'
 			+ '<trip_transport_mode>' + trip_transport_mode + '</trip_transport_mode>\n'
 			+ '<trip_ip_address>' + ip_address + '</trip_ip_address>\n'
-			+ '<geometry>\n'
-			+ '<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
-			+ '<gml:posList xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:posList>\n'
-			+ '</gml:LineString>\n'
-			+ '</geometry>\n'
+			+ '<geometry>' + lineStringCoords + '</geometry>\n'
 			+ '</GTA23_project:trip>\n'
 			+ '</wfs:Insert>\n'
 			+ '</wfs:Transaction>';
