@@ -30,9 +30,9 @@ function getTimestamp() {
 	var date = ts.toLocaleDateString();
 	var time = date.slice(6); // yyyy
 	time = time.concat('-');
-	time = time.concat(date.slice(3,5)); // mm
+	time = time.concat(date.slice(3, 5)); // mm
 	time = time.concat('-');
-	time = time.concat(date.slice(0,2)); // dd
+	time = time.concat(date.slice(0, 2)); // dd
 	time = time.concat(' ')
 	time = time.concat(ts.toLocaleTimeString()); // hh:mm:ss
 
