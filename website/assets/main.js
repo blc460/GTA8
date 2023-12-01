@@ -26,8 +26,13 @@ function saveInput() {
 function getTimestamp() {
 	// Timestamp in seconds
 	var ts = new Date();
+	//console.log(ts);
 	// Convert to PostgreSQL-Timestamp
 	var date = ts.toLocaleDateString();
+	if (date.length == 9) {
+		date = '0' + date;
+	}
+	//console.log(date);
 	var time = date.slice(6); // yyyy
 	time = time.concat('-');
 	time = time.concat(date.slice(3, 5)); // mm
@@ -35,8 +40,7 @@ function getTimestamp() {
 	time = time.concat(date.slice(0, 2)); // dd
 	time = time.concat(' ')
 	time = time.concat(ts.toLocaleTimeString()); // hh:mm:ss
-
-	// data["time"] = data["time"].dt.strftime("%Y-%m-%d %H:%M:%S") use sth like this???
+	//console.log(time)
 
 	return time;
 }
@@ -150,7 +154,7 @@ $(document).ready(function () {
 				trip["date_of_collection"] = getTimestamp();
 				// upload trip data and marked points
 				console.log(trackpoints);
-				console.log(trackpoints[0]['lat']);
+				//console.log(trackpoints[0]['lat']);
 				insertData_trip(trackpoints, trip);
 				//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
 				// stop tracking
@@ -219,20 +223,21 @@ $(document).ready(function () {
 
 	function insertData_trip(trackpoints, trip) {
 		ip_address = trip["ip_address"];
-		date_of_collection = trip["date_of_collection"];
+		//date_of_collection = trip["date_of_collection"];
+		date_of_collection = "2023-12-01 17:20:38";
 		trip_name = trip["name"];
 		trip_transport_mode = trip["transportMode"];
-		var lineStringCoords = ' ';
+		var lineStringCoords = '47.4093,8.50653 48.4093,8.50653';
 
 		// ! LineString must have at least 2 points ! -> implement assertion or error message if only one point
-
+		/*
 		for (const tupel of trackpoints) {
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
 			lineStringCoords = lineStringCoords.concat(tupel['lng']);
 			lineStringCoords = lineStringCoords.concat(' ');
 		}
-
+		*/
 		//lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
 		//lineStringCoords = lineStringCoords.concat(')');
 
@@ -264,7 +269,7 @@ $(document).ready(function () {
 			+ '<trip_ip_address>' + ip_address + '</trip_ip_address>\n'
 			+ '<geometry>\n'
 			+ '<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
-			+ '<gml:posList xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:posList>\n'
+			+ '<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
 			+ '</gml:LineString>\n'
 			+ '</geometry>\n'
 			+ '</GTA23_project:trip>\n'
