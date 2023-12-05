@@ -35,20 +35,28 @@ function getWfsData() {
     xhr.send();
 }
 
-// Funktion zum Aktualisieren des HTML-Bodys mit den erhaltenen Daten
 function updateHTML(data) {
-    var tbody = document.getElementById("trip-table-body");
+    var table = document.querySelector("table");
+    var tbody = table.querySelector("tbody");
 
-    // Löschen Sie vorhandene Daten in der Tabelle
+    // Clear existing data in the table body
     tbody.innerHTML = "";
 
-    // Iterieren Sie über die erhaltenen Daten und fügen Sie die trip_id der Tabelle hinzu
+    // Iterate over the received data and add rows to the table
     data.features.forEach(function (feature) {
         var row = tbody.insertRow();
-        var cell = row.insertCell(0);
 
-        // Annahme: Annahmen über die Struktur der Daten und das Attribut trip_id
-        cell.innerHTML = feature.properties.trip_id;
+        // Access the properties object
+        var properties = feature.properties;
+
+        // Assuming your table has three columns: trip_name, trip_transport_mode, trip_date_of_collection
+        var columns = ["trip_name", "trip_transport_mode", "trip_date_of_collection"];
+
+        // Add cells to the row for each column
+        columns.forEach(function (column, index) {
+            var cell = row.insertCell(index);
+            cell.innerHTML = properties[column];
+        });
     });
 }
 
