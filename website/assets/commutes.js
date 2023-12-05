@@ -42,15 +42,13 @@ function updateHTML(data) {
     // Löschen Sie vorhandene Daten in der Tabelle
     tbody.innerHTML = "";
 
-    // Iterieren Sie über die erhaltenen Daten und fügen Sie sie der Tabelle hinzu
+    // Iterieren Sie über die erhaltenen Daten und fügen Sie die trip_id der Tabelle hinzu
     data.features.forEach(function (feature) {
         var row = tbody.insertRow();
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
+        var cell = row.insertCell(0);
 
-        // Annahme: Annahmen über die Struktur der Daten
-        cell1.innerHTML = feature.properties.tripName;
-        cell2.innerHTML = feature.properties.location;
+        // Annahme: Annahmen über die Struktur der Daten und das Attribut trip_id
+        cell.innerHTML = feature.properties.trip_id;
     });
 }
 
