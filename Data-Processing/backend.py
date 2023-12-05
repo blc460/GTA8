@@ -1,8 +1,4 @@
 import psycopg2
-from psycopg2.extensions import AsIs
-import psycopg2
-import pandas as pd
-import numpy as np
 
 db_credentials = {"dbname": 'gta',
                   "port": 5432,
