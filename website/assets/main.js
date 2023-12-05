@@ -140,12 +140,29 @@ $(document).ready(function () {
 			// enable tracking
 			tracking = true;
 			console.log("now tracking");
+
+			var dotElement = document.createElement("div");
+			dotElement.id = "trackingDot";
+			dotElement.style.width = "10px";
+			dotElement.style.height = "10px";
+			dotElement.style.backgroundColor = "red";
+			dotElement.style.borderRadius = "50%";
+			dotElement.style.position = "fixed";
+			dotElement.style.top = "10px";
+			dotElement.style.right = "10px";
+			dotElement.style.animation = "blinking 2s infinite"; // Define a blinking animation
+			document.body.appendChild(dotElement);
 		}
 		// stop tracking
 		else {
 			// change button
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
+			// remove tracking dot
+			var dotElement = document.getElementById("trackingDot");
+			if (dotElement) {
+				dotElement.parentNode.removeChild(dotElement);
+			}
 			// pop-up window
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
@@ -169,6 +186,17 @@ $(document).ready(function () {
 
 		}
 	}
+
+	// CSS animation for blinking
+	var style = document.createElement('style');
+	style.innerHTML = `
+    @keyframes blinking {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+`;
+	document.head.appendChild(style);
 	// add onclick-event to the button
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
