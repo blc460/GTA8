@@ -1,8 +1,3 @@
-// save ip address
-$.getJSON("https://api.ipify.org/?format=json", function (e) {
-	trip["ip_address"] = e.ip;
-	console.log(e.ip);
-});
 
 // TODO: complete the url for the WMS GetFeatureInfo request
 let url = 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/layer:trip'
