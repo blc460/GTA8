@@ -1,5 +1,4 @@
 import psycopg2
-from flask import Flask, jsonify, request, after_this_request
 
 db_credentials = {"dbname": 'gta',
                   "port": 5432,
@@ -7,11 +6,7 @@ db_credentials = {"dbname": 'gta',
                   "password": 'r7sdkfdq',
                   "host": 'ikgpgis.ethz.ch'}
 
-app = Flask(__name__)
-
-@app.route("/get_id_list", methods=["GET"])
-def get_id_list(db_credentials):
-    trip_id = str(request.args.get("trip_id", "10"))
+def get_id_list(trip_id, db_credentials):
     trip_id = str(trip_id)
     conn = psycopg2.connect(**db_credentials)
     cur = conn.cursor()
@@ -23,8 +18,8 @@ def get_id_list(db_credentials):
     array = []
     for i in list:
         array.append(i[0])
-    return jsonify(array)
+    return array
 
-if __name__ == "__main__":
-    # run
-    app.run(debug=True, host="localhost", port=8989)
+trip_id = 10
+list = get_id_list(trip_id, db_credentials)
+print(list)
