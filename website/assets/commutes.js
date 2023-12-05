@@ -5,7 +5,7 @@ var params = {
     service: "WFS",
     version: "2.0.0",
     request: "GetFeature",
-    typeName: "GTA23_lab07_project",
+    typeName: "GTA23_project",
     outputFormat: "application/json"
 };
 
