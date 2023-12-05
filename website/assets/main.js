@@ -24,9 +24,10 @@ function saveInput() {
 }
 
 function getTimestamp() {
+	
 	// Timestamp in seconds
 	var ts = new Date();
-	//console.log(ts);
+	console.log(ts.toLocaleTimeString());
 	// Convert to PostgreSQL-Timestamp
 	var date = ts.toLocaleDateString();
 	if (date.length == 9) {
@@ -251,23 +252,22 @@ $(document).ready(function () {
 
 	function insertData_trip(trackpoints, trip) {
 		ip_address = trip["ip_address"];
-		//date_of_collection = trip["date_of_collection"];
-		date_of_collection = "2023-12-01 17:20:38";
+		date_of_collection = trip["date_of_collection"];
+		//date_of_collection = "2023-12-01 17:20:38";
 		trip_name = trip["name"];
 		trip_transport_mode = trip["transportMode"];
-		var lineStringCoords = '47.4093,8.50653 48.4093,8.50653';
+		//var bspStringCoords = '8.50805,47.40918 8.50499,47.40520 8.50345,47.40432 8.50312,47.40361 8.50176,47.40279 8.49995,47.40294 8.49910,47.40161';
+		var lineStringCoords = '';
 
 		// ! LineString must have at least 2 points ! -> implement assertion or error message if only one point
-		/*
 		for (const tupel of trackpoints) {
+			lineStringCoords = lineStringCoords.concat(tupel['lng']);
+			lineStringCoords = lineStringCoords.concat(',');
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
-			lineStringCoords = lineStringCoords.concat(tupel['lng']);
-			lineStringCoords = lineStringCoords.concat(' ');
 		}
-		*/
-		//lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
-		//lineStringCoords = lineStringCoords.concat(')');
+		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
+	
 
 		// test
 		console.log(date_of_collection);
