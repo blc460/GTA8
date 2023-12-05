@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
         $.ajax({
             type: "GET",
             url: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wms', // Replace with your GeoServer URL
-            dataType: "XML",
+            layers: 'GTA23_project:trip',
+           
             success: function (data) {
                 // Extract the trips from the GeoServer response
                 var trips = extractTripsFromGeoServerResponse(data);
