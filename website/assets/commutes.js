@@ -25,13 +25,33 @@ function getWfsData() {
             // Verarbeiten Sie die Antwort hier
             var response = JSON.parse(xhr.responseText);
             console.log(response);
-            // Hier können Sie die Antwort in die Tabelle einfügen
-            // z.B., durch Iteration über die Daten und Erstellen von <tr> und <td> Elementen
+
+            // Aktualisieren Sie den HTML-Body mit den erhaltenen Daten
+            updateHTML(response);
         }
     };
 
     // Senden Sie die Anfrage
     xhr.send();
+}
+
+// Funktion zum Aktualisieren des HTML-Bodys mit den erhaltenen Daten
+function updateHTML(data) {
+    var tbody = document.getElementById("trip-table-body");
+
+    // Löschen Sie vorhandene Daten in der Tabelle
+    tbody.innerHTML = "";
+
+    // Iterieren Sie über die erhaltenen Daten und fügen Sie sie der Tabelle hinzu
+    data.features.forEach(function (feature) {
+        var row = tbody.insertRow();
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        // Annahme: Annahmen über die Struktur der Daten
+        cell1.innerHTML = feature.properties.tripName;
+        cell2.innerHTML = feature.properties.location;
+    });
 }
 
 // Rufen Sie die Funktion auf, wenn das DOM vollständig geladen ist
