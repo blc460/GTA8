@@ -24,10 +24,16 @@ function saveInput() {
 }
 
 function getTimestamp() {
+	
 	// Timestamp in seconds
 	var ts = new Date();
+	console.log(ts.toLocaleTimeString());
 	// Convert to PostgreSQL-Timestamp
 	var date = ts.toLocaleDateString();
+	if (date.length == 9) {
+		date = '0' + date;
+	}
+	//console.log(date);
 	var time = date.slice(6); // yyyy
 	time = time.concat('-');
 	time = time.concat(date.slice(3, 5)); // mm
@@ -35,8 +41,7 @@ function getTimestamp() {
 	time = time.concat(date.slice(0, 2)); // dd
 	time = time.concat(' ')
 	time = time.concat(ts.toLocaleTimeString()); // hh:mm:ss
-
-	// data["time"] = data["time"].dt.strftime("%Y-%m-%d %H:%M:%S") use sth like this???
+	//console.log(time)
 
 	return time;
 }
@@ -136,12 +141,29 @@ $(document).ready(function () {
 			// enable tracking
 			tracking = true;
 			console.log("now tracking");
+
+			var dotElement = document.createElement("div");
+			dotElement.id = "trackingDot";
+			dotElement.style.width = "10px";
+			dotElement.style.height = "10px";
+			dotElement.style.backgroundColor = "red";
+			dotElement.style.borderRadius = "50%";
+			dotElement.style.position = "fixed";
+			dotElement.style.top = "10px";
+			dotElement.style.right = "10px";
+			dotElement.style.animation = "blinking 2s infinite"; // Define a blinking animation
+			document.body.appendChild(dotElement);
 		}
 		// stop tracking
 		else {
 			// change button
 			buttonElement.innerHTML = "Start";
 			buttonElement.style.backgroundColor = '#444444';
+			// remove tracking dot
+			var dotElement = document.getElementById("trackingDot");
+			if (dotElement) {
+				dotElement.parentNode.removeChild(dotElement);
+			}
 			// pop-up window
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
@@ -150,7 +172,7 @@ $(document).ready(function () {
 				trip["date_of_collection"] = getTimestamp();
 				// upload trip data and marked points
 				console.log(trackpoints);
-				console.log(trackpoints[0]['lat']);
+				//console.log(trackpoints[0]['lat']);
 				insertData_trip(trackpoints, trip);
 				//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
 				// stop tracking
@@ -165,6 +187,17 @@ $(document).ready(function () {
 
 		}
 	}
+
+	// CSS animation for blinking
+	var style = document.createElement('style');
+	style.innerHTML = `
+    @keyframes blinking {
+        0% { opacity: 0; }
+        50% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+`;
+	document.head.appendChild(style);
 	// add onclick-event to the button
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
@@ -220,21 +253,21 @@ $(document).ready(function () {
 	function insertData_trip(trackpoints, trip) {
 		ip_address = trip["ip_address"];
 		date_of_collection = trip["date_of_collection"];
+		//date_of_collection = "2023-12-01 17:20:38";
 		trip_name = trip["name"];
 		trip_transport_mode = trip["transportMode"];
-		var lineStringCoords = ' ';
+		//var bspStringCoords = '8.50805,47.40918 8.50499,47.40520 8.50345,47.40432 8.50312,47.40361 8.50176,47.40279 8.49995,47.40294 8.49910,47.40161';
+		var lineStringCoords = '';
 
 		// ! LineString must have at least 2 points ! -> implement assertion or error message if only one point
-
 		for (const tupel of trackpoints) {
+			lineStringCoords = lineStringCoords.concat(tupel['lng']);
+			lineStringCoords = lineStringCoords.concat(',');
 			lineStringCoords = lineStringCoords.concat(tupel['lat']);
 			lineStringCoords = lineStringCoords.concat(' ');
-			lineStringCoords = lineStringCoords.concat(tupel['lng']);
-			lineStringCoords = lineStringCoords.concat(' ');
 		}
-
-		//lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
-		//lineStringCoords = lineStringCoords.concat(')');
+		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
+	
 
 		// test
 		console.log(date_of_collection);
@@ -264,7 +297,7 @@ $(document).ready(function () {
 			+ '<trip_ip_address>' + ip_address + '</trip_ip_address>\n'
 			+ '<geometry>\n'
 			+ '<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
-			+ '<gml:posList xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:posList>\n'
+			+ '<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + lineStringCoords + '</gml:coordinates>\n'
 			+ '</gml:LineString>\n'
 			+ '</geometry>\n'
 			+ '</GTA23_project:trip>\n'
