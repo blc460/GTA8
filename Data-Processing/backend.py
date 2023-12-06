@@ -7,10 +7,16 @@ db_credentials = {"dbname": 'gta',
                   "password": 'r7sdkfdq',
                   "host": 'ikgpgis.ethz.ch'}
 
+__name__ == "__main__"
 app = Flask(__name__)
 
 @app.route("/get_id_list", methods=["GET"])
-def get_id_list(db_credentials):
+def get_id_list():
+    db_credentials = {"dbname": 'gta',
+                  "port": 5432,
+                  "user": 'gta_p8',
+                  "password": 'r7sdkfdq',
+                  "host": 'ikgpgis.ethz.ch'}
     trip_id = str(request.args.get("trip_id", "10"))
     trip_id = str(trip_id)
     conn = psycopg2.connect(**db_credentials)
