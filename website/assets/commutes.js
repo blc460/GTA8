@@ -1,58 +1,86 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Function to fetch trips from GeoServer
-    function fetchTrips() {
-        $.ajax({
-            type: "GET",
-            url: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project', // Replace with your GeoServer URL
-            dataType: "XML",
-            success: function (data) {
-                // Extract the trips from the GeoServer response
-                var trips = extractTripsFromGeoServerResponse(data);
+// Funktion, um WFS-Daten abzurufen und zu verarbeiten
+function getWfsData() {
+    var wfsUrl = "http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs";
 
-                // Populate the trip list
-                var tripList = document.getElementById('trip-list');
-                trips.forEach(function (trip) {
-                    var tripItem = document.createElement('li');
-                    tripItem.className = 'trip-item';
-                    tripItem.textContent = trip.name + ' - ' + trip.location;
-                    tripList.appendChild(tripItem);
+    // WFS-Parameter
+    var params = {
+        service: "WFS",
+        version: "2.0.0",
+        request: "GetFeature",
+        typeName: "GTA23_project:trip",
+        outputFormat: "application/json"
+    };
+
+    // AJAX-Anfrage
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", wfsUrl + '?' + new URLSearchParams(params), true);
+
+    // Setzen Sie CORS-Header, wenn erforderlich
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Accept", "application/json");
+
+    // Callback für die Antwort
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Verarbeiten Sie die Antwort hier
+            var response = JSON.parse(xhr.responseText);
+            console.log(response);
+
+            // Ermitteln Sie die IP-Adresse des Benutzers
+            getUserIpAddress(function(userIpAddress) {
+                // Feste IP-Adresse "111.111.111.111"
+                var fixedIpAddress = "111.111.111.111";
+
+                // Filtern Sie die Trips basierend auf den IP-Adressen
+                var filteredTrips = response.features.filter(function (feature) {
+                    return feature.properties.trip_ip_address === userIpAddress || feature.properties.trip_ip_address === fixedIpAddress;
                 });
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log("Error fetching trips from GeoServer");
-                console.log(xhr.status);
-                console.log(thrownError);
-            }
-        });
-    }
 
-    // Function to extract trips from GeoServer response
-    function extractTripsFromGeoServerResponse(geoServerResponse) {
-        // Implement the logic to extract trips from the GeoServer response
-        // Modify this function based on the actual structure of your data
-        var trips = [];
-
-        // Example: Assuming your GeoServer response has a 'FeatureCollection' element
-        var features = geoServerResponse.getElementsByTagName('gml:featureMember');
-        for (var i = 0; i < features.length; i++) {
-            var feature = features[i];
-            
-            // Extract data based on the actual structure of your GeoServer response
-            var name = feature.getElementsByTagName('Name')[0].textContent;
-            var location = feature.getElementsByTagName('Location')[0].textContent;
-
-            // Create a trip object and add it to the trips array
-            var trip = {
-                name: name,
-                location: location
-                // Add other properties as needed
-            };
-            trips.push(trip);
+                // Aktualisieren Sie den HTML-Body mit den gefilterten Daten
+                updateHTML({ features: filteredTrips });
+            });
         }
+    };
 
-        return trips;
-    }
+    // Senden Sie die Anfrage
+    xhr.send();
+}
 
-    // Fetch trips when the page loads
-    fetchTrips();
+// Funktion zum Ermitteln der IP-Adresse des Benutzers
+function getUserIpAddress(callback) {
+    // Verwenden Sie jQuery, um die IP-Adresse des Benutzers abzurufen
+    $.getJSON("https://api.ipify.org/?format=json", function (data) {
+        // callback mit der erhaltenen IP-Adresse aufrufen
+        callback(data.ip);
+    });
+}
+
+function updateHTML(data) {
+    var table = document.querySelector("table");
+    var tbody = table.querySelector("tbody");
+
+    // Clear existing data in the table body
+    tbody.innerHTML = "";
+
+    // Iterate over the received data and add rows to the table
+    data.features.forEach(function (feature) {
+        var row = tbody.insertRow();
+
+        // Access the properties object
+        var properties = feature.properties;
+
+        // Assuming your table has three columns: trip_name, trip_transport_mode, trip_date_of_collection
+        var columns = ["trip_name", "trip_transport_mode", "trip_date_of_collection"];
+
+        // Add cells to the row for each column
+        columns.forEach(function (column, index) {
+            var cell = row.insertCell(index);
+            cell.innerHTML = properties[column];
+        });
+    });
+}
+
+// Rufen Sie die Funktion auf, wenn das DOM vollständig geladen ist
+document.addEventListener("DOMContentLoaded", function () {
+    getWfsData();
 });

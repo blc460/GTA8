@@ -286,7 +286,7 @@ $(document).ready(function () {
 			+ 'xmlns:gml="http://www.opengis.net/gml"\n'
 			+ 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
 			+ 'xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n'
-			+ 'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_lab07 \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n'
+			+ 'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n'
 			+ 'http://www.opengis.net/wfs\n'
 			+ 'http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
 			+ '<wfs:Insert>\n'
