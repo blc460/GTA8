@@ -461,9 +461,23 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function processLink(link) {
-    // Hier können Sie die Logik implementieren, um mit dem Link zu arbeiten
-    console.log("Processing link:", link);
+    // Anfrage mit der ursprünglichen URL durchführen
+    $.ajax({
+		// URL to the Vercel production deployment (vercel --prod will give you this link)
+		url: link,
+		type: 'GET',
+		dataType: 'JSON',
+		success: function (data) { 
+			console.log(data);
+			document.getElementById("demo").innerHTML = JSON.stringify(data)
+		},
+		error: function (data) { console.log(data); },
+	});
+}
 
-    // Zum Beispiel: Weiterleitung zu dem empfangenen Link
-    //window.location.href = link;
+function displayData(data) {
+    // Hier können Sie die Logik implementieren, um die Daten auf der Seite anzuzeigen
+    // Zum Beispiel: Aktualisierung des DOM mit den empfangenen Daten
+    var resultElement = document.getElementById("result");
+    resultElement.textContent = "Received data: " + JSON.stringify(data);
 }
