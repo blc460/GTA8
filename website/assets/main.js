@@ -469,15 +469,7 @@ function processLink(link) {
 		dataType: 'JSON',
 		success: function (data) { 
 			console.log(data);
-			document.getElementById("demo").innerHTML = JSON.stringify(data)
 		},
 		error: function (data) { console.log(data); },
 	});
-}
-
-function displayData(data) {
-    // Hier können Sie die Logik implementieren, um die Daten auf der Seite anzuzeigen
-    // Zum Beispiel: Aktualisierung des DOM mit den empfangenen Daten
-    var resultElement = document.getElementById("result");
-    resultElement.textContent = "Received data: " + JSON.stringify(data);
 }
