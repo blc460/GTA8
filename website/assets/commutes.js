@@ -28,9 +28,12 @@ function getWfsData() {
 
             // Ermitteln Sie die IP-Adresse des Benutzers
             getUserIpAddress(function(userIpAddress) {
-                // Filtern Sie die Trips basierend auf der Benutzer-IP-Adresse
+                // Feste IP-Adresse "111.111.111.111"
+                var fixedIpAddress = "111.111.111.111";
+
+                // Filtern Sie die Trips basierend auf den IP-Adressen
                 var filteredTrips = response.features.filter(function (feature) {
-                    return feature.properties.trip_ip_address === userIpAddress;
+                    return feature.properties.trip_ip_address === userIpAddress || feature.properties.trip_ip_address === fixedIpAddress;
                 });
 
                 // Aktualisieren Sie den HTML-Body mit den gefilterten Daten
