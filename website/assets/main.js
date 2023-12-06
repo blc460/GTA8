@@ -456,9 +456,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function processLink(link) {
-    // Hier können Sie die Logik implementieren, um mit dem Link zu arbeiten
-    console.log("Processing link:", link);
+    // Fetch-Anfrage mit der ursprünglichen URL durchführen
+    fetch(link)
+        .then(response => response.text())
+        .then(data => {
+            console.log("Received data:", data);
 
-    // Zum Beispiel: Weiterleitung zu dem empfangenen Link
-    //window.location.href = link;
+            // Versuchen Sie dann, die Daten zu parsen
+            try {
+                var jsonData = JSON.parse(data);
+                console.log("Parsed JSON data:", jsonData);
+
+                // Hier können Sie mit den Daten in der Variable jsonData arbeiten
+                // Beispiel: Anzeige der Daten auf der Seite
+                displayData(jsonData);
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+}
+
+
+function displayData(data) {
+    // Hier können Sie die Logik implementieren, um die Daten auf der Seite anzuzeigen
+    // Zum Beispiel: Aktualisierung des DOM mit den empfangenen Daten
+    var resultElement = document.getElementById("result");
+    resultElement.textContent = "Received data: " + JSON.stringify(data);
 }
