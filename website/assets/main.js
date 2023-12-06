@@ -168,13 +168,18 @@ $(document).ready(function () {
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
 			document.getElementById("evaluateTrip").addEventListener("click", function () {
+				console.log(trackpoints);
+				if (trackpoints.length < 2) {
+					alert("Must track at least two points before the trip can be evaluated!");
+				}
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
 				// upload trip data and marked points
 				console.log(trackpoints);
-				//console.log(trackpoints[0]['lat']);
-				insertData_trip(trackpoints, trip);
-				//insertData_points(markedpoints, trip); ----> Noch nicht fertig implementiert (s.unten)
+				trip["trip_id"] = insertData_trip(trackpoints, trip);
+				if (markedpoints.length > 0) {
+					insertData_points(markedpoints, trip);
+				}
 				// stop tracking
 				tracking = false;
 				console.log("stopped tracking");
@@ -183,8 +188,7 @@ $(document).ready(function () {
 				markedpoints = [];
 				trip = {};
 				document.getElementById("popup").style.display = "none";
-			});
-
+		});
 		}
 	}
 
@@ -226,13 +230,17 @@ $(document).ready(function () {
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			if (tracking) {
-
+				navigator.geolocation.getCurrentPosition(function (position) {
+					markedpoints.push([position.coords.latitude, position.coords.longitude, getTimestamp()]);
+					console.log("point marked successfully");
+					console.log(markedpoints);
+				});
 			}
-			navigator.geolocation.getCurrentPosition(function (position) {
-				markedpoints.push([position.coords.latitude, position.coords.longitude, getTimestamp()]);
-				console.log("point marked successfully");
-				console.log(markedpoints);
-			});
+			else {
+				// TODO: Create a prettier pop-up with information for user
+				// console.log("Can only mark points while tracking!");
+				alert("You cannot mark points when you are not tracking, please start the tracking mode!");
+			}
 		} else {
 			alert("Geolocation is not supported by your browser.");
 		}
@@ -248,6 +256,31 @@ $(document).ready(function () {
 		wfs: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs',
 		ows: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/ows'
 	};
+
+	// Function to extract the inserted feature ID from the Insert response
+	function extractIdFromInsertResponse(responseXml) {
+		var insertedId = null;
+
+		// Use jQuery to parse the XML response
+		var $xml = $(responseXml);
+
+		// Check if the response contains the necessary elements
+		var $featureId = $xml.find('ogc\\:FeatureId');
+		if ($featureId.length > 0) {
+			var fullId = $featureId.attr('fid');
+			
+			// Extract the numeric part after the 'trip.'
+			var numericPart = fullId.replace('trip.', '');
+			
+			// Convert the numeric part to a number (if needed)
+			returned_id = parseInt(numericPart, 10);
+		}
+
+
+		console.log(returned_id)
+
+		return returned_id;
+	}
 
 
 	function insertData_trip(trackpoints, trip) {
@@ -304,6 +337,8 @@ $(document).ready(function () {
 			+ '</wfs:Insert>\n'
 			+ '</wfs:Transaction>';
 
+		var insertedId;
+
 		$.ajax({
 			type: "POST",
 			url: gs.wfs,
@@ -316,7 +351,11 @@ $(document).ready(function () {
 				console.log("Success from AJAX");
 
 				// do something to notify user
-				alert("Data uploaded");
+
+				insertedId = extractIdFromInsertResponse(xml);
+
+        		// Notify user or perform additional actions with the inserted ID
+        		alert("Data uploaded. Inserted ID: " + insertedId);
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 				// error handling
@@ -325,9 +364,21 @@ $(document).ready(function () {
 				console.log(thrownError);
 			}
 		});
+
+		return insertedId;
 	}
 
-	/*
+	function insertData_points(markedpoints, trip) {
+		var trip_id = trip["trip_id"];
+		for (let pt in markedpoints) {
+			var pt_lat = pt[0];
+			var pt_lng = pt[1];
+			var pt_time = pt[2];
+			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
+		}
+	}
+
+
 	function insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id) {
 
 		let postData =
@@ -345,6 +396,7 @@ $(document).ready(function () {
 			+ '  <wfs:Insert>\n'
 			+ '    <GTA23_project:marked_point>\n'
 			+ '      <marked_point_time>' + pt_time + '</marked_point_time>\n'
+			+ '      <trip_id>' + trip_id + '</trip_id>\n'
 			+ '      <geometry>\n'
 			+ '        <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n'
 			+ '          <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + pt_lng + ',' + pt_lat + '</gml:coordinates>\n'
@@ -375,15 +427,5 @@ $(document).ready(function () {
 		});
 	}
 
-	function insertData_points(markedpoints, trip) {
-		var trip_id = trip["trip_id"];
-		for (let pt in markedpoints) {
-			var pt_lat = pt[0];
-			var pt_lng = pt[1];
-			var pt_time = pt[2];
-			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
-		}
-	}
-	*/
 
 });
