@@ -5,13 +5,13 @@ app = Flask(__name__)
 
 @app.route("/get_id_list", methods=["GET"])
 def get_id_list():
+    trip_id = request.args.get("trip_id")
+    trip_id = str(trip_id)
     db_credentials = {"dbname": 'gta',
                   "port": 5432,
                   "user": 'gta_p8',
                   "password": 'r7sdkfdq',
                   "host": 'ikgpgis.ethz.ch'}
-    trip_id = str(request.args.get("trip_id"))
-    trip_id = str(trip_id)
     conn = psycopg2.connect(**db_credentials)
     cur = conn.cursor()
     sql_string = "SELECT restaurant_id FROM gta_p8.restaurant JOIN gta_p8.trip ON gta_p8.trip.trip_id = "+trip_id+" WHERE ST_Contains(ST_Buffer(ST_Transform(gta_p8.trip.geometry, 3857),100, 'endcap=flat join=round'),ST_Transform(gta_p8.restaurant.geometry, 3857));"
@@ -26,4 +26,4 @@ def get_id_list():
 
 if __name__ == "__main__":
     # run
-    app.run(debug=True, host="localhost", port=8989)
+    app.run(debug=True, host="0.0.0.0", port=6006)
