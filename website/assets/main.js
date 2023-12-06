@@ -168,6 +168,7 @@ $(document).ready(function () {
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
 			document.getElementById("evaluateTrip").addEventListener("click", function () {
+				console.log("Markedpoints:");
 				console.log(markedpoints);
 				if (trackpoints.length < 2) {
 					alert("Must track at least two points before the trip can be evaluated!");
@@ -177,6 +178,8 @@ $(document).ready(function () {
 				// upload trip data and marked points
 				//console.log(trackpoints);
 				trip["trip_id"] = insertData_trip(trackpoints, trip);
+				console.log("Trip ID");
+				console.log(trip["trip_id"]);
 				if (markedpoints.length > 0) {
 					insertData_points(markedpoints, trip);
 				}
@@ -259,7 +262,7 @@ $(document).ready(function () {
 
 	// Function to extract the inserted feature ID from the Insert response
 	function extractIdFromInsertResponse(responseXml) {
-		var insertedId = null;
+		var returned_id = null;
 
 		// Use jQuery to parse the XML response
 		var $xml = $(responseXml);
@@ -275,9 +278,9 @@ $(document).ready(function () {
 			// Convert the numeric part to a number (if needed)
 			returned_id = parseInt(numericPart, 10);
 		}
-
-
-		//console.log(returned_id)
+		// funktioniert
+		console.log("Trip_id before return from extra function:");
+		console.log(returned_id);
 
 		return returned_id;
 	}
@@ -337,7 +340,7 @@ $(document).ready(function () {
 			+ '</wfs:Insert>\n'
 			+ '</wfs:Transaction>';
 
-		var insertedId;
+		var insertedId = null;
 
 		$.ajax({
 			type: "POST",
@@ -364,20 +367,22 @@ $(document).ready(function () {
 				console.log(thrownError);
 			}
 		});
-
+		
+		console.log("Trip_id before return from post:");
+		console.log(insertedId);
 		return insertedId;
 	}
 
 	function insertData_points(markedpoints, trip) {
 		var trip_id = trip["trip_id"];
-		for (let pt in markedpoints) {
+		for (var pt of markedpoints) {
 			console.log(pt);
 			var pt_lat = pt[0];
 			var pt_lng = pt[1];
 			var pt_time = pt[2];
-			console.log(pt_lat);
-			console.log(pt_lng);
-			console.log(pt_time);
+			//console.log(pt_lat);
+			//console.log(pt_lng);
+			//console.log(pt_time);
 			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
 		}
 	}
