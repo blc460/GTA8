@@ -1,13 +1,6 @@
 import psycopg2
 from flask import Flask, jsonify, request, after_this_request
 
-db_credentials = {"dbname": 'gta',
-                  "port": 5432,
-                  "user": 'gta_p8',
-                  "password": 'r7sdkfdq',
-                  "host": 'ikgpgis.ethz.ch'}
-
-__name__ == "__main__"
 app = Flask(__name__)
 
 @app.route("/get_id_list", methods=["GET"])
