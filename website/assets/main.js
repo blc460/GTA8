@@ -168,14 +168,14 @@ $(document).ready(function () {
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
 			document.getElementById("evaluateTrip").addEventListener("click", function () {
-				console.log(trackpoints);
+				console.log(markedpoints);
 				if (trackpoints.length < 2) {
 					alert("Must track at least two points before the trip can be evaluated!");
 				}
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
 				// upload trip data and marked points
-				console.log(trackpoints);
+				//console.log(trackpoints);
 				trip["trip_id"] = insertData_trip(trackpoints, trip);
 				if (markedpoints.length > 0) {
 					insertData_points(markedpoints, trip);
@@ -277,7 +277,7 @@ $(document).ready(function () {
 		}
 
 
-		console.log(returned_id)
+		//console.log(returned_id)
 
 		return returned_id;
 	}
@@ -300,15 +300,15 @@ $(document).ready(function () {
 			lineStringCoords = lineStringCoords.concat(' ');
 		}
 		lineStringCoords = lineStringCoords.substr(0, lineStringCoords.length - 1);
-	
+		
 
 		// test
-		console.log(date_of_collection);
-		console.log(lineStringCoords);
-		console.log(trip_name);
-		console.log(trip_transport_mode);
-		console.log(ip_address);
-		console.log(lineStringCoords);
+		//console.log(date_of_collection);
+		//console.log(lineStringCoords);
+		//console.log(trip_name);
+		//console.log(trip_transport_mode);
+		//console.log(ip_address);
+		//console.log(lineStringCoords);
 
 		let postData =
 			'<wfs:Transaction\n'
@@ -371,9 +371,13 @@ $(document).ready(function () {
 	function insertData_points(markedpoints, trip) {
 		var trip_id = trip["trip_id"];
 		for (let pt in markedpoints) {
+			console.log(pt);
 			var pt_lat = pt[0];
 			var pt_lng = pt[1];
 			var pt_time = pt[2];
+			console.log(pt_lat);
+			console.log(pt_lng);
+			console.log(pt_time);
 			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
 		}
 	}
