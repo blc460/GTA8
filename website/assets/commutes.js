@@ -26,13 +26,30 @@ function getWfsData() {
             var response = JSON.parse(xhr.responseText);
             console.log(response);
 
-            // Aktualisieren Sie den HTML-Body mit den erhaltenen Daten
-            updateHTML(response);
+            // Ermitteln Sie die IP-Adresse des Benutzers
+            getUserIpAddress(function(userIpAddress) {
+                // Filtern Sie die Trips basierend auf der Benutzer-IP-Adresse
+                var filteredTrips = response.features.filter(function (feature) {
+                    return feature.properties.trip_ip_address === userIpAddress;
+                });
+
+                // Aktualisieren Sie den HTML-Body mit den gefilterten Daten
+                updateHTML({ features: filteredTrips });
+            });
         }
     };
 
     // Senden Sie die Anfrage
     xhr.send();
+}
+
+// Funktion zum Ermitteln der IP-Adresse des Benutzers
+function getUserIpAddress(callback) {
+    // Verwenden Sie jQuery, um die IP-Adresse des Benutzers abzurufen
+    $.getJSON("https://api.ipify.org/?format=json", function (data) {
+        // callback mit der erhaltenen IP-Adresse aufrufen
+        callback(data.ip);
+    });
 }
 
 function updateHTML(data) {
