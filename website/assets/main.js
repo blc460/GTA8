@@ -456,29 +456,19 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function processLink(link) {
-    // Fetch-Anfrage mit der ursprünglichen URL durchführen
-    fetch(link)
-        .then(response => response.text())
-        .then(data => {
-            console.log("Received data:", data);
-
-            // Versuchen Sie dann, die Daten zu parsen
-            try {
-                var jsonData = JSON.parse(data);
-                console.log("Parsed JSON data:", jsonData);
-
-                // Hier können Sie mit den Daten in der Variable jsonData arbeiten
-                // Beispiel: Anzeige der Daten auf der Seite
-                displayData(jsonData);
-            } catch (error) {
-                console.error("Error parsing JSON:", error);
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-        });
+    // Anfrage mit der ursprünglichen URL durchführen
+    $.ajax({
+		// URL to the Vercel production deployment (vercel --prod will give you this link)
+		url: link,
+		type: 'GET',
+		dataType: 'JSON',
+		success: function (data) { 
+			console.log(data);
+			document.getElementById("demo").innerHTML = JSON.stringify(data)
+		},
+		error: function (data) { console.log(data); },
+	});
 }
-
 
 function displayData(data) {
     // Hier können Sie die Logik implementieren, um die Daten auf der Seite anzuzeigen
