@@ -99,7 +99,13 @@ function addRowClickListener() {
                 // Entfernen Sie das Präfix "trip_" und konvertieren Sie die trip_id in eine Zahl
                 var tripIdNumber = parseInt(tripId.replace("trip_", ""));
                 console.log("Selected trip_id:", tripIdNumber);
-                // Hier können Sie die trip_id nach Bedarf verwenden
+                
+                // Ergänzen Sie den Link mit der tripIdNumber als Parameter
+                var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber;
+                var link2 = 'index.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
+
+                // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
+                window.location.href = link2;
             }
         }
     });
