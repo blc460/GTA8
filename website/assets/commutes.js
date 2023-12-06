@@ -27,7 +27,7 @@ function getWfsData() {
             console.log(response);
 
             // Ermitteln Sie die IP-Adresse des Benutzers
-            getUserIpAddress(function(userIpAddress) {
+            getUserIpAddress(function (userIpAddress) {
                 // Feste IP-Adresse "111.111.111.111"
                 var fixedIpAddress = "111.111.111.111";
 
@@ -38,6 +38,9 @@ function getWfsData() {
 
                 // Aktualisieren Sie den HTML-Body mit den gefilterten Daten
                 updateHTML({ features: filteredTrips });
+
+                // Fügen Sie den Event Listener zu jeder Zeile hinzu
+                addRowClickListener();
             });
         }
     };
@@ -65,6 +68,7 @@ function updateHTML(data) {
     // Iterate over the received data and add rows to the table
     data.features.forEach(function (feature) {
         var row = tbody.insertRow();
+        row.setAttribute("id", "trip_" + extractTripId(feature));
 
         // Access the properties object
         var properties = feature.properties;
@@ -79,6 +83,45 @@ function updateHTML(data) {
         });
     });
 }
+
+function addRowClickListener() {
+    var table = document.querySelector("table");
+    var tbody = table.querySelector("tbody");
+
+    tbody.addEventListener("click", function (event) {
+        var target = event.target;
+        // Überprüfen Sie, ob das Ziel eine Zelle in einer Zeile ist
+        if (target.tagName === "TD") {
+            // Extrahieren Sie die trip_id aus der ID der Zeile
+            var tripId = target.parentNode.id;
+            // Überprüfen Sie, ob die trip_id vorhanden ist
+            if (tripId) {
+                // Entfernen Sie das Präfix "trip_" und konvertieren Sie die trip_id in eine Zahl
+                var tripIdNumber = parseInt(tripId.replace("trip_", ""));
+                console.log("Selected trip_id:", tripIdNumber);
+                
+                // Ergänzen Sie den Link mit der tripIdNumber als Parameter
+                var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber;
+                var link2 = 'index.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
+
+                // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
+                window.location.href = link2;
+            }
+        }
+    });
+}
+
+function extractTripId(feature) {
+    var tripId = feature.id.split(".")[1]; // Extrahieren Sie den numerischen Teil der id
+    // Überprüfen, ob die tripId eine Zahl ist
+    if (!isNaN(tripId)) {
+        return parseInt(tripId);
+    } else {
+        // Falls nicht, geben Sie NaN zurück oder behandeln Sie dies nach Bedarf
+        return NaN;
+    }
+}
+
 
 // Rufen Sie die Funktion auf, wenn das DOM vollständig geladen ist
 document.addEventListener("DOMContentLoaded", function () {
