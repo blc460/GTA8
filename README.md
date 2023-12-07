@@ -22,7 +22,20 @@ Now you can relive your trip and all the sights you saw along the way. ENJOY :)
 
 picture of the example trip with the poi's
 
-## Structure
+## Software Structure
 
 <img src="pictures/analysis flowchart-group8.png" width="752" alt>
 
+## Folderstructure Repository
+
+### data_processing
+
+This is exactly the same folder that is deployed to the vercel server. It contains the backand.py file which performs the buffer analysis of the trips, as well as the requirments and vercel settings. Currently there is another git repository which is directly connected to vercel you can access it through this [Link](https://github.com/eckertniklas/side-eye-vercel). 
+
+### Database
+
+The Database folder contains the csv files which are exported from openstreetmap. This data is stored in a postGIS-database, the upload and modification of the data was made using the load_db.ipynb code. The database itself was created in pgAdmin4 using the commands saved in table_creation.txt.
+
+### website
+
+The website folder contains all the .html- .css- .js-files as well as the graphics used on the webapp.
