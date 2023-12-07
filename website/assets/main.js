@@ -175,23 +175,35 @@ $(document).ready(function () {
 				}
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
+
 				// upload trip data and marked points
 				//console.log(trackpoints);
-				trip["trip_id"] = insertData_trip(trackpoints, trip);
-				console.log("Trip ID");
-				console.log(trip["trip_id"]);
-				if (markedpoints.length > 0) {
-					insertData_points(markedpoints, trip);
-				}
-				// stop tracking
-				tracking = false;
-				console.log("stopped tracking");
-				// reset
-				trackpoints = [];
-				markedpoints = [];
-				trip = {};
-				document.getElementById("popup").style.display = "none";
-		});
+				//trip["trip_id"] = insertData_trip(trackpoints, trip);
+				insertData_trip(trackpoints, trip)
+				.then((insertedId) => {
+					console.log("Trip_id after AJAX request:", insertedId);
+				  	// Perform further actions based on the insertedId
+				  	if (insertedId !== null) {
+						trip["trip_id"] = insertedId;
+				  	}
+				  	console.log("Trip ID");
+					console.log(trip["trip_id"]);
+					if (markedpoints.length > 0) {
+						insertData_points(markedpoints, trip);
+					}
+					// stop tracking
+					tracking = false;
+					console.log("stopped tracking");
+					// reset
+					trackpoints = [];
+					markedpoints = [];
+					trip = {};
+					document.getElementById("popup").style.display = "none";
+					})
+				.catch((error) => {
+					console.error("Error:", error);
+				});
+			});
 		}
 	}
 
@@ -286,6 +298,81 @@ $(document).ready(function () {
 	}
 
 
+
+	function insertData_trip(trackpoints, trip) {
+		return new Promise((resolve, reject) => {
+		  var ip_address = trip["ip_address"];
+		  var date_of_collection = trip["date_of_collection"];
+		  var trip_name = trip["name"];
+		  var trip_transport_mode = trip["transportMode"];
+		  var lineStringCoords = '';
+	  
+		  // Construct the LineString coordinates
+		  for (const tuple of trackpoints) {
+			lineStringCoords += `${tuple['lng']},${tuple['lat']} `;
+		  }
+		  lineStringCoords = lineStringCoords.trim();
+	  
+		  // Construct the XML request
+		  let postData =
+			'<wfs:Transaction\n' +
+			'service="WFS"\n' +
+			'version="1.0.0"\n' +
+			'xmlns="http://www.opengis.net/wfs"\n' +
+			'xmlns:wfs="http://www.opengis.net/wfs"\n' +
+			'xmlns:gml="http://www.opengis.net/gml"\n' +
+			'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n' +
+			'xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n' +
+			'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n' +
+			'http://www.opengis.net/wfs\n' +
+			'http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n' +
+			'<wfs:Insert>\n' +
+			'<GTA23_project:trip>\n' +
+			`<trip_date_of_collection>${date_of_collection}</trip_date_of_collection>\n` +
+			`<trip_name>${trip_name}</trip_name>\n` +
+			`<trip_transport_mode>${trip_transport_mode}</trip_transport_mode>\n` +
+			`<trip_ip_address>${ip_address}</trip_ip_address>\n` +
+			'<geometry>\n' +
+			'<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n' +
+			`<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">${lineStringCoords}</gml:coordinates>\n` +
+			'</gml:LineString>\n' +
+			'</geometry>\n' +
+			'</GTA23_project:trip>\n' +
+			'</wfs:Insert>\n' +
+			'</wfs:Transaction>';
+	  
+		  $.ajax({
+			type: "POST",
+			url: gs.wfs,
+			dataType: "xml",
+			contentType: "text/xml",
+			data: postData,
+			success: function (xml) {
+			  console.log(xml);
+			  console.log("Success from AJAX");
+	  
+			  var insertedId = extractIdFromInsertResponse(xml);
+	  
+			  // Notify user or perform additional actions with the inserted ID
+			  alert("Data uploaded. Inserted ID: " + insertedId);
+	  
+			  // Resolve the Promise with the insertedId
+			  resolve(insertedId);
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+			  console.log("Error from AJAX");
+			  console.log(xhr.status);
+			  console.log(thrownError);
+	  
+			  // Reject the Promise with an error
+			  reject(thrownError);
+			},
+		  });
+		});
+	}
+	  
+	  
+	/*
 	function insertData_trip(trackpoints, trip) {
 		ip_address = trip["ip_address"];
 		date_of_collection = trip["date_of_collection"];
@@ -357,6 +444,9 @@ $(document).ready(function () {
 
 				insertedId = extractIdFromInsertResponse(xml);
 
+				// Resolve the Promise with the insertedId
+				resolve(insertedId);
+
         		// Notify user or perform additional actions with the inserted ID
         		alert("Data uploaded. Inserted ID: " + insertedId);
 			},
@@ -367,11 +457,12 @@ $(document).ready(function () {
 				console.log(thrownError);
 			}
 		});
-		
+
 		console.log("Trip_id before return from post:");
 		console.log(insertedId);
 		return insertedId;
 	}
+	*/
 
 	function insertData_points(markedpoints, trip) {
 		var trip_id = trip["trip_id"];
