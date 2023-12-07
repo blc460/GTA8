@@ -99,17 +99,26 @@ function addRowClickListener() {
                 // Entfernen Sie das Präfix "trip_" und konvertieren Sie die trip_id in eine Zahl
                 var tripIdNumber = parseInt(tripId.replace("trip_", ""));
                 console.log("Selected trip_id:", tripIdNumber);
-                
-                // Ergänzen Sie den Link mit der tripIdNumber als Parameter
-                var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber;
-                var link2 = 'index.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
 
-                // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
-                window.location.href = link2;
+                // Benutzer nach der Kategorie fragen
+                var category = prompt("Bitte wählen Sie eine Kategorie:\n0 für Restaurants\n1 für Kirchen");
+
+                // Überprüfen Sie, ob eine gültige Kategorie ausgewählt wurde
+                if (category !== null && (category === "0" || category === "1")) {
+                    // Ergänzen Sie den Link mit der tripIdNumber und der Kategorie als Parameter
+                    var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber + "&cat=" + category;
+                    var encodedLink = 'index.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
+
+                    // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
+                    window.location.href = encodedLink;
+                } else {
+                    alert("Ungültige Kategorie ausgewählt.");
+                }
             }
         }
     });
 }
+
 
 function extractTripId(feature) {
     var tripId = feature.id.split(".")[1]; // Extrahieren Sie den numerischen Teil der id
