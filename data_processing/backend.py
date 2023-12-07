@@ -1,12 +1,14 @@
 import psycopg2
 from flask import Flask, jsonify, request, after_this_request
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 @app.route("/get_id_list", methods=["GET"])
 def get_id_list():
     trip_id = str(request.args.get("trip_id"))
-    cat = int(request.args.get("num2", 0)) #0=restaurant, 1=churches
+    cat = int(request.args.get("cat")) #0=restaurant, 1=churches
     db_credentials = {"dbname": 'gta',
                   "port": 5432,
                   "user": 'gta_p8',
@@ -19,9 +21,9 @@ def get_id_list():
     if cat == 0:
         cur.execute(sql_string_0)
         list = cur.fetchall()
-    if cat == 1:
+    else:
         cur.execute(sql_string_1)
-        list = cur.fetchall()   
+        list = cur.fetchall()
     conn.commit()
     conn.close()
     array = []
