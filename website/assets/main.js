@@ -461,15 +461,21 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function processLink(link) {
-    // Anfrage mit der ursprünglichen URL durchführen
-    $.ajax({
-		// URL to the Vercel production deployment (vercel --prod will give you this link)
-		url: link,
-		type: 'GET',
-		dataType: 'JSON',
-		success: function (data) { 
-			console.log(data);
-		},
-		error: function (data) { console.log(data); },
-	});
+    // Füge einen zufälligen Parameter hinzu, um JSONP zu verwenden und CORS zu umgehen
+    var randomCallbackName = "jsonpCallback" + Math.floor(Math.random() * 1000000);
+    var jsonpUrl = link + "&callback=" + randomCallbackName;
+
+    // Erstelle ein Skript-Element für die JSONP-Anfrage
+    var script = document.createElement("script");
+    script.src = jsonpUrl;
+
+    // Füge das Skript zum DOM hinzu
+    document.body.appendChild(script);
+
+    // JSONP-Callback-Funktion
+    window[randomCallbackName] = function (data) {
+        console.log(data);
+
+        // Optional: Hier kannst du den erhaltenen Daten verarbeiten
+    };
 }

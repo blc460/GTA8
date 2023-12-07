@@ -101,7 +101,7 @@ function addRowClickListener() {
                 console.log("Selected trip_id:", tripIdNumber);
 
                 // Benutzer nach der Kategorie fragen
-                var category = prompt("Bitte wählen Sie eine Kategorie:\n0 für Restaurants\n1 für Kirchen");
+                var category = prompt("Please choose a category:\n0 for Restaurants\n1 for Sacred Places");
 
                 // Überprüfen Sie, ob eine gültige Kategorie ausgewählt wurde
                 if (category !== null && (category === "0" || category === "1")) {
