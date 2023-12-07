@@ -24,5 +24,5 @@ picture of the example trip with the poi's
 
 ## Structure
 
-<img src="pictures/analysis flowchart-group8.png" width="502" alt>
+<img src="pictures/analysis flowchart-group8.png" width="752" alt>
 
