@@ -5,7 +5,7 @@ $(document).ready(function () {
 	// create and display map --------------------------------------------------------------------
 
 
-	/*var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
+	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
 	L.tileLayer('https://api.maptiler.com/maps/ch-swisstopo-lbm/{z}/{x}/{y}.png?key=5GIyaQiOX7pA9JBdK5R8', {
 		minZoom: 2,
@@ -36,10 +36,7 @@ $(document).ready(function () {
 	function onLocationError(e) {
 		alert(e.message);
 	}
-	map.on('locationerror', onLocationError);*/
-
-	
-
+	map.on('locationerror', onLocationError);
 
 	// trip visualisation: ---------------------------------------------------------------
 	// Erstellen Sie ein URLSearchParams-Objekt, um auf die URL-Parameter zuzugreifen
