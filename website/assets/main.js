@@ -420,38 +420,3 @@ $(document).ready(function () {
 
 
 });
-
-
-// trip visualisation: ---------------------------------------------------------------
-document.addEventListener("DOMContentLoaded", function () {
-    // Erstellen Sie ein URLSearchParams-Objekt, um auf die URL-Parameter zuzugreifen
-    var urlParams = new URLSearchParams(window.location.search);
-
-    // Lesen Sie den Wert des "link"-Parameters
-    var linkParam = urlParams.get("link");
-
-    // Überprüfen Sie, ob der Parameter vorhanden ist
-    if (linkParam) {
-        console.log("Link parameter found:", linkParam);
-
-        // Hier können Sie den Link-Parameter verwenden, wie es benötigt wird
-        // Zum Beispiel können Sie ihn einer Variable zuweisen oder eine Funktion aufrufen
-        processLink(linkParam);
-    } else {
-        console.log("Link parameter not found.");
-    }
-});
-
-function processLink(link) {
-    // Anfrage mit der ursprünglichen URL durchführen
-    $.ajax({
-		// URL to the Vercel production deployment (vercel --prod will give you this link)
-		url: link,
-		type: 'GET',
-		dataType: 'JSON',
-		success: function (data) { 
-			console.log(data);
-		},
-		error: function (data) { console.log(data); },
-	});
-}

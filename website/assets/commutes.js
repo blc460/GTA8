@@ -107,7 +107,7 @@ function addRowClickListener() {
                 if (category !== null && (category === "0" || category === "1")) {
                     // Ergänzen Sie den Link mit der tripIdNumber und der Kategorie als Parameter
                     var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber + "&cat=" + category;
-                    var encodedLink = 'index.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
+                    var encodedLink = 'result.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
 
                     // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
                     window.location.href = encodedLink;
