@@ -252,8 +252,8 @@ $(document).ready(function () {
 	// upload to database: -----------------------------------------------------------------------
 
 	var gs = {
-		wfs: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs',
-		ows: 'http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/ows'
+		wfs: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs',
+		ows: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/ows'
 	};
 
 	// Function to extract the inserted feature ID from the Insert response
@@ -307,9 +307,9 @@ $(document).ready(function () {
 			'xmlns:gml="http://www.opengis.net/gml"\n' +
 			'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n' +
 			'xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n' +
-			'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n' +
+			'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n' +
 			'http://www.opengis.net/wfs\n' +
-			'http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n' +
+			'https://ikgeoserv.ethz.ch/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n' +
 			'<wfs:Insert>\n' +
 			'<GTA23_project:trip>\n' +
 			`<trip_date_of_collection>${date_of_collection}</trip_date_of_collection>\n` +
@@ -381,9 +381,9 @@ $(document).ready(function () {
 			+ '  xmlns:gml="http://www.opengis.net/gml"\n'
 			+ '  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n'
 			+ '  xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n'
-			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Amarked_point\n'
+			+ '  xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Amarked_point\n'
 			+ '                      http://www.opengis.net/wfs\n'
-			+ '                      http://ikgeoserv.ethz.ch:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
+			+ '                      https://ikgeoserv.ethz.ch/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n'
 			+ '  <wfs:Insert>\n'
 			+ '    <GTA23_project:marked_point>\n'
 			+ '      <marked_point_time>' + pt_time + '</marked_point_time>\n'
