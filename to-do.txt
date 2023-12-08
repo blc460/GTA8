@@ -1,0 +1,2 @@
+-change button in "after recording" popup from evaluate to save.
+-clean trajectory function
