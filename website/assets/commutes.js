@@ -1,6 +1,6 @@
 // Funktion, um WFS-Daten abzurufen und zu verarbeiten
 function getWfsData() {
-    var wfsUrl = "http://ikgeoserv.ethz.ch:8080/geoserver/GTA23_project/wfs";
+    var wfsUrl = "https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs";
 
     // WFS-Parameter
     var params = {

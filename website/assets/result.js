@@ -18,7 +18,6 @@ $(document).ready(function () {
 
 	var locationCircle;
 
-	// brauchen wir das???
 	function onLocationFound(e) {
 		var radius = e.accuracy;
 
@@ -37,6 +36,19 @@ $(document).ready(function () {
 		alert(e.message);
 	}
 	map.on('locationerror', onLocationError);
+
+	// Add WMS Layer ---------------------------------------------------------------
+    /*var restaurant = L.tileLayer.wms('https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms', {
+        layers: 'restaurant',
+        format: 'image/png',
+        transparent: true,
+    }).addTo(map);*/
+
+	var trip = L.tileLayer.wms('https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms', {
+        layers: 'trip',
+        format: 'image/png',
+        transparent: true,
+    }).addTo(map);
 
 	// trip visualisation: ---------------------------------------------------------------
 	// Erstellen Sie ein URLSearchParams-Objekt, um auf die URL-Parameter zuzugreifen
@@ -65,9 +77,44 @@ $(document).ready(function () {
 			type: 'GET',
 			dataType: 'JSON',
 			success: function (data) {
+				// Speichern Sie die Daten in der globalen Variable
+				responseData = data;
+				console.log(responseData);
+				// Jetzt kannst du die Restaurants anzeigen
+                displayRestaurants(responseData);
+			},
+			error: function (data) {
 				console.log(data);
 			},
-			error: function (data) { console.log(data); },
+		});
+	}
+
+	function displayRestaurants(data) {
+		// Annahme: responseData ist ein Array von Restaurant-IDs
+		data.forEach(function (restaurantId) {
+			// Hier rufst du die Informationen für jedes Restaurant anhand der ID ab
+			$.ajax({
+				url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
+				type: 'GET',
+				data: {
+					service: 'WFS',
+					request: 'GetFeature',
+					typeName: 'restaurant',
+					outputFormat: 'application/json',
+					featureID: restaurantId,
+				},
+				dataType: 'JSON',
+				success: function (restaurantData) {
+					// Hier kannst du die Koordinaten oder andere Informationen des Restaurants extrahieren
+					var coordinates = restaurantData.features[0].geometry.coordinates;
+					
+					// Hier fügst du einen Marker für das Restaurant auf der Karte hinzu
+					L.marker([coordinates[1], coordinates[0]]).addTo(map);
+				},
+				error: function (error) {
+					console.log(error);
+				},
+			});
 		});
 	}
 
