@@ -125,7 +125,7 @@ $(document).ready(function () {
 			// enable tracking
 			tracking = true;
 			console.log("now tracking");
-
+			// tracking dot
 			var dotElement = document.createElement("div");
 			dotElement.id = "trackingDot";
 			dotElement.style.width = "10px";
