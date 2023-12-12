@@ -111,17 +111,16 @@ $(document).ready(function () {
 
 	//icons ------------------------------------------
 	var pois = L.icon({
-		iconUrl: 'assets/SVG/pois.svg',
-		//iconSize: [38, 95],
-		iconAnchor: [22, 94],
-		popupAnchor: [-3, -76]
+		iconUrl: 'assets/SVG/pois.png',
+		iconSize: [30, 45],
+		iconAnchor: [15, 45],
+		popupAnchor: [0, -45]
 	});
 
 	var marked = L.icon({
-		iconUrl: 'assets/SVG/marked.svg',
-		//iconSize: [38, 95],
-		iconAnchor: [22, 94],
-		popupAnchor: [-3, -76]
+		iconUrl: 'assets/SVG/marked.png',
+		iconSize: [30, 45],
+		iconAnchor: [15, 45],
 	});
 	
 	
@@ -145,9 +144,13 @@ $(document).ready(function () {
 				success: function (restaurantData) {
 					// Hier kannst du die Koordinaten oder andere Informationen des Restaurants extrahieren
 					var coordinates = restaurantData.features[0].geometry.coordinates;
-
+					var restaurantName = restaurantData.features[0].properties.restaurant_name;
+	
 					// Hier fügst du einen Marker für das Restaurant auf der Karte hinzu
-					L.marker([coordinates[1], coordinates[0]], {icon: pois}).addTo(map);
+					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
+	
+					// Hier fügst du ein Popup mit dem restaurant_name hinzu
+					marker.bindPopup(restaurantName);
 				},
 				error: function (error) {
 					console.log(error);
@@ -155,6 +158,7 @@ $(document).ready(function () {
 			});
 		});
 	}
+	
 
 	function displayChurch(data) {
 		// Annahme: responseData ist ein Array von Church-IDs
@@ -172,11 +176,15 @@ $(document).ready(function () {
 				},
 				dataType: 'JSON',
 				success: function (churchData) {
-					// Hier kannst du die Koordinaten oder andere Informationen des Restaurants extrahieren
+					// Hier kannst du die Koordinaten oder andere Informationen der Church extrahieren
 					var coordinates = churchData.features[0].geometry.coordinates;
-
-					// Hier fügst du einen Marker für das Restaurant auf der Karte hinzu
-					L.marker([coordinates[1], coordinates[0]], {icon: pois}).addTo(map);
+					var churchName = churchData.features[0].properties.church_name;
+	
+					// Hier fügst du einen Marker für die Church auf der Karte hinzu
+					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
+	
+					// Hier fügst du ein Popup mit dem church_name hinzu
+					marker.bindPopup(churchName);
 				},
 				error: function (error) {
 					console.log(error);
@@ -184,6 +192,7 @@ $(document).ready(function () {
 			});
 		});
 	}
+	
 
 	function displayTrip(data) {
 		// Annahme: data ist ein Array von Trip-IDs
@@ -205,15 +214,39 @@ $(document).ready(function () {
 					var coordinates = tripData.features[0].geometry.coordinates;
 	
 					// Hier fügst du eine Polylinie für den Trip auf der Karte hinzu
-					var polyline = L.polyline(coordinates.map(function(coord) {
+					var polyline = L.polyline(coordinates.map(function (coord) {
 						return [coord[1], coord[0]];
 					})).addTo(map);
 	
 					// Optional: Zoom zur Polylinie
 					map.fitBounds(polyline.getBounds());
+	
+					// Hier rufst du die Informationen für die POIs anhand der trip_id ab
+					$.ajax({
+						url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
+						type: 'GET',
+						data: {
+							service: 'WFS',
+							request: 'GetFeature',
+							typeName: 'marked_point',
+							outputFormat: 'application/json',
+							featureID: tripId,
+						},
+						dataType: 'JSON',
+						success: function (mark) {
+							
+							var coordinates = mark.features[0].geometry.coordinates;
+		
+							
+							L.marker([coordinates[1], coordinates[0]], {icon: marked}).addTo(map);
+						},
+						error: function (error) {
+							console.log(error);
+						},
+					});
 				},
 				error: function (error) {
-					console.log(error);
+					console.log('Error fetching trip data:', error);
 				},
 			});
 		});
