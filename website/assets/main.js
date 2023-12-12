@@ -156,6 +156,14 @@ $(document).ready(function () {
 				//console.log(markedpoints);
 				if (trackpoints.length < 2) {
 					alert("Must track at least two points before the trip can be evaluated!");
+					// document.getElementById("popup-alert").style.display = "flex";
+					// element in html erstelle mit display = none
+					// in css gleiches design der class pop-up
+
+
+					// -------------------------------------  Carlos TO DO -------------------------------------------
+
+
 				}
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
