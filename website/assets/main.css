@@ -279,6 +279,26 @@ body {
 	/* Changed to center alignment */
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  label {
+	margin-top: 10px;
+	text-align: left;
+  }
+  
+  input {
+	margin-top: 10px;
+	width: 100%; /* Fülle den verfügbaren Platz aus */
+  }
+  
+  button {
+	margin-top: 15px; /* Hier kannst du den Abstand zum vorherigen Element anpassen */
+	width: 100%; /* Fülle den verfügbaren Platz aus */
+  }
+
 .close {
 	position: absolute;
 	top: 10px;
@@ -319,3 +339,14 @@ input {
 #evaluateTrip:hover {
 	background-color: #000000;
 }
+.popup_alert-content {
+	background-color: #fefefe;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 400px;
+	text-align: left;
+	font-size: 10px;
+}
+.popup_alert-content h2 {
+	margin-bottom: 15px; /* Hier kannst du die gewünschte Abstandshöhe einstellen */
+  }

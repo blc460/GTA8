@@ -71,6 +71,14 @@
 			</form>
 		</div>
 	</div>
+	<!-- Alert Pop-up when linestring has just one element-->	
+	<div id="popup_alert" class="popup">
+		<div class="popup_alert-content">
+		  <span class="close" id="closePopupBtn" onclick="closePopup()">&times;</span>
+		  <h2>The trip must have at least 2 elements.</h2>
+		  <button onclick="closePopup()">Close</button>
+		</div>
+	  </div>
 
 	<!-- Footer -->
 	<!--<footer id="footer">
