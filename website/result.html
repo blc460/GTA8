@@ -7,6 +7,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet" href="assets/main.css" />
+	<link rel="stylesheet" href="assets/result.css" />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -16,28 +17,6 @@
 </head>
 
 <body class="is-preload">
-
-	<!-- Nav -->
-	<!--<nav>
-		<div class="navbar">
-			<div class="container nav-container">
-				<input class="checkbox" type="checkbox" name="" id="" />
-				<div class="hamburger-lines">
-					<span class="line line1"></span>
-					<span class="line line2"></span>
-					<span class="line line3"></span>
-				</div>
-				<div class="logo">
-					<h1> <a href="index.html">Side-Eye</a></h1>
-				</div>
-				<div class="menu-items">
-					<li><a href="index.html">Map</a></li>
-					<li><a href="commutes.html">Commutes</a></li>
-					<li><a href="about.html">About</a></li>
-				</div>
-			</div>
-		</div>
-	</nav> -->
 
 	<nav>
 		<div class="navbar">
@@ -55,6 +34,10 @@
 
 	<!-- Main -->
 	<div id="map"></div>
+
+	<div id="loading-overlay">
+		<div id="loading-spinner"></div>
+	  </div>
 
 
 
