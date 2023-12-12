@@ -65,7 +65,14 @@ function updateHTML(data) {
     // Clear existing data in the table body
     tbody.innerHTML = "";
 
-    // Iterate over the received data and add rows to the table
+    // Sort the features array by trip ID
+    data.features.sort(function (a, b) {
+        var tripIdA = extractTripId(a);
+        var tripIdB = extractTripId(b);
+        return tripIdA - tripIdB;
+    });
+
+    // Iterate over the sorted data and add rows to the table
     data.features.forEach(function (feature) {
         var row = tbody.insertRow();
         row.setAttribute("id", "trip_" + extractTripId(feature));
@@ -92,6 +99,7 @@ function updateHTML(data) {
         });
     });
 }
+
 
 function formatDateTime(dateTimeString) {
     // Parse the input date string
