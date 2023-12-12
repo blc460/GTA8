@@ -1,2 +1,3 @@
 -change button in "after recording" popup from evaluate to save.
 -clean trajectory function
+-not jumping to the location when evaluating a trip
