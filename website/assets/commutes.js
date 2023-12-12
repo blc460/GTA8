@@ -100,24 +100,49 @@ function addRowClickListener() {
                 var tripIdNumber = parseInt(tripId.replace("trip_", ""));
                 console.log("Selected trip_id:", tripIdNumber);
 
-                // Benutzer nach der Kategorie fragen
-                var category = prompt("Please choose a category:\n0 for Restaurants\n1 for Sacred Places");
-
-                // Überprüfen Sie, ob eine gültige Kategorie ausgewählt wurde
-                if (category !== null && (category === "0" || category === "1")) {
-                    // Ergänzen Sie den Link mit der tripIdNumber und der Kategorie als Parameter
-                    var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber + "&cat=" + category;
-                    var encodedLink = 'result.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
-
-                    // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
-                    window.location.href = encodedLink;
-                } else {
-                    alert("Ungültige Kategorie ausgewählt.");
-                }
+                // Öffnen Sie das Kategorieauswahl-Popup
+                openCategoryPopup(tripIdNumber);
             }
         }
     });
 }
+
+function openCategoryPopup(tripIdNumber) {
+    var categoryPopup = document.getElementById("categoryPopup");
+    categoryPopup.style.display = "flex";
+
+    // Funktion zum Schließen des Popups
+    var closePopupBtn = document.getElementById("closeCategoryPopupBtn");
+    closePopupBtn.onclick = function () {
+        categoryPopup.style.display = "none";
+    };
+
+    // Funktion zum Navigieren basierend auf der ausgewählten Kategorie
+    function selectCategory(category) {
+        categoryPopup.style.display = "none";
+        console.log("Selected category:", category); // Hier wird die Kategorie in der Konsole protokolliert
+        navigateToLink(tripIdNumber, category);
+    }
+
+    // Fügen Sie Event-Listener für die Kategorieauswahl-Buttons hinzu
+    var categoryButtons = document.getElementsByClassName("categoryButton");
+    for (var i = 0; i < categoryButtons.length; i++) {
+        categoryButtons[i].onclick = function () {
+            selectCategory(this.getAttribute("data-category"));
+        };
+    }
+}
+
+function navigateToLink(tripIdNumber, category) {
+    // Ergänzen Sie den Link mit der tripIdNumber und der Kategorie als Parameter
+    var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber + "&cat=" + category;
+    var encodedLink = 'result.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
+
+    // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
+    window.location.href = encodedLink;
+}
+
+
 
 
 function extractTripId(feature) {
