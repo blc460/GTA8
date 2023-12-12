@@ -79,10 +79,34 @@ function updateHTML(data) {
         // Add cells to the row for each column
         columns.forEach(function (column, index) {
             var cell = row.insertCell(index);
-            cell.innerHTML = properties[column];
+
+            // Check if the current column is 'trip_date_of_collection'
+            if (column === "trip_date_of_collection") {
+                // Format the date and time
+                var formattedDate = formatDateTime(properties[column]);
+                cell.innerHTML = formattedDate;
+            } else {
+                // For other columns, simply display the value
+                cell.innerHTML = properties[column];
+            }
         });
     });
 }
+
+function formatDateTime(dateTimeString) {
+    // Parse the input date string
+    var date = new Date(dateTimeString);
+
+    // Format the date and time
+    var formattedDate = `${padZero(date.getDate())}.${padZero(date.getMonth() + 1)}.${date.getFullYear()} ${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
+
+    return formattedDate;
+}
+
+function padZero(value) {
+    return value < 10 ? `0${value}` : value;
+}
+
 
 function addRowClickListener() {
     var table = document.querySelector("table");
