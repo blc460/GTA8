@@ -155,9 +155,9 @@ $(document).ready(function () {
 				//console.log("Markedpoints:");
 				//console.log(markedpoints);
 				if (trackpoints.length < 2) {
-					alert("Must track at least two points before the trip can be evaluated!");
-					// document.getElementById("popup-alert").style.display = "flex";
-					// element in html erstelle mit display = none
+					//alert("Must track at least two points before the trip can be evaluated!");
+					document.getElementById("popup_alert").style.display = "flex";
+					//element in html erstelle mit display = none
 					// in css gleiches design der class pop-up
 
 
@@ -428,3 +428,7 @@ $(document).ready(function () {
 
 
 });
+
+function closePopup() {
+	document.getElementById("popup_alert").style.display = "none";
+  }

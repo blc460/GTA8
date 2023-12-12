@@ -73,15 +73,12 @@
 	</div>
 	<!-- Alert Pop-up when linestring has just one element-->	
 	<div id="popup_alert" class="popup">
-		<div class="popup-content">
-			<span class="close" id="closePopupBtn" onclick="closePopup()">&times;</span>
-			<h2>Save the trip</h2>
-			<p>The trip must have at least 2 elements.</p>
-			<p>Do you want to continue keeping track or cancel?</p>
-			<button type="button" id="continueBtn" onclick="continueTracking()">Continue</button>
-			<button type="button" id="cancelBtn" onclick="cancelTracking()">Cancel</button>
+		<div class="popup_alert-content">
+		  <span class="close" id="closePopupBtn" onclick="closePopup()">&times;</span>
+		  <h2>The trip must have at least 2 elements.</h2>
+		  <button onclick="closePopup()">Close</button>
 		</div>
-	</div>
+	  </div>
 
 	<!-- Footer -->
 	<!--<footer id="footer">
