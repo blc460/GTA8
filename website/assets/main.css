@@ -278,6 +278,26 @@ body {
 	text-align: left;
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  label {
+	margin-top: 10px;
+	text-align: left;
+  }
+  
+  input {
+	margin-top: 10px;
+	width: 100%; /* Fülle den verfügbaren Platz aus */
+  }
+  
+  button {
+	margin-top: 15px; /* Hier kannst du den Abstand zum vorherigen Element anpassen */
+	width: 100%; /* Fülle den verfügbaren Platz aus */
+  }
+
 .close {
 	position: absolute;
 	top: 10px;
@@ -294,5 +314,5 @@ body {
 	font-size: 10px;
 }
 .popup_alert-content h2 {
-	margin-bottom: 20px; /* Hier kannst du die gewünschte Abstandshöhe einstellen */
+	margin-bottom: 15px; /* Hier kannst du die gewünschte Abstandshöhe einstellen */
   }
