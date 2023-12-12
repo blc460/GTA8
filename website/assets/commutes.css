@@ -41,10 +41,6 @@ tbody tr:hover {
     justify-content: center;
 }
 
-#popTitle {
-    padding-bottom: 10px;
-}
-
 #categoryPopup .popup-content {
     background-color: #fefefe;
     padding: 20px;
