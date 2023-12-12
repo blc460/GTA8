@@ -108,6 +108,22 @@ $(document).ready(function () {
 			},
 		});
 	}
+
+	//icons ------------------------------------------
+	var pois = L.icon({
+		iconUrl: 'assets/SVG/pois.svg',
+		//iconSize: [38, 95],
+		iconAnchor: [22, 94],
+		popupAnchor: [-3, -76]
+	});
+
+	var marked = L.icon({
+		iconUrl: 'assets/SVG/marked.svg',
+		//iconSize: [38, 95],
+		iconAnchor: [22, 94],
+		popupAnchor: [-3, -76]
+	});
+	
 	
 	
 
@@ -131,7 +147,7 @@ $(document).ready(function () {
 					var coordinates = restaurantData.features[0].geometry.coordinates;
 
 					// Hier fügst du einen Marker für das Restaurant auf der Karte hinzu
-					L.marker([coordinates[1], coordinates[0]]).addTo(map);
+					L.marker([coordinates[1], coordinates[0]], {icon: pois}).addTo(map);
 				},
 				error: function (error) {
 					console.log(error);
@@ -160,7 +176,7 @@ $(document).ready(function () {
 					var coordinates = churchData.features[0].geometry.coordinates;
 
 					// Hier fügst du einen Marker für das Restaurant auf der Karte hinzu
-					L.marker([coordinates[1], coordinates[0]]).addTo(map);
+					L.marker([coordinates[1], coordinates[0]], {icon: pois}).addTo(map);
 				},
 				error: function (error) {
 					console.log(error);
