@@ -13,7 +13,13 @@
 }
 
 #footer {
-	margin: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f8f8; /* Hintergrundfarbe anpassen, falls gewünscht */
+    padding: 10px;
+    text-align: center;
 }
 
 #map {
@@ -319,3 +325,14 @@ input {
     background-color: #000000;
 }
 
+.blockschrift {
+	display: block; /* Stellt sicher, dass das Element ein Blockelement ist */
+	width: 90%; /* Nutzt nur 90% der Breite aus */
+	margin: 0 auto; /* Zentriert das Element horizontal */
+	white-space: pre-wrap; /* Behält den Zeilenumbruch bei */
+	text-align: left; /* Setzt die Ausrichtung auf linksbündig */
+  }
+ 
+  .blockschrift::first-line {
+	text-align: left;
+  }
