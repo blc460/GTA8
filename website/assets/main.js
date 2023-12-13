@@ -10,7 +10,6 @@ $.getJSON("https://api.ipify.org/?format=json", function (e) {
 
 // save input from pop-up window
 function saveInput() {
-	// save user input
 	trip["name"] = document.getElementById("name").value;
 	trip["transportMode"] = document.getElementById("transportMode").value;
 
@@ -33,9 +32,7 @@ function getTimestamp() {
 $(document).ready(function () {
 	console.log("ready!");
 
-
 	// create and display map --------------------------------------------------------------------
-
 
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
@@ -63,15 +60,15 @@ $(document).ready(function () {
 			locationCircle = L.circle(e.latlng, radius).addTo(map);
 		}
 	}
+
 	map.on('locationfound', onLocationFound);
 	function onLocationError(e) {
 		alert(e.message);
 	}
+
 	map.on('locationerror', onLocationError);
 
-
 	// location tracking: ---------------------------------------------------------------
-
 
 	function geoSuccess(position) {
 		// call the current position
@@ -90,6 +87,7 @@ $(document).ready(function () {
 			console.log("position logged");
 		}
 	}
+
 	function geoError(error) {
 		// handle errors
 		console.error("Fehler bei der Geolokalisierung:", error);
@@ -98,21 +96,14 @@ $(document).ready(function () {
 		// options
 		enableHighAccuracy: false,
 		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
-		//timeout: 30000   // A maximum of 30 seconds before timeout.
 	}
 
 	// activate geolocation tracking
 	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
-	// end location tracking
-	// // navigator.geolocation.clearWatch(watchID);
-
-
-
 	// buttons -----------------------------------------------------------------------------
 
-
-	// startstop button: (de)activate tracking---------------------------------------------
+	// startstop button: (de)activate tracking
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
 		// start tracking
@@ -136,6 +127,7 @@ $(document).ready(function () {
 			dotElement.style.animation = "blinking 2s infinite"; // Define a blinking animation
 			document.body.appendChild(dotElement);
 		}
+
 		// stop tracking
 		else {
 			// change button
@@ -151,15 +143,13 @@ $(document).ready(function () {
 			// close pop-up
 			document.getElementById("evaluateTrip").addEventListener("click", function () {
 				if (trackpoints.length < 2) {
-					//alert("Must track at least two points before the trip can be evaluated!");
 					document.getElementById("popup_alert").style.display = "flex";
 				}
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
 
 				// upload trip data and marked points
-				//console.log(trackpoints);
-				//trip["trip_id"] = insertData_trip(trackpoints, trip);
+	
 				insertData_trip(trackpoints, trip)
 				.then((insertedId) => {
 					//console.log("Trip_id after AJAX request:", insertedId);
