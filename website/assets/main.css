@@ -11,6 +11,9 @@
 .main {
 	margin: 10px;
 }
+.main_about {
+	margin-bottom: 50px ;
+}
 
 #footer {
     position: fixed;
@@ -336,3 +339,8 @@ input {
   .blockschrift::first-line {
 	text-align: left;
   }
+.header_about{
+	display: block; /* Stellt sicher, dass das Element ein Blockelement ist */
+	width: 90%; /* Nutzt nur 90% der Breite aus */
+	margin: 0 auto; /* Zentriert das Element horizontal */
+}
