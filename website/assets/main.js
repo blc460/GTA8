@@ -10,6 +10,7 @@ $.getJSON("https://api.ipify.org/?format=json", function (e) {
 
 // save input from pop-up window
 function saveInput() {
+	// save user input
 	trip["name"] = document.getElementById("name").value;
 	trip["transportMode"] = document.getElementById("transportMode").value;
 
@@ -23,8 +24,7 @@ function saveInput() {
 
 function getTimestamp() {
 	var ts = new Date();
-	ts = ts.toISOString()
-	console.log(ts);
+	ts = ts.toISOString();
 	return ts;
 }
 
@@ -32,7 +32,9 @@ function getTimestamp() {
 $(document).ready(function () {
 	console.log("ready!");
 
+
 	// create and display map --------------------------------------------------------------------
+
 
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
@@ -60,15 +62,15 @@ $(document).ready(function () {
 			locationCircle = L.circle(e.latlng, radius).addTo(map);
 		}
 	}
-
 	map.on('locationfound', onLocationFound);
 	function onLocationError(e) {
 		alert(e.message);
 	}
-
 	map.on('locationerror', onLocationError);
 
+
 	// location tracking: ---------------------------------------------------------------
+
 
 	function geoSuccess(position) {
 		// call the current position
@@ -83,11 +85,10 @@ $(document).ready(function () {
 		}
 		// save position when in tracking mode
 		if (tracking) {
-			trackpoints.push(latlng)
+			trackpoints.push(latlng);
 			console.log("position logged");
 		}
 	}
-
 	function geoError(error) {
 		// handle errors
 		console.error("Fehler bei der Geolokalisierung:", error);
@@ -96,14 +97,20 @@ $(document).ready(function () {
 		// options
 		enableHighAccuracy: false,
 		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
+		//timeout: 30000   // A maximum of 30 seconds before timeout.
 	}
 
 	// activate geolocation tracking
 	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
+	// end location tracking
+	// // navigator.geolocation.clearWatch(watchID);
+
+
 	// buttons -----------------------------------------------------------------------------
 
-	// startstop button: (de)activate tracking
+
+	// startstop button: (de)activate tracking---------------------------------------------
 	function startStopButton() {
 		var buttonElement = document.getElementById("button");
 		// start tracking
@@ -127,7 +134,6 @@ $(document).ready(function () {
 			dotElement.style.animation = "blinking 2s infinite"; // Define a blinking animation
 			document.body.appendChild(dotElement);
 		}
-
 		// stop tracking
 		else {
 			// change button
@@ -148,17 +154,13 @@ $(document).ready(function () {
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
 
-				// upload trip data and marked points
-	
+				// upload trip data and as soons as this is finshed, also the marked points
 				insertData_trip(trackpoints, trip)
 				.then((insertedId) => {
-					//console.log("Trip_id after AJAX request:", insertedId);
-				  	// Perform further actions based on the insertedId
+				  	// perform further actions based on the insertedId
 				  	if (insertedId !== null) {
 						trip["trip_id"] = insertedId;
 				  	}
-				  	//console.log("Trip ID");
-					//console.log(trip["trip_id"]);
 					if (markedpoints.length > 0) {
 						insertData_points(markedpoints, trip);
 					}
@@ -219,12 +221,13 @@ $(document).ready(function () {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					markedpoints.push([position.coords.latitude, position.coords.longitude, getTimestamp()]);
 					console.log("point marked successfully");
-					//console.log(markedpoints);
 				});
 			}
 			else {
+
+//------------------------------TO DO Carlos ------------------------------------------------------------------------------------
+
 				// TODO: Create a prettier pop-up with information for user
-				// console.log("Can only mark points while tracking!");
 				alert("You cannot mark points when you are not tracking, please start the tracking mode!");
 			}
 		} else {
@@ -243,19 +246,19 @@ $(document).ready(function () {
 		ows: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/ows'
 	};
 
-	// Function to extract the inserted feature ID from the Insert response
+	// function to extract the inserted feature ID from the Insert response
 	function extractIdFromInsertResponse(responseXml) {
 		var returned_id = null;
 
-		// Use jQuery to parse the XML response
+		// use jQuery to parse the XML response
 		var $xml = $(responseXml);
 
-		// Check if the response contains the necessary elements
+		// check if the response contains the necessary elements
 		var $featureId = $xml.find('ogc\\:FeatureId');
 		if ($featureId.length > 0) {
 			var fullId = $featureId.attr('fid');
 			
-			// Extract the numeric part after the 'trip.'
+			// extract the numeric part after the 'trip.'
 			var numericPart = fullId.replace('trip.', '');
 			
 			// Convert the numeric part to a number (if needed)
