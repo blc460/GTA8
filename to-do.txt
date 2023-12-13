@@ -1,2 +1,1 @@
--clean trajectory function (niklas)
--not jumping to the location when evaluating a trip (chrigi)
+
