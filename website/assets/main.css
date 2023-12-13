@@ -11,18 +11,20 @@
 .main {
 	margin: 10px;
 }
+
 .main_about {
-	margin-bottom: 50px ;
+	margin-bottom: 50px;
 }
 
 #footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f8f8f8; /* Hintergrundfarbe anpassen, falls gewünscht */
-    padding: 10px;
-    text-align: center;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f8f8f8;
+	/* Hintergrundfarbe anpassen, falls gewünscht */
+	padding: 10px;
+	text-align: center;
 }
 
 #map {
@@ -206,13 +208,10 @@ body {
 	border-radius: 25px;
 }
 
-
-
 #locateButton {
 	position: absolute;
 	bottom: 50px;
 	left: calc(50% + 100px);
-	/* Änderung hier: 50% + 150px, um 150px rechts neben #button zu platzieren */
 	width: 50px;
 	height: 50px;
 	z-index: 1;
@@ -227,21 +226,17 @@ body {
 
 #locateButton img {
 	width: 55%;
-	/* Die Breite des Bildes auf 80% festlegen */
 	height: auto;
-	/* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
 }
 
 #locateButton:active {
 	background-color: #000;
-	/* Hintergrundfarbe während des Klickens ändern */
 }
 
 #drawButton {
 	position: absolute;
 	bottom: 50px;
 	left: calc(50% - 150px);
-	/* Änderung hier: 50% + 150px, um 150px rechts neben #button zu platzieren */
 	width: 50px;
 	height: 50px;
 	z-index: 1;
@@ -256,92 +251,91 @@ body {
 
 #drawButton img {
 	width: 60%;
-	/* Die Breite des Bildes auf 80% festlegen */
 	height: auto;
-	/* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
 }
 
 #drawButton:active {
 	background-color: #000;
-	/* Hintergrundfarbe während des Klickens ändern */
 }
 
 /* Pop-up Fenster */
 .popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
+	justify-content: center;
 }
 
 .popup-content {
-    background-color: #fefefe;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    text-align: center; /* Changed to center alignment */
+	background-color: #fefefe;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 400px;
+	text-align: center;
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
-    cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 20px;
+	cursor: pointer;
 }
 
 #inputForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 label {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
 }
 
 #evaluateTrip {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #444444;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+	display: block;
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	background-color: #444444;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 #evaluateTrip:hover {
-    background-color: #000000;
+	background-color: #000000;
 }
 
+/* about */
 .blockschrift {
-	display: block; /* Stellt sicher, dass das Element ein Blockelement ist */
-	width: 90%; /* Nutzt nur 90% der Breite aus */
-	margin: 0 auto; /* Zentriert das Element horizontal */
-	white-space: pre-wrap; /* Behält den Zeilenumbruch bei */
-	text-align: left; /* Setzt die Ausrichtung auf linksbündig */
-  }
- 
-  .blockschrift::first-line {
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	white-space: pre-wrap;
 	text-align: left;
-  }
-  .main_about {
-	text-align: center; /* Zentriert den Text horizontal */
-	display: block; /* Stellt sicher, dass das Element ein Blockelement ist */
-	width: 90%; /* Nutzt nur 90% der Breite aus */
-	margin: 0 auto; /* Zentriert das Element horizontal */
-  }
+}
+
+.blockschrift::first-line {
+	text-align: left;
+}
+
+.main_about {
+	text-align: center;
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+}
