@@ -1,8 +1,8 @@
-// Funktion, um WFS-Daten abzurufen und zu verarbeiten
+// function to get WFS-data
 function getWfsData() {
     var wfsUrl = "https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs";
 
-    // WFS-Parameter
+    // WFS-parameter
     var params = {
         service: "WFS",
         version: "2.0.0",
@@ -11,49 +11,46 @@ function getWfsData() {
         outputFormat: "application/json"
     };
 
-    // AJAX-Anfrage
+    // AJAX-request
     var xhr = new XMLHttpRequest();
     xhr.open("GET", wfsUrl + '?' + new URLSearchParams(params), true);
 
     // Setzen Sie CORS-Header, wenn erforderlich
+    // set the CORS-header, if necessary
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Accept", "application/json");
 
-    // Callback für die Antwort
+    // callback for the response
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // Verarbeiten Sie die Antwort hier
             var response = JSON.parse(xhr.responseText);
             console.log(response);
 
-            // Ermitteln Sie die IP-Adresse des Benutzers
+            // get the IP-adress of the user
             getUserIpAddress(function (userIpAddress) {
-                // Feste IP-Adresse "111.111.111.111"
+                // fix IP-adress "111.111.111.111"
                 var fixedIpAddress = "111.111.111.111";
 
-                // Filtern Sie die Trips basierend auf den IP-Adressen
+                // filter the trips with the IP-adress
                 var filteredTrips = response.features.filter(function (feature) {
                     return feature.properties.trip_ip_address === userIpAddress || feature.properties.trip_ip_address === fixedIpAddress;
                 });
 
-                // Aktualisieren Sie den HTML-Body mit den gefilterten Daten
+                // update the HTML-body with the filtered trips
                 updateHTML({ features: filteredTrips });
 
-                // Fügen Sie den Event Listener zu jeder Zeile hinzu
+                // ad a eventlistener to everey row
                 addRowClickListener();
             });
         }
     };
 
-    // Senden Sie die Anfrage
     xhr.send();
 }
 
-// Funktion zum Ermitteln der IP-Adresse des Benutzers
+// function to get the IP-adress of the user
 function getUserIpAddress(callback) {
-    // Verwenden Sie jQuery, um die IP-Adresse des Benutzers abzurufen
     $.getJSON("https://api.ipify.org/?format=json", function (data) {
-        // callback mit der erhaltenen IP-Adresse aufrufen
         callback(data.ip);
     });
 }
@@ -62,50 +59,48 @@ function updateHTML(data) {
     var table = document.querySelector("table");
     var tbody = table.querySelector("tbody");
 
-    // Clear existing data in the table body
+    // clear existing data in the table body
     tbody.innerHTML = "";
 
-    // Sort the features array by trip ID
+    // sort the features array by trip ID
     data.features.sort(function (a, b) {
         var tripIdA = extractTripId(a);
         var tripIdB = extractTripId(b);
         return tripIdA - tripIdB;
     });
 
-    // Iterate over the sorted data and add rows to the table
+    // iterate over the sorted data and add rows to the table
     data.features.forEach(function (feature) {
         var row = tbody.insertRow();
         row.setAttribute("id", "trip_" + extractTripId(feature));
 
-        // Access the properties object
+        // access the properties object
         var properties = feature.properties;
 
-        // Assuming your table has three columns: trip_name, trip_transport_mode, trip_date_of_collection
         var columns = ["trip_name", "trip_transport_mode", "trip_date_of_collection"];
 
-        // Add cells to the row for each column
+        // add cells to the row for each column
         columns.forEach(function (column, index) {
             var cell = row.insertCell(index);
 
-            // Check if the current column is 'trip_date_of_collection'
+            // check if the current column is 'trip_date_of_collection'
             if (column === "trip_date_of_collection") {
                 // Format the date and time
                 var formattedDate = formatDateTime(properties[column]);
                 cell.innerHTML = formattedDate;
             } else {
-                // For other columns, simply display the value
+                // for other columns, simply display the value
                 cell.innerHTML = properties[column];
             }
         });
     });
 }
 
-
 function formatDateTime(dateTimeString) {
-    // Parse the input date string
+    // parse the input date string
     var date = new Date(dateTimeString);
 
-    // Format the date and time
+    // format the date and time
     var formattedDate = `${padZero(date.getDate())}.${padZero(date.getMonth() + 1)}.${date.getFullYear()} ${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
 
     return formattedDate;
@@ -115,24 +110,23 @@ function padZero(value) {
     return value < 10 ? `0${value}` : value;
 }
 
-
 function addRowClickListener() {
     var table = document.querySelector("table");
     var tbody = table.querySelector("tbody");
 
     tbody.addEventListener("click", function (event) {
         var target = event.target;
-        // Überprüfen Sie, ob das Ziel eine Zelle in einer Zeile ist
+    
         if (target.tagName === "TD") {
-            // Extrahieren Sie die trip_id aus der ID der Zeile
+            // extract the trip_id out of the ID from the row
             var tripId = target.parentNode.id;
-            // Überprüfen Sie, ob die trip_id vorhanden ist
+            // check if the tripId exists
             if (tripId) {
-                // Entfernen Sie das Präfix "trip_" und konvertieren Sie die trip_id in eine Zahl
+                // remove the prefix 'tip_' and convert it in to a number
                 var tripIdNumber = parseInt(tripId.replace("trip_", ""));
                 console.log("Selected trip_id:", tripIdNumber);
 
-                // Öffnen Sie das Kategorieauswahl-Popup
+                // open the category popup
                 openCategoryPopup(tripIdNumber);
             }
         }
@@ -143,20 +137,20 @@ function openCategoryPopup(tripIdNumber) {
     var categoryPopup = document.getElementById("categoryPopup");
     categoryPopup.style.display = "flex";
 
-    // Funktion zum Schließen des Popups
+    // close the popup
     var closePopupBtn = document.getElementById("closeCategoryPopupBtn");
     closePopupBtn.onclick = function () {
         categoryPopup.style.display = "none";
     };
 
-    // Funktion zum Navigieren basierend auf der ausgewählten Kategorie
+    // navigate based on the selected category
     function selectCategory(category) {
         categoryPopup.style.display = "none";
-        console.log("Selected category:", category); // Hier wird die Kategorie in der Konsole protokolliert
+        console.log("Selected category:", category);
         navigateToLink(tripIdNumber, category);
     }
 
-    // Fügen Sie Event-Listener für die Kategorieauswahl-Buttons hinzu
+    // eventlistener for the category buttons
     var categoryButtons = document.getElementsByClassName("categoryButton");
     for (var i = 0; i < categoryButtons.length; i++) {
         categoryButtons[i].onclick = function () {
@@ -166,30 +160,26 @@ function openCategoryPopup(tripIdNumber) {
 }
 
 function navigateToLink(tripIdNumber, category) {
-    // Ergänzen Sie den Link mit der tripIdNumber und der Kategorie als Parameter
+    // complete the link with the tripIdNumber and category
     var link = "https://side-eye-vercel.vercel.app/get_id_list?trip_id=" + tripIdNumber + "&cat=" + category;
-    var encodedLink = 'result.html?link=' + encodeURIComponent(link); // Übergabe von link als Parameter
+    var encodedLink = 'result.html?link=' + encodeURIComponent(link); 
 
-    // Hier können Sie den Link verwenden oder weiterleiten, wie gewünscht
+    // open the created link
     window.location.href = encodedLink;
 }
 
-
-
-
 function extractTripId(feature) {
-    var tripId = feature.id.split(".")[1]; // Extrahieren Sie den numerischen Teil der id
-    // Überprüfen, ob die tripId eine Zahl ist
+    var tripId = feature.id.split(".")[1]; // extract the numeric part of the TripId
+    // check if the tripId is a number
     if (!isNaN(tripId)) {
         return parseInt(tripId);
     } else {
-        // Falls nicht, geben Sie NaN zurück oder behandeln Sie dies nach Bedarf
+        // if not, give NaN back
         return NaN;
     }
 }
 
-
-// Rufen Sie die Funktion auf, wenn das DOM vollständig geladen ist
+// call the function, wehn DOM is completly loaded
 document.addEventListener("DOMContentLoaded", function () {
     getWfsData();
 });
