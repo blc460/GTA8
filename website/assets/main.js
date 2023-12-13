@@ -28,13 +28,10 @@ function getTimestamp() {
 	return ts;
 }
 
-
 $(document).ready(function () {
 	console.log("ready!");
 
-
 	// create and display map --------------------------------------------------------------------
-
 
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
@@ -68,9 +65,7 @@ $(document).ready(function () {
 	}
 	map.on('locationerror', onLocationError);
 
-
 	// location tracking: ---------------------------------------------------------------
-
 
 	function geoSuccess(position) {
 		// call the current position
@@ -97,18 +92,12 @@ $(document).ready(function () {
 		// options
 		enableHighAccuracy: false,
 		maximumAge: 15000,  // The maximum age of a cached location (15 seconds).
-		//timeout: 30000   // A maximum of 30 seconds before timeout.
 	}
 
 	// activate geolocation tracking
 	var watchID = navigator.geolocation.watchPosition(geoSuccess, geoError, geoOptions);
 
-	// end location tracking
-	// // navigator.geolocation.clearWatch(watchID);
-
-
 	// buttons -----------------------------------------------------------------------------
-
 
 	// startstop button: (de)activate tracking---------------------------------------------
 	function startStopButton() {
@@ -134,6 +123,7 @@ $(document).ready(function () {
 			dotElement.style.animation = "blinking 2s infinite"; // Define a blinking animation
 			document.body.appendChild(dotElement);
 		}
+
 		// stop tracking
 		else {
 			// change button
@@ -180,7 +170,7 @@ $(document).ready(function () {
 		}
 	}
 
-	// CSS animation for blinking
+	// CSS animation for blinking dot
 	var style = document.createElement('style');
 	style.innerHTML = `
     @keyframes blinking {
@@ -194,9 +184,7 @@ $(document).ready(function () {
 	var button = document.getElementById("button");
 	button.onclick = startStopButton;
 
-
-
-	// locating button: center map at current location---------------------------------------
+	// locating button: center map at current location
 	function locatingButton() {
 		if ("geolocation" in navigator) {
 			navigator.geolocation.getCurrentPosition(function (position) {
@@ -214,7 +202,7 @@ $(document).ready(function () {
 	var locateButton = document.getElementById("locateButton");
 	locateButton.onclick = locatingButton;
 
-	// draw button: mark interesting point-------------------------------------------------------
+	// draw button: mark interesting point
 	function markingButton() {
 		if ("geolocation" in navigator) {
 			if (tracking) {
@@ -264,9 +252,6 @@ $(document).ready(function () {
 			// Convert the numeric part to a number (if needed)
 			returned_id = parseInt(numericPart, 10);
 		}
-		// funktioniert
-		//console.log("Trip_id before return from extra function:");
-		//console.log(returned_id);
 
 		return returned_id;
 	}
@@ -281,13 +266,13 @@ $(document).ready(function () {
 		  var trip_transport_mode = trip["transportMode"];
 		  var lineStringCoords = '';
 	  
-		  // Construct the LineString coordinates
+		  // construct the LineString coordinates
 		  for (const tuple of trackpoints) {
 			lineStringCoords += `${tuple['lng']},${tuple['lat']} `;
 		  }
 		  lineStringCoords = lineStringCoords.trim();
 	  
-		  // Construct the XML request
+		  // construct the XML request
 		  let postData =
 			'<wfs:Transaction\n' +
 			'service="WFS"\n' +
@@ -322,12 +307,10 @@ $(document).ready(function () {
 			contentType: "text/xml",
 			data: postData,
 			success: function (xml) {
-			  //console.log(xml);
-			  //console.log("Success from AJAX");
-	  
+			 
 			  var insertedId = extractIdFromInsertResponse(xml);
 	  
-			  // Notify user or perform additional actions with the inserted ID
+			  // notify user or perform additional actions with the inserted ID
 			  console.log("Data uploaded. Inserted ID: " + insertedId);
 	  
 			  // Resolve the Promise with the insertedId
@@ -345,7 +328,6 @@ $(document).ready(function () {
 		});
 	}
 	  
-
 	function insertData_points(markedpoints, trip) {
 		var trip_id = trip["trip_id"];
 		for (var pt of markedpoints) {
@@ -353,8 +335,6 @@ $(document).ready(function () {
 			var pt_lat = pt[0];
 			var pt_lng = pt[1];
 			var pt_time = pt[2];
-			//console.log(pt_lat);
-			//console.log(pt_lng);
 			console.log(pt_time);
 			insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id);
 		}
@@ -395,8 +375,6 @@ $(document).ready(function () {
 			data: postData,
 			success: function (xml) {
 				//Success feedback
-				//console.log("Success from AJAX");
-				// Do something to notify user
 				console.log("Marked Point uploaded");
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
@@ -407,7 +385,6 @@ $(document).ready(function () {
 			}
 		});
 	}
-
 
 });
 
