@@ -1,3 +1,4 @@
+/* general UI */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Yantramanav&display=swap');
 
@@ -11,8 +12,19 @@
 	margin: 10px;
 }
 
+.main_about {
+	margin-bottom: 50px;
+}
+
 #footer {
-	margin: 10px;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f8f8f8;
+	/* Hintergrundfarbe anpassen, falls gewünscht */
+	padding: 10px;
+	text-align: center;
 }
 
 #map {
@@ -177,6 +189,7 @@ body {
 	display: none;
 }
 
+/* buttons */
 #button {
 	position: absolute;
 	bottom: 50px;
@@ -187,9 +200,7 @@ body {
 	z-index: 1;
 	text-transform: uppercase;
 	background-color: #444444;
-	/* Hintergrundfarbe des Buttons */
 	color: #fff;
-	/* Textfarbe des Buttons */
 	font-weight: bold;
 	font-size: large;
 	border: none;
@@ -197,13 +208,10 @@ body {
 	border-radius: 25px;
 }
 
-
-
 #locateButton {
 	position: absolute;
 	bottom: 50px;
 	left: calc(50% + 100px);
-	/* Änderung hier: 50% + 150px, um 150px rechts neben #button zu platzieren */
 	width: 50px;
 	height: 50px;
 	z-index: 1;
@@ -218,21 +226,17 @@ body {
 
 #locateButton img {
 	width: 55%;
-	/* Die Breite des Bildes auf 80% festlegen */
 	height: auto;
-	/* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
 }
 
 #locateButton:active {
 	background-color: #000;
-	/* Hintergrundfarbe während des Klickens ändern */
 }
 
 #drawButton {
 	position: absolute;
 	bottom: 50px;
 	left: calc(50% - 150px);
-	/* Änderung hier: 50% + 150px, um 150px rechts neben #button zu platzieren */
 	width: 50px;
 	height: 50px;
 	z-index: 1;
@@ -247,17 +251,14 @@ body {
 
 #drawButton img {
 	width: 60%;
-	/* Die Breite des Bildes auf 80% festlegen */
 	height: auto;
-	/* Die Höhe automatisch anpassen, um das Seitenverhältnis beizubehalten */
 }
 
 #drawButton:active {
 	background-color: #000;
-	/* Hintergrundfarbe während des Klickens ändern */
 }
 
-/* Pop-up Fenster*/
+/* Pop-up Fenster */
 .popup {
 	display: none;
 	position: fixed;
@@ -275,7 +276,7 @@ body {
 	padding: 20px;
 	border-radius: 8px;
 	max-width: 400px;
-	text-align: left;
+	text-align: center;
 }
 
 .close {
@@ -284,4 +285,57 @@ body {
 	right: 10px;
 	font-size: 20px;
 	cursor: pointer;
+}
+
+#inputForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+label {
+	margin-bottom: 5px;
+}
+
+input {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+
+#evaluateTrip {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	font-size: 16px;
+	background-color: #444444;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+#evaluateTrip:hover {
+	background-color: #000000;
+}
+
+/* about */
+.blockschrift {
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	white-space: pre-wrap;
+	text-align: left;
+}
+
+.blockschrift::first-line {
+	text-align: left;
+}
+
+.main_about {
+	text-align: center;
+	display: block;
+	width: 90%;
+	margin: 0 auto;
 }

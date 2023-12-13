@@ -1,9 +1,7 @@
 $(document).ready(function () {
 	console.log("ready!");
 
-
 	// create and display map --------------------------------------------------------------------
-
 
 	var map = L.map('map', { zoomControl: false }).setView([46.79851, 8.23173], 6);
 
@@ -37,56 +35,43 @@ $(document).ready(function () {
 	}
 	map.on('locationerror', onLocationError);
 
-	// Add WMS Layer ---------------------------------------------------------------
-	/*var restaurant = L.tileLayer.wms('https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms', {
-		layers: 'restaurant',
-		format: 'image/png',
-		transparent: true,
-	}).addTo(map);
-
-	var trip = L.tileLayer.wms('https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms', {
-		layers: 'trip',
-		format: 'image/png',
-		transparent: true,
-	}).addTo(map);*/
-
 	// trip visualisation: ---------------------------------------------------------------
-	// Erstellen Sie ein URLSearchParams-Objekt, um auf die URL-Parameter zuzugreifen
+
+	// create a URLSearchParams-object to find the URL-parameters
 	var urlParams = new URLSearchParams(window.location.search);
 
-	// Lesen Sie den Wert des "link"-Parameters
+	// reat the link
 	var linkParam = urlParams.get("link");
 
-	// Überprüfen Sie, ob der Parameter vorhanden ist
+	// check if the parameter is available
 	if (linkParam) {
 		console.log("Link parameter found:", linkParam);
-
-		// Hier können Sie den Link-Parameter verwenden, wie es benötigt wird
-		// Zum Beispiel können Sie ihn einer Variable zuweisen oder eine Funktion aufrufen
 		processLink(linkParam);
 	} else {
 		console.log("Link parameter not found.");
 	}
 
-
 	function processLink(link) {
-		// Anfrage mit der ursprünglichen URL durchführen
+		// show the loading icon
+		showLoadingOverlay();
+
 		$.ajax({
-			// URL to the Vercel production deployment (vercel --prod will give you this link)
+			// URL to the Vercel production deployment
 			url: link,
 			type: 'GET',
 			dataType: 'JSON',
 			success: function (data) {
-				// Speichern Sie die Daten in der globalen Variable
+				// save the data in a globla variable
 				responseData = data;
 				console.log(responseData);
-	
-				// Überprüfe den Wert von "cat" im Link und rufe die entsprechende Funktion auf
+
+				// check 'cat' in the link and start the corresponding function
 				var urlParams = new URLSearchParams(link);
 				console.log(urlParams);
 				var catParam = urlParams.get("cat");
 				console.log(catParam)
-				// Überprüfe den Wert von "trip_id" im Link und rufe die entsprechende Funktion auf
+
+				// check 'trip_id' in the link and start the corresponding function
 				var tripIdParam = urlParams.get("https://side-eye-vercel.vercel.app/get_id_list?trip_id");
 				console.log(tripIdParam)
 
@@ -97,14 +82,18 @@ $(document).ready(function () {
 				} else {
 					console.log("Invalid cat parameter value:", catParam);
 				}
-	
+
 				if (tripIdParam) {
-					// Rufe die displayTrip-Funktion auf, wenn trip_id im Link vorhanden ist
+					// start the displayTrip-function, if trip_id is available in the link
 					displayTrip([tripIdParam]);
 				}
+				// wehn finished, hide the loading icon
+				hideLoadingOverlay();
 			},
 			error: function (data) {
 				console.log(data);
+				// if an error occur, also hide the loading icon
+				hideLoadingOverlay();
 			},
 		});
 	}
@@ -122,14 +111,10 @@ $(document).ready(function () {
 		iconSize: [30, 45],
 		iconAnchor: [15, 45],
 	});
-	
-	
-	
 
 	function displayRestaurants(data) {
-		// Annahme: responseData ist ein Array von Restaurant-IDs
 		data.forEach(function (restaurantId) {
-			// Hier rufst du die Informationen für jedes Restaurant anhand der ID ab
+			// call the information for every restaurant with the corresponding id
 			$.ajax({
 				url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
 				type: 'GET',
@@ -142,14 +127,13 @@ $(document).ready(function () {
 				},
 				dataType: 'JSON',
 				success: function (restaurantData) {
-					// Hier kannst du die Koordinaten oder andere Informationen des Restaurants extrahieren
 					var coordinates = restaurantData.features[0].geometry.coordinates;
 					var restaurantName = restaurantData.features[0].properties.restaurant_name;
-	
-					// Hier fügst du einen Marker für das Restaurant auf der Karte hinzu
+
+					// add a marker for the restaurant
 					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
-	
-					// Hier fügst du ein Popup mit dem restaurant_name hinzu
+
+					// add a popup to the marker
 					marker.bindPopup(restaurantName);
 				},
 				error: function (error) {
@@ -158,12 +142,10 @@ $(document).ready(function () {
 			});
 		});
 	}
-	
 
 	function displayChurch(data) {
-		// Annahme: responseData ist ein Array von Church-IDs
 		data.forEach(function (churchId) {
-			// Hier rufst du die Informationen für jede Church anhand der ID ab
+			// call the information for every church with the corresponding id
 			$.ajax({
 				url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
 				type: 'GET',
@@ -176,14 +158,13 @@ $(document).ready(function () {
 				},
 				dataType: 'JSON',
 				success: function (churchData) {
-					// Hier kannst du die Koordinaten oder andere Informationen der Church extrahieren
 					var coordinates = churchData.features[0].geometry.coordinates;
 					var churchName = churchData.features[0].properties.church_name;
-	
-					// Hier fügst du einen Marker für die Church auf der Karte hinzu
+
+					// add a marker for the church
 					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
-	
-					// Hier fügst du ein Popup mit dem church_name hinzu
+
+					// add a popup to the marker
 					marker.bindPopup(churchName);
 				},
 				error: function (error) {
@@ -192,12 +173,10 @@ $(document).ready(function () {
 			});
 		});
 	}
-	
 
 	function displayTrip(data) {
-		// Annahme: data ist ein Array von Trip-IDs
 		data.forEach(function (tripId) {
-			// Hier rufst du die Informationen für jeden Trip anhand der ID ab
+			// call the information for every trip with the corresponding id
 			$.ajax({
 				url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
 				type: 'GET',
@@ -210,18 +189,17 @@ $(document).ready(function () {
 				},
 				dataType: 'JSON',
 				success: function (tripData) {
-					// Hier kannst du die Koordinaten oder andere Informationen des Trips extrahieren
 					var coordinates = tripData.features[0].geometry.coordinates;
-	
-					// Hier fügst du eine Polylinie für den Trip auf der Karte hinzu
+
+					// add a polyline fot the trip
 					var polyline = L.polyline(coordinates.map(function (coord) {
 						return [coord[1], coord[0]];
 					})).addTo(map);
-	
-					// Optional: Zoom zur Polylinie
+
+					// zoom to the polyline
 					map.fitBounds(polyline.getBounds());
-	
-					// Hier rufst du die Informationen für die POIs anhand der trip_id ab
+
+					// call the information for every markedpoint with the corresponding tripId
 					$.ajax({
 						url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
 						type: 'GET',
@@ -234,11 +212,10 @@ $(document).ready(function () {
 						},
 						dataType: 'JSON',
 						success: function (mark) {
-							
+
 							var coordinates = mark.features[0].geometry.coordinates;
-		
-							
-							L.marker([coordinates[1], coordinates[0]], {icon: marked}).addTo(map);
+
+							L.marker([coordinates[1], coordinates[0]], { icon: marked }).addTo(map);
 						},
 						error: function (error) {
 							console.log(error);
@@ -251,9 +228,15 @@ $(document).ready(function () {
 			});
 		});
 	}
-	
 
+	// show the loading icon
+	function showLoadingOverlay() {
+		$('#loading-overlay').show();
+	}
 
-
+	// hide the loading icon
+	function hideLoadingOverlay() {
+		$('#loading-overlay').hide();
+	}
 
 });

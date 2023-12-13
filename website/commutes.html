@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<link rel="stylesheet" href="assets/main.css" />
-	<link rel="stylesheet" href="assets/commutes.css"/>
+	<link rel="stylesheet" href="assets/commutes.css" />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -53,6 +53,16 @@
 			</thead>
 			<tbody></tbody>
 		</table>
+	</div>
+
+	<!-- Pop-up to choose category -->
+	<div id="categoryPopup" class="popup">
+		<div class="popup-content">
+			<span class="close" id="closeCategoryPopupBtn">&times;</span>
+			<h2>Choose a Category</h2>
+			<button class="categoryButton" data-category="0">Restaurants</button>
+			<button class="categoryButton" data-category="1">Places of Whorship</button>
+		</div>
 	</div>
 
 	<!-- Footer -->

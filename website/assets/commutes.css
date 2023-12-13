@@ -1,22 +1,68 @@
-/* Apply a border-collapse property to the table for better styling */
+/* table */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px; /* Adjust the margin as needed */
+    margin-top: 20px;
 }
 
-/* Style the table header */
 thead {
-    background-color: #f2f2f2; /* Light gray background color */
+    background-color: #f2f2f2;
 }
 
-th, td {
-    padding: 10px; /* Add padding to cells for better spacing */
-    text-align: left; /* Align text to the left in cells */
-    border: 1px solid #ddd; /* Add a border to cells */
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
 /* Add hover effect to the table rows */
 tbody tr:hover {
-    background-color: #ebf3e2; /* Lighter gray background on hover */
+    background-color: #ebf3e2;
+}
+
+/* pop-up for category */
+#categoryPopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+#categoryPopup .popup-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.categoryButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    background-color: #444444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.categoryButton:hover {
+    background-color: #000000;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
 }
