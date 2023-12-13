@@ -1,34 +1,27 @@
-/* Apply a border-collapse property to the table for better styling */
+/* table */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    /* Adjust the margin as needed */
 }
 
-/* Style the table header */
 thead {
     background-color: #f2f2f2;
-    /* Light gray background color */
 }
 
 th,
 td {
     padding: 10px;
-    /* Add padding to cells for better spacing */
     text-align: left;
-    /* Align text to the left in cells */
     border: 1px solid #ddd;
-    /* Add a border to cells */
 }
 
 /* Add hover effect to the table rows */
 tbody tr:hover {
     background-color: #ebf3e2;
-    /* Lighter gray background on hover */
 }
 
-/* Pop-up Fenster für Kategorieauswahl */
+/* pop-up for category */
 #categoryPopup {
     display: none;
     position: fixed;
