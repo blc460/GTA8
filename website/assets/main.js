@@ -6,7 +6,6 @@ var markedpoints = [];
 // save ip address
 $.getJSON("https://api.ipify.org/?format=json", function (e) {
 	trip["ip_address"] = e.ip;
-	//console.log(e.ip);
 });
 
 // save input from pop-up window
@@ -51,7 +50,6 @@ $(document).ready(function () {
 
 	var locationCircle;
 
-	// brauchen wir das???
 	function onLocationFound(e) {
 		var radius = e.accuracy;
 
@@ -152,18 +150,9 @@ $(document).ready(function () {
 			document.getElementById("popup").style.display = "flex";
 			// close pop-up
 			document.getElementById("evaluateTrip").addEventListener("click", function () {
-				//console.log("Markedpoints:");
-				//console.log(markedpoints);
 				if (trackpoints.length < 2) {
 					//alert("Must track at least two points before the trip can be evaluated!");
 					document.getElementById("popup_alert").style.display = "flex";
-					//element in html erstelle mit display = none
-					// in css gleiches design der class pop-up
-
-
-					// -------------------------------------  Carlos TO DO -------------------------------------------
-
-
 				}
 				// get timestamp
 				trip["date_of_collection"] = getTimestamp();
