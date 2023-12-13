@@ -212,11 +212,9 @@ $(document).ready(function () {
 				});
 			}
 			else {
+				// Alert notification if there is no possibility to marke points
+				document.getElementById("popup_alert_marked_point").style.display = "flex";
 
-//------------------------------TO DO Carlos ------------------------------------------------------------------------------------
-
-				// TODO: Create a prettier pop-up with information for user
-				alert("You cannot mark points when you are not tracking, please start the tracking mode!");
 			}
 		} else {
 			alert("Geolocation is not supported by your browser.");
@@ -390,4 +388,5 @@ $(document).ready(function () {
 
 function closePopup() {
 	document.getElementById("popup_alert").style.display = "none";
+	document.getElementById("popup_alert_marked_point").style.display = "none";
   }
