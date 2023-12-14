@@ -217,7 +217,8 @@ $(document).ready(function () {
 
 			}
 		} else {
-			alert("Geolocation is not supported by your browser.");
+			document.getElementById("popup_alert_geolocaliation").style.display = "flex";
+			
 		}
 	}
 	// add onclick-event to the button
@@ -404,4 +405,5 @@ $(document).ready(function () {
 function closePopup() {
 	document.getElementById("popup_alert").style.display = "none";
 	document.getElementById("popup_alert_marked_point").style.display = "none";
+	document.getElementById("popup_alert_geolocaliation").style.display = "none";
   }
