@@ -195,7 +195,7 @@ $(document).ready(function () {
 				console.log("center");
 			});
 		} else {
-			alert("Geolocation is not supported by your browser.");
+			document.getElementById("popup_alert_geolocaliation").style.display = "flex";
 		}
 	}
 	// add onclick-event to the button
