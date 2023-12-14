@@ -308,11 +308,26 @@ $(document).ready(function () {
 			 
 			  var insertedId = extractIdFromInsertResponse(xml);
 	  
-			  // notify user or perform additional actions with the inserted ID
+			  // notify user
 			  console.log("Data uploaded. Inserted ID: " + insertedId);
-	  
-			  // Resolve the Promise with the insertedId
-			  resolve(insertedId);
+
+			  // clean uploaded LineString
+			  link = `https://side-eye-vercel.vercel.app/update_linestring?trip_id=${insertedId}` 
+			  // call the function on Vercel using $.ajax
+			  $.ajax({
+				type: "GET",
+				url: link,
+				success: function(data) {
+					console.log("Function on Vercel called successfully:", data);
+					// Resolve the Promise with the insertedId
+					resolve(insertedId);
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.error("Error calling function on Vercel:", errorThrown);
+					// Reject the Promise with an error
+					reject(errorThrown);
+				}
+			  });
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
 			  console.log("Error from AJAX");
@@ -372,11 +387,11 @@ $(document).ready(function () {
 			contentType: "text/xml",
 			data: postData,
 			success: function (xml) {
-				//Success feedback
+				// success feedback
 				console.log("Marked Point uploaded");
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
-				//Error handling
+				// error handling
 				console.log("Error from AJAX");
 				console.log(xhr.status);
 				console.log(thrownError);
