@@ -120,7 +120,7 @@ $(document).ready(function () {
 			dotElement.style.position = "fixed";
 			dotElement.style.top = "10px";
 			dotElement.style.right = "10px";
-			dotElement.style.animation = "blinking 2s infinite"; // Define a blinking animation
+			dotElement.style.animation = "blinking 2s infinite"; // define a blinking animation
 			document.body.appendChild(dotElement);
 		}
 
@@ -212,7 +212,7 @@ $(document).ready(function () {
 				});
 			}
 			else {
-				// Alert notification if there is no possibility to marke points
+				// notification if there is no possibility to mark points
 				document.getElementById("popup_alert_marked_point").style.display = "flex";
 
 			}
@@ -256,7 +256,7 @@ $(document).ready(function () {
 	}
 
 
-
+	// upload the trip to the database
 	function insertData_trip(trackpoints, trip) {
 		return new Promise((resolve, reject) => {
 		  var ip_address = trip["ip_address"];
@@ -298,7 +298,8 @@ $(document).ready(function () {
 			'</GTA23_project:trip>\n' +
 			'</wfs:Insert>\n' +
 			'</wfs:Transaction>';
-	  
+
+		  // post the data to the geoserver
 		  $.ajax({
 			type: "POST",
 			url: gs.wfs,
@@ -313,19 +314,20 @@ $(document).ready(function () {
 			  console.log("Data uploaded. Inserted ID: " + insertedId);
 
 			  // clean uploaded LineString
-			  link = `https://side-eye-vercel.vercel.app/update_linestring?trip_id=${insertedId}` 
-			  // call the function on Vercel using $.ajax
+			  link = `https://side-eye-vercel.vercel.app/update_linestring?trip_id=${insertedId}`;
+			  
+			  // call the clean-linestring function (deletes jumps)
 			  $.ajax({
 				type: "GET",
 				url: link,
 				success: function(data) {
 					console.log("Function on Vercel called successfully:", data);
-					// Resolve the Promise with the insertedId
+					// resolve the promise with the insertedId
 					resolve(insertedId);
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
 					console.error("Error calling function on Vercel:", errorThrown);
-					// Reject the Promise with an error
+					// reject the promise with an error
 					reject(errorThrown);
 				}
 			  });
@@ -335,15 +337,17 @@ $(document).ready(function () {
 			  console.log(xhr.status);
 			  console.log(thrownError);
 	  
-			  // Reject the Promise with an error
+			  // reject the promise with an error
 			  reject(thrownError);
 			},
 		  });
 		});
 	}
-	  
+	
+	// upload the marked points to the database
 	function insertData_points(markedpoints, trip) {
 		var trip_id = trip["trip_id"];
+		// iterate through all marked points
 		for (var pt of markedpoints) {
 			console.log(pt);
 			var pt_lat = pt[0];
@@ -354,8 +358,10 @@ $(document).ready(function () {
 		}
 	}
 
+	// upload a single marked point to the database
 	function insertPoint_markedPoint(pt_lat, pt_lng, pt_time, trip_id) {
 
+		// construct the request
 		let postData =
 			'<wfs:Transaction\n'
 			+ '  service="WFS"\n'
@@ -381,6 +387,7 @@ $(document).ready(function () {
 			+ '  </wfs:Insert>\n'
 			+ '</wfs:Transaction>';
 
+		// post the data to the geoserver
 		$.ajax({
 			type: "POST",
 			url: gs.wfs,
@@ -402,6 +409,7 @@ $(document).ready(function () {
 
 });
 
+// closes alert window
 function closePopup() {
 	document.getElementById("popup_alert").style.display = "none";
 	document.getElementById("popup_alert_marked_point").style.display = "none";
