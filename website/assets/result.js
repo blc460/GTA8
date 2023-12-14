@@ -40,7 +40,7 @@ $(document).ready(function () {
 	// create a URLSearchParams-object to find the URL-parameters
 	var urlParams = new URLSearchParams(window.location.search);
 
-	// reat the link
+	// read the link
 	var linkParam = urlParams.get("link");
 
 	// check if the parameter is available
@@ -61,7 +61,7 @@ $(document).ready(function () {
 			type: 'GET',
 			dataType: 'JSON',
 			success: function (data) {
-				// save the data in a globla variable
+				// save the data in a global variable
 				responseData = data;
 				console.log(responseData);
 
@@ -87,18 +87,18 @@ $(document).ready(function () {
 					// start the displayTrip-function, if trip_id is available in the link
 					displayTrip([tripIdParam]);
 				}
-				// wehn finished, hide the loading icon
+				// when finished, hide the loading icon
 				hideLoadingOverlay();
 			},
 			error: function (data) {
 				console.log(data);
-				// if an error occur, also hide the loading icon
+				// if an error occurs, also hide the loading icon
 				hideLoadingOverlay();
 			},
 		});
 	}
 
-	//icons ------------------------------------------
+	// icons ------------------------------------------
 	var pois = L.icon({
 		iconUrl: 'assets/SVG/pois.png',
 		iconSize: [30, 45],
@@ -191,7 +191,7 @@ $(document).ready(function () {
 				success: function (tripData) {
 					var coordinates = tripData.features[0].geometry.coordinates;
 
-					// add a polyline fot the trip
+					// add a polyline for the trip
 					var polyline = L.polyline(coordinates.map(function (coord) {
 						return [coord[1], coord[0]];
 					})).addTo(map);

@@ -15,7 +15,6 @@ function getWfsData() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", wfsUrl + '?' + new URLSearchParams(params), true);
 
-    // Setzen Sie CORS-Header, wenn erforderlich
     // set the CORS-header, if necessary
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Accept", "application/json");
@@ -28,7 +27,7 @@ function getWfsData() {
 
             // get the IP-adress of the user
             getUserIpAddress(function (userIpAddress) {
-                // fix IP-adress "111.111.111.111"
+                // fixed IP-adress "111.111.111.111" for example trips
                 var fixedIpAddress = "111.111.111.111";
 
                 // filter the trips with the IP-adress
@@ -39,7 +38,7 @@ function getWfsData() {
                 // update the HTML-body with the filtered trips
                 updateHTML({ features: filteredTrips });
 
-                // ad a eventlistener to everey row
+                // add an eventlistener to every row
                 addRowClickListener();
             });
         }
@@ -85,7 +84,7 @@ function updateHTML(data) {
 
             // check if the current column is 'trip_date_of_collection'
             if (column === "trip_date_of_collection") {
-                // Format the date and time
+                // format the date and time
                 var formattedDate = formatDateTime(properties[column]);
                 cell.innerHTML = formattedDate;
             } else {
@@ -122,7 +121,7 @@ function addRowClickListener() {
             var tripId = target.parentNode.id;
             // check if the tripId exists
             if (tripId) {
-                // remove the prefix 'tip_' and convert it in to a number
+                // remove the prefix 'trip_' and convert it to a number
                 var tripIdNumber = parseInt(tripId.replace("trip_", ""));
                 console.log("Selected trip_id:", tripIdNumber);
 
@@ -179,7 +178,7 @@ function extractTripId(feature) {
     }
 }
 
-// call the function, wehn DOM is completly loaded
+// call the function, when DOM is completely loaded
 document.addEventListener("DOMContentLoaded", function () {
     getWfsData();
 });
