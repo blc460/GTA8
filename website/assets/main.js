@@ -146,26 +146,26 @@ $(document).ready(function () {
 
 				// upload trip data and as soons as this is finshed, also the marked points
 				insertData_trip(trackpoints, trip)
-				.then((insertedId) => {
-				  	// perform further actions based on the insertedId
-				  	if (insertedId !== null) {
-						trip["trip_id"] = insertedId;
-				  	}
-					if (markedpoints.length > 0) {
-						insertData_points(markedpoints, trip);
-					}
-					// stop tracking
-					tracking = false;
-					console.log("stopped tracking");
-					// reset
-					trackpoints = [];
-					markedpoints = [];
-					trip = {};
-					document.getElementById("popup").style.display = "none";
+					.then((insertedId) => {
+						// perform further actions based on the insertedId
+						if (insertedId !== null) {
+							trip["trip_id"] = insertedId;
+						}
+						if (markedpoints.length > 0) {
+							insertData_points(markedpoints, trip);
+						}
+						// stop tracking
+						tracking = false;
+						console.log("stopped tracking");
+						// reset
+						trackpoints = [];
+						markedpoints = [];
+						trip = {};
+						document.getElementById("popup").style.display = "none";
 					})
-				.catch((error) => {
-					console.error("Error:", error);
-				});
+					.catch((error) => {
+						console.error("Error:", error);
+					});
 			});
 		}
 	}
@@ -218,7 +218,7 @@ $(document).ready(function () {
 			}
 		} else {
 			document.getElementById("popup_alert_geolocaliation").style.display = "flex";
-			
+
 		}
 	}
 	// add onclick-event to the button
@@ -244,10 +244,10 @@ $(document).ready(function () {
 		var $featureId = $xml.find('ogc\\:FeatureId');
 		if ($featureId.length > 0) {
 			var fullId = $featureId.attr('fid');
-			
+
 			// extract the numeric part after the 'trip.'
 			var numericPart = fullId.replace('trip.', '');
-			
+
 			// Convert the numeric part to a number (if needed)
 			returned_id = parseInt(numericPart, 10);
 		}
@@ -259,91 +259,91 @@ $(document).ready(function () {
 	// upload the trip to the database
 	function insertData_trip(trackpoints, trip) {
 		return new Promise((resolve, reject) => {
-		  var ip_address = trip["ip_address"];
-		  var date_of_collection = trip["date_of_collection"];
-		  var trip_name = trip["name"];
-		  var trip_transport_mode = trip["transportMode"];
-		  var lineStringCoords = '';
-	  
-		  // construct the LineString coordinates
-		  for (const tuple of trackpoints) {
-			lineStringCoords += `${tuple['lng']},${tuple['lat']} `;
-		  }
-		  lineStringCoords = lineStringCoords.trim();
-	  
-		  // construct the XML request
-		  let postData =
-			'<wfs:Transaction\n' +
-			'service="WFS"\n' +
-			'version="1.0.0"\n' +
-			'xmlns="http://www.opengis.net/wfs"\n' +
-			'xmlns:wfs="http://www.opengis.net/wfs"\n' +
-			'xmlns:gml="http://www.opengis.net/gml"\n' +
-			'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n' +
-			'xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n' +
-			'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n' +
-			'http://www.opengis.net/wfs\n' +
-			'https://ikgeoserv.ethz.ch/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n' +
-			'<wfs:Insert>\n' +
-			'<GTA23_project:trip>\n' +
-			`<trip_date_of_collection>${date_of_collection}</trip_date_of_collection>\n` +
-			`<trip_name>${trip_name}</trip_name>\n` +
-			`<trip_transport_mode>${trip_transport_mode}</trip_transport_mode>\n` +
-			`<trip_ip_address>${ip_address}</trip_ip_address>\n` +
-			'<geometry>\n' +
-			'<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n' +
-			`<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">${lineStringCoords}</gml:coordinates>\n` +
-			'</gml:LineString>\n' +
-			'</geometry>\n' +
-			'</GTA23_project:trip>\n' +
-			'</wfs:Insert>\n' +
-			'</wfs:Transaction>';
+			var ip_address = trip["ip_address"];
+			var date_of_collection = trip["date_of_collection"];
+			var trip_name = trip["name"];
+			var trip_transport_mode = trip["transportMode"];
+			var lineStringCoords = '';
 
-		  // post the data to the geoserver
-		  $.ajax({
-			type: "POST",
-			url: gs.wfs,
-			dataType: "xml",
-			contentType: "text/xml",
-			data: postData,
-			success: function (xml) {
-			 
-			  var insertedId = extractIdFromInsertResponse(xml);
-	  
-			  // notify user
-			  console.log("Data uploaded. Inserted ID: " + insertedId);
+			// construct the LineString coordinates
+			for (const tuple of trackpoints) {
+				lineStringCoords += `${tuple['lng']},${tuple['lat']} `;
+			}
+			lineStringCoords = lineStringCoords.trim();
 
-			  // clean uploaded LineString
-			  link = `https://side-eye-vercel.vercel.app/update_linestring?trip_id=${insertedId}`;
-			  
-			  // call the clean-linestring function (deletes jumps)
-			  $.ajax({
-				type: "GET",
-				url: link,
-				success: function(data) {
-					console.log("Function on Vercel called successfully:", data);
-					// resolve the promise with the insertedId
-					resolve(insertedId);
+			// construct the XML request
+			let postData =
+				'<wfs:Transaction\n' +
+				'service="WFS"\n' +
+				'version="1.0.0"\n' +
+				'xmlns="http://www.opengis.net/wfs"\n' +
+				'xmlns:wfs="http://www.opengis.net/wfs"\n' +
+				'xmlns:gml="http://www.opengis.net/gml"\n' +
+				'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n' +
+				'xmlns:GTA23_project="http://www.gis.ethz.ch/GTA23_project" \n' +
+				'xsi:schemaLocation="http://www.gis.ethz.ch/GTA23_project \n https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=GTA23_project%3Atrip\n' +
+				'http://www.opengis.net/wfs\n' +
+				'https://ikgeoserv.ethz.ch/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">\n' +
+				'<wfs:Insert>\n' +
+				'<GTA23_project:trip>\n' +
+				`<trip_date_of_collection>${date_of_collection}</trip_date_of_collection>\n` +
+				`<trip_name>${trip_name}</trip_name>\n` +
+				`<trip_transport_mode>${trip_transport_mode}</trip_transport_mode>\n` +
+				`<trip_ip_address>${ip_address}</trip_ip_address>\n` +
+				'<geometry>\n' +
+				'<gml:LineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">\n' +
+				`<gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">${lineStringCoords}</gml:coordinates>\n` +
+				'</gml:LineString>\n' +
+				'</geometry>\n' +
+				'</GTA23_project:trip>\n' +
+				'</wfs:Insert>\n' +
+				'</wfs:Transaction>';
+
+			// post the data to the geoserver
+			$.ajax({
+				type: "POST",
+				url: gs.wfs,
+				dataType: "xml",
+				contentType: "text/xml",
+				data: postData,
+				success: function (xml) {
+
+					var insertedId = extractIdFromInsertResponse(xml);
+
+					// notify user
+					console.log("Data uploaded. Inserted ID: " + insertedId);
+
+					// clean uploaded LineString
+					link = `https://side-eye-vercel.vercel.app/update_linestring?trip_id=${insertedId}`;
+
+					// call the clean-linestring function (deletes jumps)
+					$.ajax({
+						type: "GET",
+						url: link,
+						success: function (data) {
+							console.log("Function on Vercel called successfully:", data);
+							// resolve the promise with the insertedId
+							resolve(insertedId);
+						},
+						error: function (jqXHR, textStatus, errorThrown) {
+							console.error("Error calling function on Vercel:", errorThrown);
+							// reject the promise with an error
+							reject(errorThrown);
+						}
+					});
 				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					console.error("Error calling function on Vercel:", errorThrown);
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log("Error from AJAX");
+					console.log(xhr.status);
+					console.log(thrownError);
+
 					// reject the promise with an error
-					reject(errorThrown);
-				}
-			  });
-			},
-			error: function (xhr, ajaxOptions, thrownError) {
-			  console.log("Error from AJAX");
-			  console.log(xhr.status);
-			  console.log(thrownError);
-	  
-			  // reject the promise with an error
-			  reject(thrownError);
-			},
-		  });
+					reject(thrownError);
+				},
+			});
 		});
 	}
-	
+
 	// upload the marked points to the database
 	function insertData_points(markedpoints, trip) {
 		var trip_id = trip["trip_id"];
@@ -412,6 +412,7 @@ $(document).ready(function () {
 // closes alert window
 function closePopup() {
 	document.getElementById("popup_alert").style.display = "none";
+	document.getElementById('popup_ok').style.display = 'none';
 	document.getElementById("popup_alert_marked_point").style.display = "none";
 	document.getElementById("popup_alert_geolocaliation").style.display = "none";
-  }
+}
