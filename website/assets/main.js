@@ -412,7 +412,7 @@ $(document).ready(function () {
 // closes alert window
 function closePopup() {
 	document.getElementById("popup_alert").style.display = "none";
-	document.getElementById('popup_ok').style.display = 'none';
+	document.getElementById("popup_ok").style.display = "none";
 	document.getElementById("popup_alert_marked_point").style.display = "none";
 	document.getElementById("popup_alert_geolocaliation").style.display = "none";
 }
