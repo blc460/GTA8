@@ -26,9 +26,9 @@ Now you can relive your trip and all the sights you saw (or missed) along the wa
 
 ## Software Structure
 
-<img src="pictures/analysis flowchart-group8.png" width="752" alt>
+<img src="pictures/workflow_project.jpg" width="752" alt>
 
-<img src="pictures/Analysis_workflow.png" width="352" alt>
+<img src="pictures/analysis_flowchart.jpg" width="352" alt>
 
 ## Folderstructure Repository
 
