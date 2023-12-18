@@ -55,6 +55,7 @@ function getUserIpAddress(callback) {
 }
 
 function updateHTML(data) {
+    showLoadingOverlay();
     var table = document.querySelector("table");
     var tbody = table.querySelector("tbody");
 
@@ -93,6 +94,7 @@ function updateHTML(data) {
             }
         });
     });
+    hideLoadingOverlay();
 }
 
 function formatDateTime(dateTimeString) {
@@ -176,6 +178,16 @@ function extractTripId(feature) {
         // if not, give NaN back
         return NaN;
     }
+}
+
+// show the loading icon
+function showLoadingOverlay() {
+    $('#loading-overlay').show();
+}
+
+// hide the loading icon
+function hideLoadingOverlay() {
+    $('#loading-overlay').hide();
 }
 
 // call the function, when DOM is completely loaded
