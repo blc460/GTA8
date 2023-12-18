@@ -112,6 +112,10 @@ $(document).ready(function () {
 		iconAnchor: [15, 45],
 	});
 
+	function getAddress(address_id){
+
+	}
+
 	function displayRestaurants(data) {
 		data.forEach(function (restaurantId) {
 			// call the information for every restaurant with the corresponding id
@@ -127,14 +131,17 @@ $(document).ready(function () {
 				},
 				dataType: 'JSON',
 				success: function (restaurantData) {
+					//read data from ;
 					var coordinates = restaurantData.features[0].geometry.coordinates;
 					var restaurantName = restaurantData.features[0].properties.restaurant_name;
+					// var address_id = restaurantData.features[0].properties.address_id;
+					var restaurantWebsite = restaurantData.features[0].properties.restaurant_website;
 
 					// add a marker for the restaurant
 					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
 
 					// add a popup to the marker
-					marker.bindPopup(restaurantName);
+					marker.bindPopup(restaurantName  + '</br>' + restaurantWebsite);
 				},
 				error: function (error) {
 					console.log(error);
