@@ -28,6 +28,8 @@ Now you can relive your trip and all the sights you saw (or missed) along the wa
 
 <img src="pictures/analysis flowchart-group8.png" width="752" alt>
 
+<img src="pictures/Analysis_workflow.png" width="352" alt>
+
 ## Folderstructure Repository
 
 ### data_processing
