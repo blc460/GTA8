@@ -31,7 +31,7 @@ $(document).ready(function () {
 	}
 	map.on('locationfound', onLocationFound);
 	function onLocationError(e) {
-		alert(e.message);
+		document.getElementById("popup_alert_geolocaliation").style.display = "flex";
 	}
 	map.on('locationerror', onLocationError);
 
