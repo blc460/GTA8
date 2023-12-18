@@ -144,7 +144,7 @@ $(document).ready(function () {
 
 					// add a popup to the marker
 					// marker.bindPopup(restaurantName + '</br>' + address + '</br>' + restaurantWebsite);
-					marker.bindPopup(restaurantName + '</br>' + restaurantWebsite);
+					marker.bindPopup(restaurantName + '</br>' + '<a href="' + restaurantWebsite + '" target="_blank">' + restaurantWebsite + '</a>');
 				},
 				error: function (error) {
 					console.log(error);
@@ -152,7 +152,7 @@ $(document).ready(function () {
 			});
 		});
 	}
-
+	
 	function displayChurch(data) {
 		data.forEach(function (churchId) {
 			// call the information for every church with the corresponding id
