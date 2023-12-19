@@ -1,0 +1,10 @@
+// @name restaurant-zürich
+// this is the example how to receive the restaurant-zurich.csv, on the same way kirchen-zurich.csv was gathered
+
+[out:csv (::lat,::lon, "name", "addr:street", "addr:housenumber", "addr:postcode", "addr:city", "cuisine", "website")][timeout:25];
+// fetch area “Zurich” to search in
+{{geocodeArea:Zurich}}->.searchArea;
+// gather results
+nwr["amenity"="restaurant"](area.searchArea);
+// print results
+out geom;
