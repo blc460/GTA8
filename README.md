@@ -32,7 +32,7 @@ Now you can relive your trip and all the sights you saw (or missed) along the wa
 
 ### data_processing
 
-This is exactly the same folder that is deployed to the vercel server. It contains the backend.py file which performs the buffer analysis of the trips, as well as the requirements and vercel settings. Currently, there is another git-repository which is directly connected to vercel. You can access it through this link: [Link](https://github.com/eckertniklas/side-eye-vercel). 
+This is exactly the same folder that is deployed to the vercel server. It contains the backend.py file which performs the buffer analysis of the trips and the linestring cleaning function, as well as the requirements and vercel settings.
 
 ### Database
 
