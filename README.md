@@ -36,7 +36,7 @@ This is exactly the same folder that is deployed to the vercel server. It contai
 
 ### Database
 
-The database folder contains the .csv files with the POI-data which was exported from openstreetmap. This data is stored in a postGIS-database. The script used to upload and modify the data can be found in the load_db.ipynb-file. The database itself was created in pgAdmin4 using the commands saved in table_creation.txt.
+The database folder contains the .csv files with the POI-data which was exported from openstreetmap. This data is stored in a postGIS-database. The script used to upload and modify the data can be found in the load_db.ipynb-file. The database itself was created in pgAdmin4 using the commands saved in table_creation.txt. The download of the .csv-files took place via overpass-turbo.eu, the query is saved in overpass-turbo_query.txt.
 
 ### website
 
