@@ -18,11 +18,18 @@ If you see something remarkable you want to be able to find again easily, you ca
 
 After pressing the stop-button, a window pops up in which you can enter the name and transport mode of your trip and upload it to the database. Now the app switches from the map page to your commutes, where you should see your newly recorded trip. After clicking on your trip, you can choose if you would like to see the restaurants or places of worship along your route.
 
-(pictures of the pop-up, triplist and poi selection)
+
+<p float="left">
+  <img src="pictures/trip_list.png" width="250" alt>
+  <img src="pictures/desision_poi.png" width="252" alt>
+</p>
 
 Now you can relive your trip and all the sights you saw (or missed) along the way. ENJOY :)
 
-(picture of the example trip with the poi's)
+<p float="left">
+  <img src="pictures/trip_list.png" width="250" alt>
+  <img src="pictures/example_restaurant.png" width="252" alt>
+</p>
 
 ## Software Structure
 
@@ -32,11 +39,11 @@ Now you can relive your trip and all the sights you saw (or missed) along the wa
 
 ### data_processing
 
-This is exactly the same folder that is deployed to the vercel server. It contains the backend.py file which performs the buffer analysis of the trips, as well as the requirements and vercel settings. Currently, there is another git-repository which is directly connected to vercel. You can access it through this link: [Link](https://github.com/eckertniklas/side-eye-vercel). 
+This is exactly the same folder that is deployed to the vercel server. It contains the backend.py file which performs the buffer analysis of the trips and the linestring cleaning function, as well as the requirements and vercel settings.
 
 ### Database
 
-The database folder contains the .csv files with the POI-data which was exported from openstreetmap. This data is stored in a postGIS-database. The script used to upload and modify the data can be found in the load_db.ipynb-file. The database itself was created in pgAdmin4 using the commands saved in table_creation.txt.
+The database folder contains the .csv files with the POI-data which was exported from openstreetmap. This data is stored in a postGIS-database. The script used to upload and modify the data can be found in the load_db.ipynb-file. The database itself was created in pgAdmin4 using the commands saved in table_creation.txt. The download of the .csv-files took place via overpass-turbo.eu, the query is saved in overpass-turbo_query.txt.
 
 ### website
 
