@@ -112,7 +112,7 @@ $(document).ready(function () {
 		iconAnchor: [15, 45],
 	});
 
-	function getAddress(address_id){
+	function getAddress(address_id) {
 
 	}
 
@@ -152,7 +152,7 @@ $(document).ready(function () {
 			});
 		});
 	}
-	
+
 	function displayChurch(data) {
 		data.forEach(function (churchId) {
 			// call the information for every church with the corresponding id
@@ -222,7 +222,7 @@ $(document).ready(function () {
 							request: 'GetFeature',
 							typeName: 'marked_point',
 							outputFormat: 'application/json',
-							featureID: tripId,
+							cql_filter: 'trip_id=' + tripId,
 						},
 						dataType: 'JSON',
 						success: function (mark) {
