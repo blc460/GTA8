@@ -112,10 +112,6 @@ $(document).ready(function () {
 		iconAnchor: [15, 45],
 	});
 
-	function getAddress(address_id) {
-
-	}
-
 	function displayRestaurants(data) {
 		data.forEach(function (restaurantId) {
 			// call the information for every restaurant with the corresponding id
