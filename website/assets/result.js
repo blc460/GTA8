@@ -134,16 +134,12 @@ $(document).ready(function () {
 					// read data from restaurantData
 					var coordinates = restaurantData.features[0].geometry.coordinates;
 					var restaurantName = restaurantData.features[0].properties.restaurant_name;
-					var address_id = restaurantData.features[0].properties.address_id;
 					var restaurantWebsite = restaurantData.features[0].properties.restaurant_website;
-
-					var address = getAddress(address_id);
 
 					// add a marker for the restaurant
 					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
 
 					// add a popup to the marker
-					// marker.bindPopup(restaurantName + '</br>' + address + '</br>' + restaurantWebsite);
 					marker.bindPopup(restaurantName + '</br>' + '<a href="' + restaurantWebsite + '" target="_blank">' + restaurantWebsite + '</a>');
 				},
 				error: function (error) {
@@ -170,15 +166,11 @@ $(document).ready(function () {
 				success: function (churchData) {
 					var coordinates = churchData.features[0].geometry.coordinates;
 					var churchName = churchData.features[0].properties.church_name;
-					var address_id = churchData.features[0].properties.address_id;
-
-					var address = getAddress(address_id);
 
 					// add a marker for the church
 					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
 
 					// add a popup to the marker
-					// marker.bindPopup(churchName + '</br>' + address);
 					marker.bindPopup(churchName);
 				},
 				error: function (error) {

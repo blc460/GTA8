@@ -233,7 +233,7 @@ $(document).ready(function () {
 		ows: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/ows'
 	};
 
-	// function to extract the inserted feature ID from the Insert response
+	// function to extract the inserted feature ID from the insert response
 	function extractIdFromInsertResponse(responseXml) {
 		var returned_id = null;
 
@@ -248,7 +248,7 @@ $(document).ready(function () {
 			// extract the numeric part after the 'trip.'
 			var numericPart = fullId.replace('trip.', '');
 
-			// Convert the numeric part to a number (if needed)
+			// convert the numeric part to a number (if needed)
 			returned_id = parseInt(numericPart, 10);
 		}
 
