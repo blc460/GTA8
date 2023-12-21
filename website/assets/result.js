@@ -147,29 +147,37 @@ $(document).ready(function () {
 		});
 	}
 
-	function displayChurch(data) {
-		data.forEach(function (churchId) {
-			// call the information for every church with the corresponding id
+	function displayRestaurants(data) {
+		data.forEach(function (restaurantId) {
+			// call the information for every restaurant with the corresponding id
 			$.ajax({
 				url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
 				type: 'GET',
 				data: {
 					service: 'WFS',
 					request: 'GetFeature',
-					typeName: 'church',
+					typeName: 'restaurant',
 					outputFormat: 'application/json',
-					featureID: churchId,
+					featureID: restaurantId,
 				},
 				dataType: 'JSON',
-				success: function (churchData) {
-					var coordinates = churchData.features[0].geometry.coordinates;
-					var churchName = churchData.features[0].properties.church_name;
-
-					// add a marker for the church
+				success: function (restaurantData) {
+					// read data from restaurantData
+					var coordinates = restaurantData.features[0].geometry.coordinates;
+					var restaurantName = restaurantData.features[0].properties.restaurant_name;
+					var restaurantWebsite = restaurantData.features[0].properties.restaurant_website;
+	
+					// add a marker for the restaurant
 					var marker = L.marker([coordinates[1], coordinates[0]], { icon: pois }).addTo(map);
-
+	
 					// add a popup to the marker
-					marker.bindPopup(churchName);
+					if (restaurantWebsite !== 'keine Website vorhanden!') {
+						// If website is not 'keine Website vorhanden!', create a link
+						marker.bindPopup(restaurantName + '<br>' + '<a href="' + restaurantWebsite + '" target="_blank">' + restaurantWebsite + '</a>');
+					} else {
+						// If 'keine Website vorhanden!', display text without a link
+						marker.bindPopup(restaurantName + '<br>' + 'Keine Website vorhanden!');
+					}
 				},
 				error: function (error) {
 					console.log(error);
@@ -177,6 +185,7 @@ $(document).ready(function () {
 			});
 		});
 	}
+	
 
 	function displayMarked(data) {
 		console.log(data);
