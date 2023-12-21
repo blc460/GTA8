@@ -86,7 +86,9 @@ $(document).ready(function () {
 				if (tripIdParam) {
 					// start the displayTrip-function, if trip_id is available in the link
 					displayTrip([tripIdParam]);
+					displayMarked(tripIdParam)
 				}
+
 				// when finished, hide the loading icon
 				hideLoadingOverlay();
 			},
@@ -176,6 +178,38 @@ $(document).ready(function () {
 		});
 	}
 
+	function displayMarked(data) {
+		console.log(data);
+
+		var tripId = data;
+		console.log(tripId);
+
+		$.ajax({
+			url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
+			type: 'GET',
+			data: {
+				service: 'WFS',
+				request: 'GetFeature',
+				typeName: 'marked_point',
+				outputFormat: 'application/json',
+				cql_filter: 'trip_id=' + tripId,
+			},
+			dataType: 'JSON',
+			success: function (mark) {
+				mark.features.forEach(function (feature) {
+					var coordinates = feature.geometry.coordinates;
+					L.marker([coordinates[1], coordinates[0]], { icon: marked }).addTo(map);
+				});
+			},
+			error: function (error) {
+				console.log(error);
+			},
+		});
+
+	}
+
+
+
 	function displayTrip(data) {
 		data.forEach(function (tripId) {
 			// call the information for every trip with the corresponding id
@@ -201,28 +235,7 @@ $(document).ready(function () {
 					// zoom to the polyline
 					map.fitBounds(polyline.getBounds());
 
-					// call the information for every markedpoint with the corresponding tripId
-					$.ajax({
-						url: 'https://ikgeoserv.ethz.ch/geoserver/GTA23_project/wms',
-						type: 'GET',
-						data: {
-							service: 'WFS',
-							request: 'GetFeature',
-							typeName: 'marked_point',
-							outputFormat: 'application/json',
-							cql_filter: 'trip_id=' + tripId,
-						},
-						dataType: 'JSON',
-						success: function (mark) {
 
-							var coordinates = mark.features[0].geometry.coordinates;
-
-							L.marker([coordinates[1], coordinates[0]], { icon: marked }).addTo(map);
-						},
-						error: function (error) {
-							console.log(error);
-						},
-					});
 				},
 				error: function (error) {
 					console.log('Error fetching trip data:', error);
