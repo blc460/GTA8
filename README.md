@@ -31,7 +31,7 @@ Now you can switch from the map-page to your commutes, where you should see your
 Now you can relive your trip and all the sights you saw (or missed) along the way. ENJOY :)
 
 <p float="left">
-  <img src="pictures/trip_list_2.png" width="250" alt>
+  <img src="pictures/list_trip_2.png" width="250" alt>
   <img src="pictures/example_restaurant.png" width="252" alt>
 </p>
 
