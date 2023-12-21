@@ -186,7 +186,6 @@ $(document).ready(function () {
 		});
 	}
 	
-
 	function displayMarked(data) {
 		console.log(data);
 
@@ -216,8 +215,6 @@ $(document).ready(function () {
 		});
 
 	}
-
-
 
 	function displayTrip(data) {
 		data.forEach(function (tripId) {
