@@ -20,8 +20,8 @@ After pressing the stop-button, a window pops up in which you can enter the name
 
 
 <p float="left">
-  <img src="pictures/trip_list.png" width="250" alt>
-  <img src="pictures/desision_poi.png" width="252" alt>
+  <img src="pictures/list_trip_2.png" width="250" alt>
+  <img src="pictures/decision_2.png" width="252" alt>
 </p>
 
 Now you can relive your trip and all the sights you saw (or missed) along the way. ENJOY :)
