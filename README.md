@@ -3,7 +3,7 @@
 ## Introduction
 Side-Eye is a semesterproject in the lecture *GTA - Geoinformationstechnologien und -analysen* from Carlos Hunziker, Christian Blaser, Estelle Zemp and Niklas Eckert.
 
-The idea of this project was to implement an app, which allows the user to track a trip or rather their commute. After completing the tracking the app will then show them what interesting places they passed and missed while they were on the go. Currently the app only supports restaurants and places of worship in the city of zurich, but it could theoretically be extended to support other points of interest (POIs) as well.
+The idea of this project was to implement an app, which allows the user to track a trip or rather their commute. After completing the tracking, the app will then show them what interesting places they passed and missed while they were on the go. Currently the app only supports restaurants and places of worship in the city of zurich, but it could theoretically be extended to support other points of interest (POIs) as well.
 
 ## How to use the app?
 The app is shared under the following url: [URL](https://n.ethz.ch/~cblase/gta/index.html). It's important that your device is connected to the ETH VPN when you are not inside the ETH network, otherwise the application will not work. Due to the implementation with a vercel-server you can use all functionalities through the website (no need to use localhost). As default-data there is a pre-recorded example-trip you can test the app with. Alternatively, you can go out and explore the city of zurich by recording new trips on the maps-page. As soon as you start recording you'll see a blinking red dot appear in the upper right corner of your screen.
